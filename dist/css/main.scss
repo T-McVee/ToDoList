@@ -1,4 +1,5 @@
 @import 'config';
+@import 'list';
 
 * {
   box-sizing: border-box;
@@ -6,4 +7,67 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: $black;
+}
+
+.row, .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+nav {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  .row {
+    width: 100%;
+    justify-content: space-between;
+    .col:nth-child(1) {
+      width: 100px;
+      justify-content: flex-start;
+      .logo {
+        display: flex;
+        flex-direction: column;
+        font-weight: 800;
+        color: $blue;
+        letter-spacing: 0.2rem;
+        line-height: 0.9rem;
+      }
+    }
+    .col:nth-child(2) {
+      width: 30%;
+      justify-content: flex-end;
+      ul {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        list-style: none;
+        li {
+          padding: 0.5rem 1.2rem;
+          border-left: solid 2px $blue;
+          border-radius: $radius;
+          transition: all 0.5s;
+          &:hover {
+            cursor: pointer;
+            background-color: $blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+.work-space {
+  display: flex;
+  flex-direction: row;
 }

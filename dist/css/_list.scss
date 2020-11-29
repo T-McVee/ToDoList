@@ -1,0 +1,41 @@
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 300px;
+  height: fit-content;
+  padding: 0.75rem;
+  margin-right: 1.5rem;
+  background: $light-grey;
+  border-radius: $radius;
+  box-shadow: 2px 2px 8px rgba($color: $black, $alpha: 0.2);
+  .list-head {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 0.75rem;
+    h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin: 0.5rem 0;
+    }
+    .delete {
+      color: $soft-black
+    }
+  }
+  .list-body {
+    width: 100%;
+    .todo {
+      border: 1px solid $black;
+      border-radius: $radius;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      h3 {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

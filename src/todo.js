@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
-const logAttributes = (state) => ({
-  logTitle: () => console.log('Title: ' + state.title),
+const logDetails = (state) => ({
+  logTitle: () => console.log(state.title),
   logDescription: () => console.log(state.description),
   logDateCreated: () => console.log(format(state.dateCreated, 'yyyy/MM/dd kk:mm')),
   logDueDate: () => console.log(state.dueDate),
@@ -30,7 +30,7 @@ const createTodo = (title, description, dueDate, priority) => {
 
   return Object.assign(
     {},
-    logAttributes(state),
+    logDetails(state),
     updateTodo(state)
   )
 }
