@@ -1,0 +1,1 @@
+document.querySelector("#content"),(()=>{const e=document.createElement("div");e.classList.add("hello"),e.textContent="Hello!",content.appendChild(e)})();
