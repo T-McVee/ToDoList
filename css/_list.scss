@@ -15,14 +15,14 @@
     justify-content: space-between;
     flex-direction: row;
     width: 100%;
-    padding: 0 0.75rem;
     h2 {
       font-size: 1rem;
       font-weight: 800;
       margin: 0.5rem 0;
     }
     .delete {
-      color: $soft-black
+      cursor: pointer;
+      color: $soft-black;
     }
   }
   .list-body {
@@ -33,8 +33,34 @@
       width: 100%;
       margin: 0.5rem 0;
       padding: 0.5rem;
+      transition: background-color $time;
       h3 {
         font-size: 0.8rem;
+      }
+      .due-date {
+        font-size: 0.75rem;
+        color: lighten($color: $soft-black, $amount: 30);
+        transition: color $time;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: lighten($color: $light-grey, $amount: 2);
+        .due-date {
+          color: lighten($color: $soft-black, $amount: 20);
+        }
+      }
+    }
+  }
+  .list-footer {
+    width: 100%;
+    .new-todo {
+      font-size: 0.8rem;
+      color: lighten($color: $soft-black, $amount: 10);
+      padding: 0.25rem 0;
+      transition: color $time;
+      &:hover {
+        cursor: pointer;
+        color: $black;
       }
     }
   }

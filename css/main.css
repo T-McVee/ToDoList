@@ -36,7 +36,6 @@
       -ms-flex-direction: row;
           flex-direction: row;
   width: 100%;
-  padding: 0 0.75rem;
 }
 
 .list .list-head h2 {
@@ -46,6 +45,7 @@
 }
 
 .list .list-head .delete {
+  cursor: pointer;
   color: #666667;
 }
 
@@ -59,10 +59,45 @@
   width: 100%;
   margin: 0.5rem 0;
   padding: 0.5rem;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .list .list-body .todo h3 {
   font-size: 0.8rem;
+}
+
+.list .list-body .todo .due-date {
+  font-size: 0.75rem;
+  color: #b3b3b3;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.list .list-body .todo:hover {
+  cursor: pointer;
+  background-color: #f1f2f4;
+}
+
+.list .list-body .todo:hover .due-date {
+  color: #99999a;
+}
+
+.list .list-footer {
+  width: 100%;
+}
+
+.list .list-footer .new-todo {
+  font-size: 0.8rem;
+  color: #7f7f81;
+  padding: 0.25rem 0;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.list .list-footer .new-todo:hover {
+  cursor: pointer;
+  color: #1e272b;
 }
 
 * {
@@ -99,6 +134,7 @@ nav {
   display: -ms-flexbox;
   display: flex;
   width: 100vw;
+  height: 80px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -178,5 +214,27 @@ nav .row .col:nth-child(2) ul li:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+
+.work-space .new-list {
+  position: relative;
+  background-color: rgba(235, 236, 240, 0.3);
+  border-radius: 4px;
+  width: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1.25rem 1rem;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.work-space .new-list p {
+  margin: 0;
+}
+
+.work-space .new-list:hover {
+  cursor: pointer;
+  background-color: rgba(235, 236, 240, 0.6);
 }
 /*# sourceMappingURL=main.css.map */
