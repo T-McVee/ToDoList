@@ -26,6 +26,7 @@ body {
 nav {
   display: flex;
   width: 100vw;
+  height: 80px;
   justify-content: center;
   align-items: center;
   .row {
@@ -70,4 +71,20 @@ nav {
 .work-space {
   display: flex;
   flex-direction: row;
+  .new-list {
+    position: relative;
+    background-color: rgba($color: $light-grey, $alpha: 0.3);
+    border-radius: $radius;
+    width: 300px;
+    height: fit-content;
+    padding: 1.25rem 1rem;
+    transition: background-color $time;
+    p {
+      margin: 0;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($color: $light-grey, $alpha: 0.6);
+    }
+  }
 }
