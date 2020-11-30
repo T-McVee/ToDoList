@@ -9,6 +9,27 @@ const logDetails = (state) => ({
   logNotes: () => console.log(state.notes),
 });
 
+const getDetails = (state) => ({
+  get title() {
+    return state.title;
+  },
+  get description() {
+    return state.description;
+  },
+  get dateCreated() {
+    return state.dateCreated;
+  },
+  get dueDate() {
+    return state.dueDate;
+  },
+  get priority() {
+    return state.priority;
+  },
+  get notes() {
+    return state.notes;
+  },
+})
+
 const updateTodo = (state) => ({
   updateTitle: (newTitle) => state.title = newTitle,
   updateDescription: (newDescription) => state.description = newDescription,
@@ -31,6 +52,7 @@ const createTodo = (title, description, dueDate, priority) => {
   return Object.assign(
     {},
     logDetails(state),
+    getDetails(state),
     updateTodo(state)
   )
 }

@@ -1,19 +1,34 @@
 import { createTodo } from './todo'
 import { createList } from './list'
+import { pageLoad } from './pageLoad'
+import { renderList } from './helpers'
+
 
 
 const domElements = {
   content: document.querySelector('#content')
 };
 
+const myLists = [];
+
 const init = (() => {
+  myLists.unshift(createList('Morning routine'));
+  myLists[0].addTodo(createTodo(
+    'Make Breakfast', 'Make a healthy breakfast for Tishy and Tim', '6:45am', 'high'
+  ));
 
+  myLists[0].addTodo(createTodo(
+    'Workout', 'Excercies the mind and body', 'Nov 30th 6:45am', 'Medium'
+  ));
 
-  /* 
-  const todo1 = createTodo('Make Breakfast', 'Make a healthy breakfast for Tishy and Tim', '6:45am', 'high');
-  const todo2 = createTodo('Workout', 'Excercies the mind and body', '6:45am', 'Medium');
-  const list1 = createList('Morning routine');
-  list1.addTodo(todo1);
-  list1.addTodo(todo2);
-  list1.logTodos(); */
+  domElements.content.appendChild(pageLoad(myLists));
+  domElements.workSpace = document.querySelector('.work-space');
+  domElements.newList = document.querySelector('.new-list');
 })();
+
+
+
+domElements.newList.addEventListener('click', () => {
+  myLists.unshift(createList('Evening Routine'));
+  domElements.workSpace.insertBefore(renderList(myLists[0]), domElements.workSpace.childNodes[0])
+});
