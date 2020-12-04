@@ -48,6 +48,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  font-size: 1rem;
 }
 
 .list .list-head .text-input-module .title-wrapper {
@@ -58,8 +59,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  /* justify-content: flex-start;
-      align-items: flex-start; */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
 }
 
@@ -67,18 +69,22 @@
   display: none;
 }
 
-.list .list-head .text-input-module .title-wrapper .title {
+.list .list-head .text-input-module .title-wrapper .title, .list .list-head .text-input-module .title-wrapper i {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: 50px;
-  font-weight: 800;
-  margin: 0.5rem 0;
   padding: 1px 0;
 }
 
+.list .list-head .text-input-module .title-wrapper .title {
+  min-width: 50px;
+  font-weight: 800;
+  margin: 0;
+}
+
 .list .list-head .text-input-module .title-wrapper i {
-  margin: 0.5rem 0 0.5rem 0.5rem;
+  margin-left: 0.5rem;
+  padding-bottom: 3px;
 }
 
 .list .list-head .text-input-module .title-wrapper i.hide {
@@ -91,7 +97,6 @@
 
 .list .list-head .text-input-module input {
   width: 100%;
-  font-size: 1rem;
   margin: 6px 0;
   border: none;
   background: none;
@@ -110,9 +115,15 @@
 }
 
 .list .list-head .delete {
-  cursor: pointer;
   color: #666667;
   margin-left: 0.5rem;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.list .list-head .delete:hover {
+  cursor: pointer;
+  color: #1e272b;
 }
 
 .list .list-body {
@@ -120,16 +131,49 @@
 }
 
 .list .list-body .task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border: 1px solid #1e272b;
   border-radius: 4px;
   width: 100%;
+  height: 80px;
   margin: 0.5rem 0;
   padding: 0.5rem;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 
-.list .list-body .task .text-input-module {
+.list .list-body .task .task-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.list .list-body .task .task-head .delete {
+  color: #666667;
+  margin-left: 0.5rem;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.list .list-body .task .task-head .delete:hover {
+  cursor: pointer;
+  color: #1e272b;
+}
+
+.list .list-body .task .task-head .text-input-module {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -138,9 +182,10 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  font-size: 1rem;
 }
 
-.list .list-body .task .text-input-module .title-wrapper {
+.list .list-body .task .task-head .text-input-module .title-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -148,54 +193,58 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  /* justify-content: flex-start;
-      align-items: flex-start; */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
 }
 
-.list .list-body .task .text-input-module .title-wrapper.hide {
+.list .list-body .task .task-head .text-input-module .title-wrapper.hide {
   display: none;
 }
 
-.list .list-body .task .text-input-module .title-wrapper .title {
+.list .list-body .task .task-head .text-input-module .title-wrapper .title, .list .list-body .task .task-head .text-input-module .title-wrapper i {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: 50px;
-  font-weight: 800;
-  margin: 0.5rem 0;
   padding: 1px 0;
 }
 
-.list .list-body .task .text-input-module .title-wrapper i {
-  margin: 0.5rem 0 0.5rem 0.5rem;
+.list .list-body .task .task-head .text-input-module .title-wrapper .title {
+  min-width: 50px;
+  font-weight: 800;
+  margin: 0;
 }
 
-.list .list-body .task .text-input-module .title-wrapper i.hide {
+.list .list-body .task .task-head .text-input-module .title-wrapper i {
+  margin-left: 0.5rem;
+  padding-bottom: 3px;
+}
+
+.list .list-body .task .task-head .text-input-module .title-wrapper i.hide {
   display: none;
 }
 
-.list .list-body .task .text-input-module .title-wrapper:hover {
+.list .list-body .task .task-head .text-input-module .title-wrapper:hover {
   cursor: pointer;
 }
 
-.list .list-body .task .text-input-module input {
+.list .list-body .task .task-head .text-input-module input {
   width: 100%;
-  font-size: 1rem;
   margin: 6px 0;
   border: none;
   background: none;
 }
 
-.list .list-body .task .text-input-module input.hide {
+.list .list-body .task .task-head .text-input-module input.hide {
   display: none;
 }
 
-.list .list-body .task .text-input-module input:focus {
+.list .list-body .task .task-head .text-input-module input:focus {
   outline: none;
 }
 
-.list .list-body .task .title {
+.list .list-body .task .task-head .title, .list .list-body .task .task-head i, .list .list-body .task .task-head input {
   font-size: 0.8rem;
 }
 
@@ -303,6 +352,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  font-size: 1rem;
 }
 
 .popup-wrapper .popup .popup-head .text-input-module .title-wrapper {
@@ -313,8 +363,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  /* justify-content: flex-start;
-      align-items: flex-start; */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
 }
 
@@ -322,18 +373,22 @@
   display: none;
 }
 
-.popup-wrapper .popup .popup-head .text-input-module .title-wrapper .title {
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper .title, .popup-wrapper .popup .popup-head .text-input-module .title-wrapper i {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: 50px;
-  font-weight: 800;
-  margin: 0.5rem 0;
   padding: 1px 0;
 }
 
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper .title {
+  min-width: 50px;
+  font-weight: 800;
+  margin: 0;
+}
+
 .popup-wrapper .popup .popup-head .text-input-module .title-wrapper i {
-  margin: 0.5rem 0 0.5rem 0.5rem;
+  margin-left: 0.5rem;
+  padding-bottom: 3px;
 }
 
 .popup-wrapper .popup .popup-head .text-input-module .title-wrapper i.hide {
@@ -346,7 +401,6 @@
 
 .popup-wrapper .popup .popup-head .text-input-module input {
   width: 100%;
-  font-size: 1rem;
   margin: 6px 0;
   border: none;
   background: none;

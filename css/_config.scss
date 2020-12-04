@@ -13,6 +13,16 @@ $time: 0.2s;
 
 
 /* Mixins */
+@mixin delete {
+    color: $soft-black;
+    margin-left: 0.5rem;
+    transition: color 0.2s;
+    &:hover {
+      cursor: pointer;
+      color: $black;
+    }
+}
+
 @mixin text-input-module {
   width: 100%;
   &.hide {
