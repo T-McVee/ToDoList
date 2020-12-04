@@ -1,31 +1,17 @@
 import { elFactory, appendChildren } from './helpers'
 
 // Title section for lists & tasks - allows user to click to edit title
-const textInputModule = (headingType, parentData) => {
+const textInputModule = (headingType, itemData) => {
   const textModule = elFactory('div', { class: 'text-input-module' });
-  const title = _titleFactory(headingType, parentData.title);
-  /* const titleWrapper = elFactory('div', { class: 'title-wrapper' }); */
-  /* const titleElements = [
-    elFactory(headingType, { class: 'title' }, parentData.title),
-    elFactory('i', { class: 'far fa-edit hide' }),
-  ]; */
-
-  /* titleElements.forEach(el => titleWrapper.appendChild(el)); */
-  /*  titleWrapper
-     .addEventListener('mouseover', () => titleWrapper.lastChild.classList.toggle('hide'));
-   titleWrapper
-     .addEventListener('mouseout', () => titleWrapper.lastChild.classList.toggle('hide')); */
-
+  const title = _titleFactory(headingType, itemData.title);
   const input = elFactory('input', { type: 'text', class: 'hide' });
 
   appendChildren(textModule, title, input);
 
-
-
   title.addEventListener('click', () => {
     input.classList.toggle('hide');
     title.classList.toggle('hide');
-    input.value = parentData.title;
+    input.value = itemData.title;
     input.focus();
   });
 
@@ -33,7 +19,7 @@ const textInputModule = (headingType, parentData) => {
     input.classList.toggle('hide');
     title.classList.toggle('hide');
     title.firstChild.textContent = input.value;
-    parentData.title = input.value;
+    itemData.title = input.value;
   });
 
   return textModule;
@@ -55,8 +41,11 @@ const _titleFactory = (headingType, text) => {
   return title;
 }
 
+const deleteElBtnFactory = () => {
 
-const closeFactory = (target) => {
+}
+
+const closePopupFactory = (target) => {
   const close = elFactory('div', { class: 'close' }, 'x');
   close.addEventListener('click', () => {
     document.querySelector(target).remove();
@@ -69,7 +58,7 @@ const _popupHead = (taskData) => {
   const head = elFactory('div', { class: 'popup-head' });
   const title = textInputModule('h2', taskData);
   const priority = elFactory('div', { class: 'priority' }, taskData.priority);
-  const closeBtn = closeFactory('.popup-wrapper');
+  const closeBtn = closePopupFactory('.popup-wrapper');
   const elements = [title, priority, closeBtn];
 
   appendChildren(head, ...elements);
@@ -109,4 +98,4 @@ const taskPopUp = (taskData) => {
   return popUpWrapper;
 };
 
-export { textInputModule, taskPopUp };
+export { textInputModule, taskPopUp, closePopupFactory };

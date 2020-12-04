@@ -3,16 +3,6 @@ import { taskPopUp, textInputModule } from "./helpers/components";
 import { format } from 'date-fns'
 
 
-
-const _logDetails = (state) => ({
-  logTitle: () => console.log(state.title),
-  logDescription: () => console.log(state.description),
-  logDateCreated: () => console.log(format(state.dateCreated, 'yyyy/MM/dd kk:mm')),
-  logDueDate: () => console.log(state.dueDate),
-  logPriority: () => console.log(state.priority),
-  logNotes: () => console.log(state.notes),
-});
-
 const _getDetails = (state) => ({
   get title() {
     return state.title;
@@ -44,7 +34,14 @@ const _updateTask = (state) => ({
 
 const _taskHead = (taskData) => {
   const head = elFactory('div', { class: 'task-head' });
-  return head.appendChild(textInputModule('h3', taskData));
+  const elements = [
+    textInputModule('h3', taskData),
+    elFactory('div', { class: 'delete' }, 'x'),
+  ];
+
+  elements.forEach(el => head.appendChild(el));
+
+  return head;
 }
 
 const _taskBody = (taskData) => {
@@ -58,24 +55,36 @@ const _taskBody = (taskData) => {
 const _renderTask = (state) => ({
   renderTask: () => {
     const card = elFactory('div', { class: 'task' });
-    const taskHead = _taskHead(state);
-    const taskBody = _taskBody(state);
+    const head = _taskHead(state);
+    const body = _taskBody(state);
 
-    taskBody.addEventListener('click', () => {
+    head.lastChild.addEventListener('click', () => {
+
+      // Remove task from list array and update index
+      state.parent.splice(state.index, 1);
+      for (let i = 0; i < state.parent.length; i++) {
+        state.parent[i].index = i;
+      }
+
+      // Remove task from DOM
+      head.parentElement.remove();
+    })
+
+    body.addEventListener('click', () => {
       const popUp = taskPopUp(state);
       const body = document.querySelector('body')
       body.insertBefore(popUp, body.firstChild);
     });
 
-    card.appendChild(taskHead);
-    card.appendChild(taskBody);
+    card.appendChild(head);
+    card.appendChild(body);
 
     return card;
   }
 });
 
-// Todo Factory
-const createTask = (title, description, dueDate, priority, index) => {
+// Task Factory
+const createTask = (title, description, dueDate, priority, parent) => {
   let state = {
     title,
     description,
@@ -83,12 +92,12 @@ const createTask = (title, description, dueDate, priority, index) => {
     dueDate,
     priority,
     notes: [],
-    index,
+    parent,
+    index: parent.length,
   }
 
   return Object.assign(
     {},
-    _logDetails(state),
     _getDetails(state),
     _updateTask(state),
     _renderTask(state),

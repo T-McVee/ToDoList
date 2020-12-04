@@ -46,7 +46,7 @@ const _renderList = (state) => ({
 
 
     footer.firstChild.addEventListener('click', () => {
-      const task = createTask('Click to add title', '', 'due', '', state.tasks.length); // placeholder values
+      const task = createTask('Click to add title', '', 'due', '', state.tasks);
       state.tasks.push(task);
       body.appendChild(task.renderTask());
     });
