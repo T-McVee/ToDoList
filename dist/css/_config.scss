@@ -1,8 +1,24 @@
-$blue: rgb(36, 159, 196);
+$blue: rgb(43, 164, 238);
 $black: rgb(30, 39, 43);
 $soft-black: rgb(102, 102, 103);
-$light-grey: #ebecf0;
+$light-grey: #d2d3d5;
+$white: #fff;
+$green: #21c421;
 
-$radius: 4px;
+$radius-sm: 4px;
+$radius-md: 4px;
+
 
 $time: 0.2s;
+
+
+/* Mixins */
+@mixin text-input-module {
+  width: 100%;
+  &.hide {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

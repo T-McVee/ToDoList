@@ -21,6 +21,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "date-fns": "^2.16.1"
+    "date-fns": "^2.16.1",
+    "js-datepicker": "^5.16.0"
   }
 }

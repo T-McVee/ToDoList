@@ -1,4 +1,4 @@
-import { renderNavBar, renderWorkSpace, } from './helpers'
+import { renderNavBar, renderWorkSpace, } from './render'
 
 const pageLoad = ((lists) => {
   const pageContent = document.createElement('div');
