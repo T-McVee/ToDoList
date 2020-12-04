@@ -39,39 +39,80 @@
   width: 100%;
 }
 
-.list .list-head h2 {
+.list .list-head .text-input-module {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
-  font-size: 1rem;
+}
+
+.list .list-head .text-input-module .title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  /* justify-content: flex-start;
+      align-items: flex-start; */
+  width: 100%;
+}
+
+.list .list-head .text-input-module .title-wrapper.hide {
+  display: none;
+}
+
+.list .list-head .text-input-module .title-wrapper .title {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 50px;
   font-weight: 800;
   margin: 0.5rem 0;
+  padding: 1px 0;
 }
 
-.list .list-head h2.hide {
+.list .list-head .text-input-module .title-wrapper i {
+  margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.list .list-head .text-input-module .title-wrapper i.hide {
   display: none;
 }
 
-.list .list-head input {
+.list .list-head .text-input-module .title-wrapper:hover {
+  cursor: pointer;
+}
+
+.list .list-head .text-input-module input {
   width: 100%;
   font-size: 1rem;
-  margin: 0.5rem 0;
-  width: 100%;
+  margin: 6px 0;
+  border: none;
+  background: none;
 }
 
-.list .list-head input.hide {
+.list .list-head .text-input-module input.hide {
   display: none;
 }
 
-.list .list-head input:hover {
-  cursor: pointer;
+.list .list-head .text-input-module input:focus {
+  outline: none;
 }
 
-.list .list-head input:hover {
-  cursor: pointer;
+.list .list-head .title {
+  font-size: 1rem;
 }
 
 .list .list-head .delete {
   cursor: pointer;
   color: #666667;
+  margin-left: 0.5rem;
 }
 
 .list .list-body {
@@ -88,32 +129,74 @@
   transition: background-color 0.2s;
 }
 
-.list .list-body .task h3, .list .list-body .task input {
-  font-size: 0.8rem;
-  margin: 0 0 0.5rem;
-  padding: 1px 0;
+.list .list-body .task .text-input-module {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
 }
 
-.list .list-body .task h3.hide, .list .list-body .task input.hide {
+.list .list-body .task .text-input-module .title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  /* justify-content: flex-start;
+      align-items: flex-start; */
+  width: 100%;
+}
+
+.list .list-body .task .text-input-module .title-wrapper.hide {
   display: none;
 }
 
-.list .list-body .task h3:hover, .list .list-body .task input:hover {
+.list .list-body .task .text-input-module .title-wrapper .title {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 50px;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  padding: 1px 0;
+}
+
+.list .list-body .task .text-input-module .title-wrapper i {
+  margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.list .list-body .task .text-input-module .title-wrapper i.hide {
+  display: none;
+}
+
+.list .list-body .task .text-input-module .title-wrapper:hover {
   cursor: pointer;
 }
 
-.list .list-body .task h3:hover {
-  cursor: pointer;
-}
-
-.list .list-body .task input {
-  background-color: rgba(0, 0, 0, 0);
+.list .list-body .task .text-input-module input {
+  width: 100%;
+  font-size: 1rem;
+  margin: 6px 0;
   border: none;
+  background: none;
 }
 
-.list .list-body .task input:focus {
+.list .list-body .task .text-input-module input.hide {
+  display: none;
+}
+
+.list .list-body .task .text-input-module input:focus {
   outline: none;
+}
+
+.list .list-body .task .title {
+  font-size: 0.8rem;
 }
 
 .list .list-body .task .due-date {
@@ -211,19 +294,74 @@
   height: 15%;
 }
 
-.popup-wrapper .popup .popup-head h2, .popup-wrapper .popup .popup-head input {
+.popup-wrapper .popup .popup-head .text-input-module {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0.2rem;
 }
 
-.popup-wrapper .popup .popup-head h2.hide, .popup-wrapper .popup .popup-head input.hide {
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  /* justify-content: flex-start;
+      align-items: flex-start; */
+  width: 100%;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper.hide {
   display: none;
 }
 
-.popup-wrapper .popup .popup-head h2:hover, .popup-wrapper .popup .popup-head input:hover {
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper .title {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 50px;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  padding: 1px 0;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper i {
+  margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper i.hide {
+  display: none;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module .title-wrapper:hover {
   cursor: pointer;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module input {
+  width: 100%;
+  font-size: 1rem;
+  margin: 6px 0;
+  border: none;
+  background: none;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module input.hide {
+  display: none;
+}
+
+.popup-wrapper .popup .popup-head .text-input-module input:focus {
+  outline: none;
+}
+
+.popup-wrapper .popup .popup-head .title {
+  font-size: 1.5rem;
 }
 
 .popup-wrapper .popup .popup-head .close:hover {

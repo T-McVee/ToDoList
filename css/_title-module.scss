@@ -1,0 +1,47 @@
+@mixin text-input-module {
+  .text-input-module {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .title-wrapper {
+      display: flex;
+      flex-direction: row;
+      /* justify-content: flex-start;
+      align-items: flex-start; */
+      width: 100%;
+      &.hide {
+        display: none;
+      }
+      .title {
+        width: fit-content;
+        min-width: 50px;
+        //font-size: 1rem;
+        font-weight: 800;
+        margin: 0.5rem 0;
+        padding: 1px 0;
+      }
+      i {
+        margin: 0.5rem 0 0.5rem 0.5rem;
+        &.hide {
+          display: none;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input {
+      width: 100%;
+      font-size: 1rem;
+      margin: 6px 0;
+      border: none;
+      background: none;
+      &.hide {
+        display: none;
+      }
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+}
