@@ -24,11 +24,9 @@
       flex-direction: row;
       width: 100%;
       height: 15%;
-      h2, input {
-        @include text-input-module;
-        font-size: 2rem;
-        margin: 0;
-        padding: 0.2rem;
+      @include text-input-module;
+      .title {
+        font-size: 1.5rem;
       }
       .close {
         &:hover {

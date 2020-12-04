@@ -3,27 +3,58 @@ import { elFactory, appendChildren } from './helpers'
 // Title section for lists & tasks - allows user to click to edit title
 const textInputModule = (headingType, parentData) => {
   const textModule = elFactory('div', { class: 'text-input-module' });
-  const title = elFactory(headingType, { class: 'text-input-module' }, parentData.title);
+  const title = _titleFactory(headingType, parentData.title);
+  /* const titleWrapper = elFactory('div', { class: 'title-wrapper' }); */
+  /* const titleElements = [
+    elFactory(headingType, { class: 'title' }, parentData.title),
+    elFactory('i', { class: 'far fa-edit hide' }),
+  ]; */
+
+  /* titleElements.forEach(el => titleWrapper.appendChild(el)); */
+  /*  titleWrapper
+     .addEventListener('mouseover', () => titleWrapper.lastChild.classList.toggle('hide'));
+   titleWrapper
+     .addEventListener('mouseout', () => titleWrapper.lastChild.classList.toggle('hide')); */
+
   const input = elFactory('input', { type: 'text', class: 'hide' });
-  textModule.appendChild(title);
-  textModule.appendChild(input);
+
+  appendChildren(textModule, title, input);
+
+
 
   title.addEventListener('click', () => {
     input.classList.toggle('hide');
     title.classList.toggle('hide');
-    input.value = title.textContent;
+    input.value = parentData.title;
     input.focus();
   });
 
   input.addEventListener('focusout', () => {
     input.classList.toggle('hide');
     title.classList.toggle('hide');
-    title.textContent = input.value;
+    title.firstChild.textContent = input.value;
     parentData.title = input.value;
   });
 
   return textModule;
 };
+
+const _titleFactory = (headingType, text) => {
+
+  const title = elFactory('div', { class: 'title-wrapper' });
+  const titleElements = [
+    elFactory(headingType, { class: 'title' }, text),
+    elFactory('i', { class: 'far fa-edit hide' }),
+  ];
+  titleElements.forEach(el => title.appendChild(el));
+
+  let hide = () => title.lastChild.classList.toggle('hide');
+  title.addEventListener('mouseover', hide);
+  title.addEventListener('mouseout', hide);
+
+  return title;
+}
+
 
 const closeFactory = (target) => {
   const close = elFactory('div', { class: 'close' }, 'x');
