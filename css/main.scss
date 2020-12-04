@@ -1,5 +1,6 @@
 @import 'config';
 @import 'list';
+@import 'popup';
 
 * {
   box-sizing: border-box;
@@ -9,6 +10,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: $white;
   color: $black;
 }
 
@@ -56,7 +58,7 @@ nav {
         li {
           padding: 0.5rem 1.2rem;
           border-left: solid 2px $blue;
-          border-radius: $radius;
+          border-radius: $radius-md;
           transition: all 0.5s;
           &:hover {
             cursor: pointer;
@@ -72,19 +74,35 @@ nav {
   display: flex;
   flex-direction: row;
   .new-list {
-    position: relative;
     background-color: rgba($color: $light-grey, $alpha: 0.3);
-    border-radius: $radius;
+    border-radius: $radius-md;
     width: 300px;
     height: fit-content;
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.5rem;
     transition: background-color $time;
-    p {
+    #create-list {
       margin: 0;
+      padding: 0.25rem 0.5rem;
+      width: fit-content;
+      border-radius: $radius-sm;
+      transition: background-color 0.2s;
+      &:hover {
+        cursor: pointer;
+        background: $blue;
+        color: $white;
+      }
     }
-    &:hover {
-      cursor: pointer;
-      background-color: rgba($color: $light-grey, $alpha: 0.6);
+    form {
+      display: flex;
+      width: 100%;
+      margin-bottom: 0.75rem;
+      input {
+        width: 100%;
+        padding: 0.5rem 0.25rem;
+      }
+      &.hide {
+        display: none;
+      }
     }
   }
 }
