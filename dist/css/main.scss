@@ -85,7 +85,7 @@ nav {
       padding: 0.25rem 0.5rem;
       width: fit-content;
       border-radius: $radius-sm;
-      transition: background-color 0.2s;
+      transition: background-color $time;
       &:hover {
         cursor: pointer;
         background: $blue;

@@ -151,6 +151,11 @@
   transition: background-color 0.2s;
 }
 
+.list .list-body .task:hover {
+  cursor: pointer;
+  background-color: #d7d8da;
+}
+
 .list .list-body .task .task-head {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -159,6 +164,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  height: 20px;
 }
 
 .list .list-body .task .task-head .delete {
@@ -248,20 +254,33 @@
   font-size: 0.8rem;
 }
 
-.list .list-body .task .due-date {
+.list .list-body .task .task-body {
+  height: 60px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.list .list-body .task .task-body .due-date {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   font-size: 0.75rem;
   color: #b3b3b3;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
 
-.list .list-body .task:hover {
-  cursor: pointer;
-  background-color: #d7d8da;
-}
-
-.list .list-body .task:hover .due-date {
-  color: #99999a;
+.list .list-body .task .task-body .due-date:hover {
+  color: #666667;
 }
 
 .list .list-footer {

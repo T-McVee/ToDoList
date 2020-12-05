@@ -48,8 +48,9 @@ const _taskBody = (taskData) => {
   const body = elFactory('div', { class: 'task-body' });
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
   dueDate.addEventListener('click', () => { });
+  body.appendChild(dueDate);
 
-  return body.appendChild(dueDate);
+  return body;
 }
 
 const _renderTask = (state) => ({

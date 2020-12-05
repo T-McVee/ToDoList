@@ -13,6 +13,7 @@ const textInputModule = (headingType, itemData) => {
     title.classList.toggle('hide');
     input.value = itemData.title;
     input.focus();
+    input.select();
   });
 
   input.addEventListener('focusout', () => {
@@ -39,10 +40,6 @@ const _titleFactory = (headingType, text) => {
   title.addEventListener('mouseout', hide);
 
   return title;
-}
-
-const deleteElBtnFactory = () => {
-
 }
 
 const closePopupFactory = (target) => {

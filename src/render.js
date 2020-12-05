@@ -1,5 +1,6 @@
-import { elFactory } from './helpers/helpers';
-import { createListBtn, createList, createListEl } from "./list";
+import { elFactory } from './helpers/helpers'
+import { createList } from './list'
+import { createListBtn } from './createListBtn'
 
 
 const _renderColumn = ((input) => {
@@ -45,7 +46,6 @@ const renderWorkSpace = ((myLists) => {
     newListBtn.pushToMyLists(list);
     // Create DOM elements for new list
     workSpace.insertBefore(list.renderList(), workSpace.lastChild);
-    //workSpace.appendChild(list.renderList());
     renderedListBtn.firstChild.reset();
   });
   workSpace.appendChild(renderedListBtn);
