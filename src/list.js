@@ -96,9 +96,6 @@ const _renderListFooter = ((listData) => {
   const footer = elFactory('div', { class: 'list-footer' });
   const newTaskBtn = elFactory('div', { class: 'new-task' }, '+ Add new task');
   footer.appendChild(newTaskBtn);
-  newTaskBtn.addEventListener('click', () => {
-
-  })
 
   return footer;
 });

@@ -1,5 +1,6 @@
-import { elFactory, appendChildren } from "./helpers/helpers";
-import { taskPopUp, textInputModule } from "./helpers/components";
+import { elFactory, appendChildren } from "./helpers/helpers"
+import { textInputModule, inputFactory } from "./helpers/components"
+import { taskPopUp } from './popup'
 import { format } from 'date-fns'
 
 
@@ -47,8 +48,15 @@ const _taskHead = (taskData) => {
 const _taskBody = (taskData) => {
   const body = elFactory('div', { class: 'task-body' });
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
+  const completed = inputFactory({ type: 'h4', title: 'completed:' }, 'checkbox', 'completed', taskData.completed);
   dueDate.addEventListener('click', () => { });
-  body.appendChild(dueDate);
+
+  completed.lastChild.addEventListener(
+    'change',
+    () => taskData.completed = !taskData.completed
+  );
+
+  appendChildren(body, dueDate, completed);
 
   return body;
 }
@@ -59,19 +67,18 @@ const _renderTask = (state) => ({
     const head = _taskHead(state);
     const body = _taskBody(state);
 
+    // Remove task from list and DOM
     head.lastChild.addEventListener('click', () => {
-
-      // Remove task from list array and update index
       state.parent.splice(state.index, 1);
       for (let i = 0; i < state.parent.length; i++) {
         state.parent[i].index = i;
       }
 
-      // Remove task from DOM
       head.parentElement.remove();
     })
 
-    body.addEventListener('click', () => {
+    body.addEventListener('click', (e) => {
+      if (e.target.classList[0] !== 'task-body') return;
       const popUp = taskPopUp(state);
       const body = document.querySelector('body')
       body.insertBefore(popUp, body.firstChild);
@@ -93,6 +100,7 @@ const createTask = (title, description, dueDate, priority, parent) => {
     dueDate,
     priority,
     notes: [],
+    completed: false,
     parent,
     index: parent.length,
   }

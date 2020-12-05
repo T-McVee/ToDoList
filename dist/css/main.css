@@ -115,7 +115,7 @@
 }
 
 .list .list-head .delete {
-  color: #666667;
+  color: #b3b3b3;
   margin-left: 0.5rem;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
@@ -123,7 +123,7 @@
 
 .list .list-head .delete:hover {
   cursor: pointer;
-  color: #1e272b;
+  color: #666667;
 }
 
 .list .list-body {
@@ -168,7 +168,7 @@
 }
 
 .list .list-body .task .task-head .delete {
-  color: #666667;
+  color: #b3b3b3;
   margin-left: 0.5rem;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
@@ -176,7 +176,7 @@
 
 .list .list-body .task .task-head .delete:hover {
   cursor: pointer;
-  color: #1e272b;
+  color: #666667;
 }
 
 .list .list-body .task .task-head .text-input-module {
@@ -255,18 +255,21 @@
 }
 
 .list .list-body .task .task-body {
-  height: 60px;
+  height: 42px;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .list .list-body .task .task-body .due-date {
@@ -281,6 +284,24 @@
 
 .list .list-body .task .task-body .due-date:hover {
   color: #666667;
+}
+
+.list .list-body .task .task-body .completed-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list .list-body .task .task-body .completed-wrapper .completed {
+  margin: 0;
+  font-size: 0.8rem;
 }
 
 .list .list-footer {
