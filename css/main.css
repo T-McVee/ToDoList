@@ -294,12 +294,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
-.list .list-body .task .task-body .completed-wrapper .completed {
+.list .list-body .task .task-body .completed-wrapper .completed-title {
   margin: 0;
   font-size: 0.8rem;
 }
