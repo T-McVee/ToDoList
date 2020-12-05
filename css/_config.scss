@@ -14,12 +14,12 @@ $time: 0.2s;
 
 /* Mixins */
 @mixin delete {
-    color: $soft-black;
+    color: lighten($color: $soft-black, $amount: 30);
     margin-left: 0.5rem;
     transition: color 0.2s;
     &:hover {
       cursor: pointer;
-      color: $black;
+      color: $soft-black;
     }
 }
 

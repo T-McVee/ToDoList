@@ -27,11 +27,12 @@
       }
     }
     .task-body {
-      height: 60px;
+      height: 42px;
       width: 100%;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
       .due-date {
         width: fit-content;
         font-size: 0.75rem;
@@ -39,6 +40,15 @@
         transition: color $time;
         &:hover {
           color: lighten($color: $soft-black, $amount: 0);
+        }
+      }
+      .completed-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .completed {
+          margin: 0;
+          font-size: 0.8rem;
         }
       }
     }
