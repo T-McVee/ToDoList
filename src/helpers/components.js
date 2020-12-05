@@ -44,8 +44,8 @@ const _titleFactory = (headingType, text) => {
 
 const inputFactory = (heading, inputType, inputClass) => {
   const inputWrapper = elFactory('div', { class: `${inputClass}-wrapper` });
-  const title = elFactory(heading.type, { class: inputClass }, heading.title);
-  const input = elFactory('input', { type: inputType });
+  const title = elFactory(heading.type, { class: `${inputClass}-title` }, heading.title);
+  const input = elFactory('input', { type: inputType.type, class: `${inputClass}-input`, placeholder: inputType.placeholder });
   console.log(status);
 
   let elements = [title, input];

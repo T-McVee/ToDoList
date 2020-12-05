@@ -48,7 +48,7 @@ const _taskHead = (taskData) => {
 const _taskBody = (taskData) => {
   const body = elFactory('div', { class: 'task-body' });
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
-  const completed = inputFactory({ type: 'h4', title: 'completed:' }, 'checkbox', 'completed', taskData.completed);
+  const completed = inputFactory({ type: 'h4', title: 'completed:' }, { type: 'checkbox' }, 'completed');
   dueDate.addEventListener('click', () => { });
 
   completed.lastChild.addEventListener(

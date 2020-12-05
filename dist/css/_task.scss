@@ -45,8 +45,8 @@
       .completed-wrapper {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        .completed {
+        align-items: flex-end;
+        .completed-title {
           margin: 0;
           font-size: 0.8rem;
         }

@@ -1,5 +1,5 @@
 import { elFactory, appendChildren } from './helpers/helpers'
-import { textInputModule } from './helpers/components'
+import { textInputModule, inputFactory } from './helpers/components'
 
 const closePopupFactory = (target) => {
   const close = elFactory('div', { class: 'close' }, 'x');
@@ -26,9 +26,11 @@ const _popupHead = (taskData) => {
 
 const _popupBody = (taskData) => {
   const body = elFactory('div', { class: 'popup-body' });
-  const descriptionWrapper = elFactory('div', { class: 'description-wrapper' });
-  const descriptionTitle = elFactory('h3', { class: 'description-title' }, 'Description:');
-  const descriptionInput = elFactory('textarea', { type: 'text', class: 'description-input', placeholder: 'Click to add description...' });
+  const description = inputFactory({ type: 'h3', title: 'description:' }, { type: 'textarea', placeholder: 'Click to add description...' }, 'description');
+  /* 
+    const descriptionWrapper = elFactory('div', { class: 'description-wrapper' });
+    const descriptionTitle = elFactory('h3', { class: 'description-title' }, 'Description:');
+    const descriptionInput = elFactory('textarea', { type: 'text', class: 'description-input', placeholder: 'Click to add description...' }); */
 
   appendChildren(descriptionWrapper, descriptionTitle, descriptionInput);
 
@@ -37,7 +39,7 @@ const _popupBody = (taskData) => {
   const notesList = elFactory('div', { class: 'notes' }, 'A note');
 
   appendChildren(notesWrapper, notesTitle, notesList);
-  appendChildren(body, descriptionWrapper, notesWrapper);
+  appendChildren(body, description, notesWrapper);
 
   /* elements.forEach(el => body.appendChild(el)); */
 
