@@ -38,13 +38,14 @@ const renderWorkSpace = ((myLists) => {
   renderedListBtn.lastChild.addEventListener('click', () => {
     const list = createList(
       renderedListBtn.firstChild.firstChild.value,
-      newListBtn.listIndex(),
+      newListBtn.getIndex(),
       myLists
     );
     // Add list to myLists
     newListBtn.pushToMyLists(list);
     // Create DOM elements for new list
-    workSpace.insertBefore(list.renderList(), workSpace.firstChild)
+    workSpace.insertBefore(list.renderList(), workSpace.lastChild);
+    //workSpace.appendChild(list.renderList());
     renderedListBtn.firstChild.reset();
   });
   workSpace.appendChild(renderedListBtn);

@@ -137,7 +137,7 @@ const _listBtnFunction = (state) => ({
   log: () => {
     console.log(state.target);
   },
-  listIndex: () => {
+  getIndex: () => {
     return state.target.length;
   }
 })
