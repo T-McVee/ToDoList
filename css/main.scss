@@ -1,4 +1,7 @@
+//@import '~js-datepicker/src/datepicker';
 @import 'config';
+@import 'nav';
+@import 'new-list-btn';
 @import 'list';
 @import 'popup';
 
@@ -14,6 +17,12 @@ body {
   color: $black;
 }
 
+#content {
+  z-index: -100;
+  height: 100vh;
+  width: 100vw;
+}
+
 .row, .col {
   display: flex;
   justify-content: center;
@@ -25,84 +34,25 @@ body {
   padding-right: 4rem;
 }
 
-nav {
-  display: flex;
-  width: 100vw;
-  height: 80px;
-  justify-content: center;
-  align-items: center;
-  .row {
-    width: 100%;
-    justify-content: space-between;
-    .col:nth-child(1) {
-      width: 100px;
-      justify-content: flex-start;
-      .logo {
-        display: flex;
-        flex-direction: column;
-        font-weight: 800;
-        color: $blue;
-        letter-spacing: 0.2rem;
-        line-height: 0.9rem;
-      }
-    }
-    .col:nth-child(2) {
-      width: 30%;
-      justify-content: flex-end;
-      ul {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        list-style: none;
-        li {
-          padding: 0.5rem 1.2rem;
-          border-left: solid 2px $blue;
-          border-radius: $radius-md;
-          transition: all 0.5s;
-          &:hover {
-            cursor: pointer;
-            background-color: $blue;
-          }
-        }
-      }
-    }
-  }
+.low {
+  color: $soft-black;
 }
 
+.medium {
+  color: $green
+}
+
+.urgent {
+  color: $red
+}
+
+
 .work-space {
+  position: absolute;
+  top: 60px;
+  width: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: row;
-  .new-list {
-    background-color: rgba($color: $light-grey, $alpha: 0.3);
-    border-radius: $radius-md;
-    width: 300px;
-    height: fit-content;
-    padding: 1rem 0.5rem;
-    transition: background-color $time;
-    #create-list {
-      margin: 0;
-      padding: 0.25rem 0.5rem;
-      width: fit-content;
-      border-radius: $radius-sm;
-      transition: background-color $time;
-      &:hover {
-        cursor: pointer;
-        background: $blue;
-        color: $white;
-      }
-    }
-    form {
-      display: flex;
-      width: 100%;
-      margin-bottom: 0.75rem;
-      input {
-        width: 100%;
-        padding: 0.5rem 0.25rem;
-      }
-      &.hide {
-        display: none;
-      }
-    }
-  }
+  overflow-x: scroll;
 }
