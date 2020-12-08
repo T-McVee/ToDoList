@@ -9,5 +9,3 @@ const myLists = [];
 const init = (() => {
   domElements.content.appendChild(pageLoad(myLists));
 })();
-
-const f = document.querySelector('#create-list');

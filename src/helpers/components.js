@@ -1,7 +1,7 @@
 import { elFactory, appendChildren } from './helpers'
 
 // Title section for lists & tasks - allows user to click to edit title
-const textInputModule = (headingType, itemData) => {
+const textInputModule = (headingType, itemData, editOnLoad) => {
   const textModule = elFactory('div', { class: 'text-input-module' });
   const title = _titleFactory(headingType, itemData.title);
   const input = elFactory('input', { type: 'text', class: 'hide' });
@@ -23,6 +23,17 @@ const textInputModule = (headingType, itemData) => {
     itemData.title = input.value;
   });
 
+
+  if (false) {
+    title.classList.toggle('hide');
+    input.classList.toggle('hide');
+    input.value = itemData.title;
+    setInterval(() => {
+      input.focus();
+      input.select();
+    }, 0);
+  };
+
   return textModule;
 };
 
@@ -30,7 +41,7 @@ const _titleFactory = (headingType, text) => {
 
   const title = elFactory('div', { class: 'title-wrapper' });
   const titleElements = [
-    elFactory(headingType, { class: 'title' }, text),
+    elFactory(headingType, { class: `title` }, text),
     elFactory('i', { class: 'far fa-edit hide' }),
   ];
   titleElements.forEach(el => title.appendChild(el));
@@ -46,7 +57,6 @@ const inputFactory = (heading, inputType, inputClass) => {
   const inputWrapper = elFactory('div', { class: `${inputClass}-wrapper` });
   const title = elFactory(heading.type, { class: `${inputClass}-title` }, heading.title);
   const input = elFactory('input', { type: inputType.type, class: `${inputClass}-input`, placeholder: inputType.placeholder });
-  console.log(status);
 
   let elements = [title, input];
 
@@ -55,5 +65,25 @@ const inputFactory = (heading, inputType, inputClass) => {
   return inputWrapper;
 }
 
+const selectFactory = (data, labelText) => {
+  const wrapper = elFactory('div', { class: 'select-wrapper' });
+  const label = elFactory('label', {}, `${labelText}: `);
+  const select = elFactory('select', {});
+  data.priorityOptions().forEach(option => select.appendChild(option));
+  appendChildren(wrapper, label, select);
 
-export { textInputModule, inputFactory };
+  select.selectedIndex = data.priority;
+
+  select.addEventListener('change', () => {
+    data.priority = select.value;
+  });
+
+  return wrapper;
+}
+
+
+export {
+  textInputModule,
+  inputFactory,
+  selectFactory,
+};

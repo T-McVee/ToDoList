@@ -44,9 +44,31 @@ const createListBtn = (text, target) => {
   }
   return Object.assign(
     {},
-    _renderListBtn(state),
+    // _renderListBtn(state),
     _listBtnFunction(state),
   )
 }
 
-export { createListBtn };
+const renderListBtn = () => {
+  const card = elFactory('div', { class: 'new-list' });
+  const form = elFactory('form', { class: 'hide', id: 'new-list-from' });
+  const input = elFactory('input', {
+    id: 'list-title-input',
+    type: 'text',
+    placeholder: 'Enter list title...'
+  });
+  const btn = elFactory('div', { id: 'create-list' }, '+ Create new list');
+
+  form.appendChild(input);
+  card.appendChild(form);
+  card.appendChild(btn);
+  card.addEventListener('mouseenter', () => {
+    form.classList.remove('hide');
+  })
+  card.addEventListener('mouseleave', () => {
+    form.classList.add('hide');
+  })
+  return card;
+}
+
+export { createListBtn, renderListBtn };

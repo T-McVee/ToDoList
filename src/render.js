@@ -1,6 +1,6 @@
-import { elFactory } from './helpers/helpers'
-import { createList } from './list'
-import { createListBtn } from './createListBtn'
+import { elFactory, appendChildren } from './helpers/helpers'
+import { createList, listFactory } from './list'
+import { createListBtn, renderListBtn } from './createListBtn'
 
 
 const _renderColumn = ((input) => {
@@ -24,8 +24,9 @@ const _renderRow = ((input) => {
 
 const renderNavBar = (() => {
   const nav = document.createElement('nav');
-  const row = _renderRow([{ text: 'TaskTracker', classes: 'logo' }]);
+  const row = _renderRow([{ text: '', classes: 'logo' }]);
   row.classList.add('container');
+  row.appendChild(elFactory('i', { class: 'fas fa-bars' }));
   nav.appendChild(row);
 
   return nav
@@ -34,25 +35,28 @@ const renderNavBar = (() => {
 const renderWorkSpace = ((myLists) => {
   const workSpace = elFactory('div', { class: 'work-space container' });
   const newListBtn = createListBtn('+ Create new list', myLists);
-  const renderedListBtn = newListBtn.renderBtn();
+  const renderedListBtn = renderListBtn();
 
   renderedListBtn.lastChild.addEventListener('click', () => {
     const list = createList(
       renderedListBtn.firstChild.firstChild.value,
-      newListBtn.getIndex(),
       myLists
     );
+
+
     // Add list to myLists
     newListBtn.pushToMyLists(list);
     // Create DOM elements for new list
-    workSpace.insertBefore(list.renderList(), workSpace.lastChild);
+    workSpace.insertBefore(listFactory(list), workSpace.lastChild);
     renderedListBtn.firstChild.reset();
   });
-  workSpace.appendChild(renderedListBtn);
+
+
+  appendChildren(workSpace, renderedListBtn);
 
   // Load existing lists
   myLists.forEach(list => {
-    workSpace.insertBefore(list.renderList(), workSpace.childNodes[0])
+    workSpace.insertBefore(listFactory(list), workSpace.childNodes[0])
   });
 
   return workSpace;

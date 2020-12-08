@@ -1,0 +1,32 @@
+.new-list {
+  background-color: rgba($color: $light-grey, $alpha: 0.3);
+  border-radius: $radius-md;
+  width: 300px;
+  height: fit-content;
+  padding: 1rem 0.5rem;
+  transition: background-color $time;
+  #create-list {
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+    width: fit-content;
+    border-radius: $radius-sm;
+    transition: background-color $time;
+    &:hover {
+      cursor: pointer;
+      background: $blue;
+      color: $white;
+    }
+  }
+  form {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    input {
+      width: 100%;
+      padding: 0.5rem 0.25rem;
+    }
+    &.hide {
+      display: none;
+    }
+  }
+}

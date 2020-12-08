@@ -1,4 +1,5 @@
 .popup-wrapper {
+  z-index: 100;
   position: absolute;
   top: 0;
   left: 0;
@@ -16,21 +17,48 @@
     width: 550px;
     height: 90vh;
     padding: 0.75rem;
+    border-radius: $radius-md;
     background-color: $light-grey;
     .popup-head{
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      //align-items: center;
       flex-direction: row;
       width: 100%;
       height: 15%;
-      @include text-input-module;
+      .title-block{
+        @include text-input-module;
       .title {
         font-size: 1.5rem;
       }
+      .select-wrapper {
+        color: $soft-black;
+        font-size: 0.9rem;
+        select {
+          color: $soft-black;
+          font-size: 0.9rem;
+          background: none;
+          border: none;
+          &:hover {
+            cursor: pointer;
+          }
+          &:focus {
+            outline: none;
+          }
+          option {
+            background: none;
+          }
+        }
+        
+      }
+      }
       .close {
+        font-size: 1.2rem;
+        color: lighten($color: $soft-black, $amount: 20);
+        transition: $time;
         &:hover {
           cursor: pointer;
+          color: lighten($color: $soft-black, $amount: 0);
         }
       }
     }

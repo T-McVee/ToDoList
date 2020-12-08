@@ -1,5 +1,6 @@
 import { elFactory, appendChildren } from './helpers/helpers'
-import { textInputModule, inputFactory } from './helpers/components'
+import { textInputModule, inputFactory, selectFactory } from './helpers/components'
+import { taskFactory } from './task';
 
 const closePopupFactory = (target) => {
   const close = elFactory('div', { class: 'close' }, 'x');
@@ -12,27 +13,32 @@ const closePopupFactory = (target) => {
 
 const _popupHead = (taskData) => {
   const head = elFactory('div', { class: 'popup-head' });
-  const title = textInputModule('h2', taskData);
-  const priority = elFactory('div', { class: 'priority' }, taskData.priority);
+  const titleBlock = elFactory('div', { class: 'title-block' });
+  const title = textInputModule('h2', taskData, false);
+  const priority = selectFactory(taskData, 'Priority');
+
+  //elFactory('div', { class: `priority ${taskData.returnPriority()}` }, `Priority: ${taskData.returnPriority()}`);
+  appendChildren(titleBlock, title, priority);
+
   const closeBtn = closePopupFactory('.popup-wrapper');
-  const elements = [title, priority, closeBtn];
+  const elements = [titleBlock, closeBtn];
 
   appendChildren(head, ...elements);
-
-  /* elements.forEach(el => head.appendChild(el)); */
 
   return head;
 }
 
 const _popupBody = (taskData) => {
   const body = elFactory('div', { class: 'popup-body' });
-  const description = inputFactory({ type: 'h3', title: 'description:' }, { type: 'textarea', placeholder: 'Click to add description...' }, 'description');
-  /* 
-    const descriptionWrapper = elFactory('div', { class: 'description-wrapper' });
-    const descriptionTitle = elFactory('h3', { class: 'description-title' }, 'Description:');
-    const descriptionInput = elFactory('textarea', { type: 'text', class: 'description-input', placeholder: 'Click to add description...' }); */
+  const description = elFactory('div', { class: 'description-wrapper' });
+  const descriptionTitle = elFactory('h3', { class: 'descrition-title' }, 'Description:');
+  const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Click to add description...' });
+  descriptionInput.value = taskData.description;
+  appendChildren(description, descriptionTitle, descriptionInput);
 
-  appendChildren(descriptionWrapper, descriptionTitle, descriptionInput);
+  descriptionInput.addEventListener('input', () => {
+    taskData.description = descriptionInput.value;
+  });
 
   const notesWrapper = elFactory('h3', { class: 'notes-wrapper' });
   const notesTitle = elFactory('div', { class: 'notes' }, 'Notes');
@@ -40,8 +46,6 @@ const _popupBody = (taskData) => {
 
   appendChildren(notesWrapper, notesTitle, notesList);
   appendChildren(body, description, notesWrapper);
-
-  /* elements.forEach(el => body.appendChild(el)); */
 
   return body;
 }

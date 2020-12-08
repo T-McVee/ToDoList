@@ -1,79 +1,8 @@
-import { createTask } from "./task";
-import { elFactory } from "./helpers/helpers";
+import { createTask, taskFactory } from "./task"
+import { elFactory } from "./helpers/helpers"
 import { textInputModule } from './helpers/components'
+import datepicker from 'js-datepicker'
 
-/* List Factory */
-const _updateList = (state) => ({
-  addtask: (task) => state.tasks.push(task),
-  changeIndex: (newIndex) => state.index = newIndex,
-  deleteList: () => { },
-});
-
-const _getDetails = (state) => ({
-  get title() {
-    return state.title;
-  },
-  get tasks() {
-    return state.tasks;
-  },
-  get index() {
-    return state.index;
-  },
-});
-
-const _logDetails = (state) => ({
-  logTasks: () => state.tasks.forEach(task => task.logTitle()),
-});
-
-const _renderList = (state) => ({
-  renderList: () => {
-    const list = elFactory('div', { class: 'list', name: state.title, 'data-index': state.index });
-    const head = _renderListHead(state);
-    const body = _renderListBody(state);
-    const footer = _renderListFooter(state);
-
-    // Add Delete button functionality
-    head.lastChild.addEventListener('click', () => {
-      // Remove list from main array and update index
-      state.parent.splice(state.index, 1);
-      for (let i = 0; i < state.parent.length; i++) {
-        state.parent[i].index = i;
-      }
-
-      // Remove list from DOM
-      head.parentElement.remove();
-    })
-
-
-    footer.firstChild.addEventListener('click', () => {
-      const task = createTask('Click to add title', '', 'due', '', state.tasks);
-      state.tasks.push(task);
-      body.appendChild(task.renderTask());
-    });
-
-    list.appendChild(head);
-    list.appendChild(body);
-    list.appendChild(footer);
-
-    return list
-  }
-})
-
-const createList = (title, index, parent) => {
-  const state = {
-    title,
-    tasks: [],
-    index,
-    parent,
-  }
-  return Object.assign(
-    {},
-    _updateList(state),
-    _getDetails(state),
-    _logDetails(state),
-    _renderList(state),
-  )
-}
 
 const _renderListHead = ((listData) => {
   const head = elFactory('div', { class: 'list-head' });
@@ -92,7 +21,7 @@ const _renderListBody = ((listData) => {
   return body;
 });
 
-const _renderListFooter = ((listData) => {
+const _renderListFooter = (() => {
   const footer = elFactory('div', { class: 'list-footer' });
   const newTaskBtn = elFactory('div', { class: 'new-task' }, '+ Add new task');
   footer.appendChild(newTaskBtn);
@@ -100,4 +29,89 @@ const _renderListFooter = ((listData) => {
   return footer;
 });
 
-export { createList };
+const _updateList = (state) => ({
+  changeTitle: (newTitle) => state.title = newTitle,
+  addtask: (task) => state.tasks.push(task),
+  changeIndex: (newIndex) => state.index = newIndex,
+  deleteList: () => state.parent.splice([state.index], 1),
+});
+
+const _getDetails = (state) => ({
+  get title() {
+    return state.title;
+  },
+  get tasks() {
+    return state.tasks;
+  },
+  get index() {
+    return state.index;
+  },
+  get parent() {
+    return state.parent;
+  }
+});
+
+const _logDetails = (state) => ({
+  logTasks: () => state.tasks.forEach(task => task.logTitle()),
+});
+
+/* List factory */
+const createList = (title, parent) => {
+  const state = {
+    title,
+    tasks: [],
+    parent,
+    index: parent.length,
+  }
+
+  return Object.assign(
+    {},
+    _updateList(state),
+    _getDetails(state),
+    _logDetails(state),
+  )
+}
+
+const listFactory = (listData) => {
+  const list = elFactory('div', { class: 'list', name: listData.title, 'data-index': listData.index, draggable: 'true' });
+  const head = _renderListHead(listData);
+  const body = _renderListBody(listData);
+  const footer = _renderListFooter(listData);
+
+  // Delete button
+  head.lastChild.addEventListener('click', () => {
+    // Remove list from main array and update index
+    listData.deleteList();
+    for (let i = 0; i < listData.parent.length; i++) {
+      listData.parent[i].index = i;
+    }
+
+    head.parentElement.remove();
+  })
+
+  // Create task
+  footer.firstChild.addEventListener('click', () => {
+    const task = createTask('Click to add title', '', 'Due date', '2', listData);
+    listData.addtask(task);
+    const taskEl = taskFactory(task);
+    const dueDateEl = taskEl.lastChild.firstChild;
+    body.appendChild(taskEl);
+
+
+    const picker = datepicker(dueDateEl, {
+      onHide: () => {
+        if (!picker.dateSelected) return;
+        listData.dueDate = picker.dateSelected.toDateString();
+        dueDateEl.textContent = listData.dueDate;
+      }
+    });
+  });
+
+  list.appendChild(head);
+  list.appendChild(body);
+  list.appendChild(footer);
+
+  return list
+}
+
+export { createList, listFactory };
