@@ -104,7 +104,9 @@ nav .row .col:nth-child(2) ul li:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  font-size: 1rem;
   border-radius: 4px;
+  border: none;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }

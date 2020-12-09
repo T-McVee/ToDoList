@@ -37,19 +37,24 @@ const renderWorkSpace = ((myLists) => {
   const newListBtn = createListBtn('+ Create new list', myLists);
   const renderedListBtn = renderListBtn();
 
-  renderedListBtn.lastChild.addEventListener('click', () => {
-    const list = createList(
-      renderedListBtn.firstChild.firstChild.value,
-      myLists
-    );
+  function addNewList() {
+    const input = renderedListBtn.firstChild.firstChild.value;
 
+    if (!input) return;
+    const list = createList(input, myLists);
 
     // Add list to myLists
     newListBtn.pushToMyLists(list);
     // Create DOM elements for new list
     workSpace.insertBefore(listFactory(list), workSpace.lastChild);
     renderedListBtn.firstChild.reset();
+  }
+
+  renderedListBtn.firstChild.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addNewList()
   });
+  renderedListBtn.lastChild.addEventListener('click', addNewList);
 
 
   appendChildren(workSpace, renderedListBtn);

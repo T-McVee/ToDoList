@@ -91,7 +91,7 @@ const listFactory = (listData) => {
 
   // Create task
   footer.firstChild.addEventListener('click', () => {
-    const task = createTask('Click to add title', '', 'Due date', '2', listData);
+    const task = createTask("Add a title", '', 'Due date', '2', listData);
     listData.addtask(task);
     const taskEl = taskFactory(task);
     const dueDateEl = taskEl.lastChild.firstChild;

@@ -57,11 +57,12 @@ const renderListBtn = () => {
     type: 'text',
     placeholder: 'Enter list title...'
   });
-  const btn = elFactory('div', { id: 'create-list' }, '+ Create new list');
+  const btn = elFactory('input', { type: 'submit', id: 'create-list', value: '+ Create new list' });
 
   form.appendChild(input);
   card.appendChild(form);
   card.appendChild(btn);
+
   card.addEventListener('mouseenter', () => {
     form.classList.remove('hide');
   })

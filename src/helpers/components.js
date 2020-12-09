@@ -9,26 +9,26 @@ const textInputModule = (headingType, itemData, editOnLoad) => {
   appendChildren(textModule, title, input);
 
   title.addEventListener('click', () => {
-    input.classList.toggle('hide');
-    title.classList.toggle('hide');
+    input.classList.remove('hide');
+    title.classList.add('hide');
     input.value = itemData.title;
     input.focus();
     input.select();
   });
 
   input.addEventListener('focusout', () => {
-    input.classList.toggle('hide');
-    title.classList.toggle('hide');
+    input.classList.add('hide');
+    title.classList.remove('hide');
     title.firstChild.textContent = input.value;
     itemData.title = input.value;
   });
 
 
-  if (false) {
-    title.classList.toggle('hide');
-    input.classList.toggle('hide');
+  if (editOnLoad) {
+    title.classList.add('hide');
+    input.classList.remove('hide');
     input.value = itemData.title;
-    setInterval(() => {
+    setTimeout(() => {
       input.focus();
       input.select();
     }, 0);
