@@ -16,7 +16,6 @@ nav {
           flex-direction: column;
   width: 100vw;
   height: 40px;
-  background-color: #197bb8;
 }
 
 nav .row {
@@ -41,14 +40,16 @@ nav .row .col:nth-child(1) .logo {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-weight: 800;
+  font-family: 'Caveat', cursive;
+  font-size: 2.5rem;
+  font-weight: 600;
   color: #197bb8;
   letter-spacing: 0.2rem;
   line-height: 0.9rem;
 }
 
 nav .row i {
-  color: #fff;
+  color: #1e272b;
 }
 
 nav .row .col:nth-child(2) {
@@ -106,6 +107,7 @@ nav .row .col:nth-child(2) ul li:hover {
   width: fit-content;
   font-size: 1rem;
   border-radius: 4px;
+  background: none;
   border: none;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
@@ -115,6 +117,10 @@ nav .row .col:nth-child(2) ul li:hover {
   cursor: pointer;
   background: #197bb8;
   color: #fff;
+}
+
+.new-list #create-list:focus {
+  outline: none;
 }
 
 .new-list form {
@@ -154,7 +160,9 @@ nav .row .col:nth-child(2) ul li:hover {
   height: fit-content;
   padding: 0.75rem;
   margin-right: 1.5rem;
-  background: #d2d3d5;
+  background: #dfe0e1;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   border-radius: 4px;
   -webkit-box-shadow: 2px 2px 8px rgba(30, 39, 43, 0.2);
           box-shadow: 2px 2px 8px rgba(30, 39, 43, 0.2);
@@ -658,6 +666,7 @@ nav .row .col:nth-child(2) ul li:hover {
 }
 
 body {
+  z-index: -101;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
@@ -715,5 +724,10 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   overflow-x: scroll;
+}
+
+.qs-controls {
+  background-color: #197bb8;
+  color: #fff;
 }
 /*# sourceMappingURL=main.css.map */
