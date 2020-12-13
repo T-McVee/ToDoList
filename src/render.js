@@ -24,7 +24,7 @@ const _renderRow = ((input) => {
 
 const renderNavBar = (() => {
   const nav = document.createElement('nav');
-  const row = _renderRow([{ text: '', classes: 'logo' }]);
+  const row = _renderRow([{ text: 'Kanbanit', classes: 'logo' }]);
   row.classList.add('container');
   row.appendChild(elFactory('i', { class: 'fas fa-bars' }));
   nav.appendChild(row);

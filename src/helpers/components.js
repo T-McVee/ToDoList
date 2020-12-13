@@ -1,12 +1,10 @@
+import { updateLocalStorage } from '../index'
 import { elFactory, appendChildren } from './helpers'
 
 // Title section for lists & tasks - allows user to click to edit title
 const textInputModule = (headingType, itemData, editOnLoad) => {
-  const textModule = elFactory('div', { class: 'text-input-module' });
   const title = _titleFactory(headingType, itemData.title);
-  const input = elFactory('input', { type: 'text', class: 'hide' });
-
-  appendChildren(textModule, title, input);
+  const input = elFactory('input', { type: 'text', class: 'hide', placeholder: 'Add a title...' });
 
   title.addEventListener('click', () => {
     input.classList.remove('hide');
@@ -21,6 +19,7 @@ const textInputModule = (headingType, itemData, editOnLoad) => {
     title.classList.remove('hide');
     title.firstChild.textContent = input.value;
     itemData.title = input.value;
+    updateLocalStorage();
   });
 
 
@@ -34,7 +33,7 @@ const textInputModule = (headingType, itemData, editOnLoad) => {
     }, 0);
   };
 
-  return textModule;
+  return elFactory('div', { class: 'text-input-module' }, title, input);
 };
 
 const _titleFactory = (headingType, text) => {
@@ -54,16 +53,40 @@ const _titleFactory = (headingType, text) => {
 }
 
 const inputFactory = (heading, inputType, inputClass) => {
-  const inputWrapper = elFactory('div', { class: `${inputClass}-wrapper` });
-  const title = elFactory(heading.type, { class: `${inputClass}-title` }, heading.title);
-  const input = elFactory('input', { type: inputType.type, class: `${inputClass}-input`, placeholder: inputType.placeholder });
+  const title = elFactory(
+    heading.type,
+    { class: `${inputClass}-title` },
+    heading.title
+  );
+  const input = elFactory(
+    'input',
+    {
+      type: inputType.type,
+      class: `${inputClass}-input`,
+      placeholder: inputType.placeholder
+    }
+  );
 
-  let elements = [title, input];
-
-  elements.forEach(el => inputWrapper.appendChild(el));
-
-  return inputWrapper;
+  return elFactory('div', { class: `${inputClass}-wrapper` }, title, input);
 }
+
+/* const inputBlock = (name, titleType, input) => {
+  const title = elFactory(`${titleType}`, { class: `${name}-title` }, name);
+  const input = elFactory(`${input.type}`, { class: `${name}-input` });
+  // if object.type === select look for object.options
+  // loop through options running elFactory for each one
+
+  // Finish this off ^^^ 
+
+  const inputT = {
+    type: 'select',
+    options: [
+      { value }
+    ]
+  }
+
+  return elFactory('div', { class: `${name}-wrapper` }, title, input);
+} */
 
 const selectFactory = (data, labelText) => {
   const wrapper = elFactory('div', { class: 'select-wrapper' });

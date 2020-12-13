@@ -1,7 +1,9 @@
+import { updateLocalStorage } from './index'
 import { elFactory, appendChildren } from "./helpers/helpers"
 import { textInputModule, inputFactory, priorityGraph } from "./helpers/components"
 import { taskPopUp } from './popup'
 import { format } from 'date-fns'
+
 
 
 const _updateTask = (state) => ({
@@ -88,37 +90,30 @@ const createTask = (title, description, dueDate, priority, parentData) => {
 }
 
 const _taskHead = ((taskData) => {
-  const head = elFactory('div', { class: 'task-head' });
-  const elements = [
-    textInputModule('h3', taskData, true),
-    elFactory('div', { class: 'delete' }, 'x'),
-  ];
+  const title = textInputModule('h3', taskData, true);
+  const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
 
-  elements.forEach(el => head.appendChild(el));
-
-  return head;
+  return elFactory('div', { class: 'task-head' }, title, deleteBtn);
 })
 
 const _taskBody = ((taskData) => {
-  const body = elFactory('div', { class: 'task-body' });
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
   const completed = inputFactory({ type: 'h4', title: 'completed:' }, { type: 'checkbox' }, 'completed');
-  //const priority = priorityGraph(taskData.priority);
 
   completed.lastChild.addEventListener(
-    'change',
-    () => taskData.completed = !taskData.completed
+    'change', () => {
+      taskData.completed = !taskData.completed;
+      updateLocalStorage();
+    }
+
   );
 
-  appendChildren(body, dueDate, completed);
-
-  return body;
+  return elFactory('div', { class: 'task-body' }, dueDate, completed);
 })
 
 const taskFactory = (taskData) => {
   console.log(taskData);
 
-  const card = elFactory('div', { class: 'task', 'data-index': taskData.index, draggable: 'true' });
   const head = _taskHead(taskData);
   const body = _taskBody(taskData);
 
@@ -133,31 +128,28 @@ const taskFactory = (taskData) => {
 
     console.log(taskData.parent.parent);
 
-    //console.log(document.querySelector(`[data-index="0"]`));
-
-    //head.parentElement.dataset.index = `${taskData.parent.index}-${taskData.parent[i].index}`;
-    //console.log(head.parentElement);
-
-
     head.parentElement.remove();
+    updateLocalStorage();
   })
 
   // Open popup
   body.addEventListener('click', (e) => {
     if (e.target.classList[0] !== 'task-body') return;
-    console.log(taskData);
 
-    const popUp = taskPopUp(taskData); // passing state info before methods are attached
+    const popUp = taskPopUp(taskData);
     const body = document.querySelector('body')
     body.insertBefore(popUp, body.firstChild);
   });
 
-  card.appendChild(head);
-  card.appendChild(body);
-
-
-
-  return card;
+  return elFactory('div',
+    {
+      class: 'task',
+      'data-index': taskData.index,
+      draggable: 'true'
+    },
+    head,
+    body
+  );
 }
 
 export { createTask, taskFactory };

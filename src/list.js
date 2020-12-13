@@ -1,3 +1,4 @@
+import { myLists, updateLocalStorage } from './index'
 import { createTask, taskFactory } from "./task"
 import { elFactory } from "./helpers/helpers"
 import { textInputModule } from './helpers/components'
@@ -5,13 +6,10 @@ import datepicker from 'js-datepicker'
 
 
 const _renderListHead = ((listData) => {
-  const head = elFactory('div', { class: 'list-head' });
   const title = textInputModule('h2', listData);
   const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
-  head.appendChild(title);
-  head.appendChild(deleteBtn);
 
-  return head;
+  return elFactory('div', { class: 'list-head' }, title, deleteBtn);
 });
 
 const _renderListBody = ((listData) => {
@@ -22,11 +20,9 @@ const _renderListBody = ((listData) => {
 });
 
 const _renderListFooter = (() => {
-  const footer = elFactory('div', { class: 'list-footer' });
   const newTaskBtn = elFactory('div', { class: 'new-task' }, '+ Add new task');
-  footer.appendChild(newTaskBtn);
 
-  return footer;
+  return elFactory('div', { class: 'list-footer' }, newTaskBtn);
 });
 
 const _updateList = (state) => ({
@@ -73,7 +69,6 @@ const createList = (title, parent) => {
 }
 
 const listFactory = (listData) => {
-  const list = elFactory('div', { class: 'list', name: listData.title, 'data-index': listData.index, draggable: 'true' });
   const head = _renderListHead(listData);
   const body = _renderListBody(listData);
   const footer = _renderListFooter(listData);
@@ -87,16 +82,16 @@ const listFactory = (listData) => {
     }
 
     head.parentElement.remove();
+    updateLocalStorage();
   })
 
   // Create task
   footer.firstChild.addEventListener('click', () => {
-    const task = createTask("Add a title", '', 'Due date', '2', listData);
+    const task = createTask("", '', 'Due date', '2', listData);
     listData.addtask(task);
     const taskEl = taskFactory(task);
     const dueDateEl = taskEl.lastChild.firstChild;
     body.appendChild(taskEl);
-
 
     const picker = datepicker(dueDateEl, {
       onHide: () => {
@@ -105,13 +100,20 @@ const listFactory = (listData) => {
         dueDateEl.textContent = listData.dueDate;
       }
     });
+    updateLocalStorage();
   });
 
-  list.appendChild(head);
-  list.appendChild(body);
-  list.appendChild(footer);
-
-  return list
+  return elFactory('div',
+    {
+      class: 'list',
+      name: listData.title,
+      'data-index': listData.index,
+      draggable: 'true'
+    },
+    head,
+    body,
+    footer
+  );
 }
 
 export { createList, listFactory };

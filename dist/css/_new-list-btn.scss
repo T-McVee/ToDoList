@@ -1,5 +1,6 @@
 .new-list {
   background-color: rgba($color: $light-grey, $alpha: 0.3);
+
   border-radius: $radius-md;
   width: 300px;
   height: fit-content;
@@ -11,12 +12,16 @@
     width: fit-content;
     font-size: 1rem;
     border-radius: $radius-sm;
+    background: none;
     border: none;
     transition: background-color $time;
     &:hover {
       cursor: pointer;
       background: $blue;
       color: $white;
+    }
+    &:focus {
+      outline: none;
     }
   }
   form {

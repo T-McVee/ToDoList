@@ -12,42 +12,30 @@ const closePopupFactory = (target) => {
 }
 
 const _popupHead = (taskData) => {
-  const head = elFactory('div', { class: 'popup-head' });
-  const titleBlock = elFactory('div', { class: 'title-block' });
   const title = textInputModule('h2', taskData, false);
   const priority = selectFactory(taskData, 'Priority');
-
-  //elFactory('div', { class: `priority ${taskData.returnPriority()}` }, `Priority: ${taskData.returnPriority()}`);
-  appendChildren(titleBlock, title, priority);
+  const titleBlock = elFactory('div', { class: 'title-block' }, title, priority);
 
   const closeBtn = closePopupFactory('.popup-wrapper');
-  const elements = [titleBlock, closeBtn];
 
-  appendChildren(head, ...elements);
-
-  return head;
+  return elFactory('div', { class: 'popup-head' }, titleBlock, closeBtn);
 }
 
 const _popupBody = (taskData) => {
-  const body = elFactory('div', { class: 'popup-body' });
-  const description = elFactory('div', { class: 'description-wrapper' });
   const descriptionTitle = elFactory('h3', { class: 'descrition-title' }, 'Description:');
   const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Click to add description...' });
   descriptionInput.value = taskData.description;
-  appendChildren(description, descriptionTitle, descriptionInput);
+  descriptionInput.addEventListener('input', () =>
+    taskData.description = descriptionInput.value
+  );
 
-  descriptionInput.addEventListener('input', () => {
-    taskData.description = descriptionInput.value;
-  });
+  const description = elFactory('div', { class: 'description-wrapper' }, descriptionTitle, descriptionInput);
 
-  const notesWrapper = elFactory('h3', { class: 'notes-wrapper' });
   const notesTitle = elFactory('div', { class: 'notes' }, 'Notes');
   const notesList = elFactory('div', { class: 'notes' }, 'A note');
+  const notesWrapper = elFactory('h3', { class: 'notes-wrapper' }, notesTitle, notesList);
 
-  appendChildren(notesWrapper, notesTitle, notesList);
-  appendChildren(body, description, notesWrapper);
-
-  return body;
+  return elFactory('div', { class: 'popup-body' }, description, notesWrapper);
 }
 
 const taskPopUp = (taskData) => {
