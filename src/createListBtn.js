@@ -51,8 +51,9 @@ const createListBtn = (text, target) => {
 
 const renderListBtn = () => {
   const card = elFactory('div', { class: 'new-list' });
-  const form = elFactory('form', { class: 'hide', id: 'new-list-from' });
+  const form = elFactory('form', { id: 'new-list-form' });
   const input = elFactory('input', {
+    class: 'hide',
     id: 'list-title-input',
     type: 'text',
     placeholder: 'Enter list title...'
@@ -60,14 +61,15 @@ const renderListBtn = () => {
   const btn = elFactory('input', { type: 'submit', id: 'create-list', value: '+ Create new list' });
 
   form.appendChild(input);
+  form.appendChild(btn);
   card.appendChild(form);
-  card.appendChild(btn);
+
 
   card.addEventListener('mouseenter', () => {
-    form.classList.remove('hide');
+    input.classList.remove('hide');
   })
   card.addEventListener('mouseleave', () => {
-    form.classList.add('hide');
+    input.classList.add('hide');
   })
   return card;
 }

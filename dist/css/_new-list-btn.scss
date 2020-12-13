@@ -1,39 +1,39 @@
 .new-list {
   background-color: rgba($color: $light-grey, $alpha: 0.3);
-
   border-radius: $radius-md;
   width: 300px;
   height: fit-content;
   padding: 1rem 0.5rem;
   transition: background-color $time;
-  #create-list {
-    margin: 0;
-    padding: 0.25rem 0.5rem;
-    width: fit-content;
-    font-size: 1rem;
-    border-radius: $radius-sm;
-    background: none;
-    border: none;
-    transition: background-color $time;
-    &:hover {
-      cursor: pointer;
-      background: $blue;
-      color: $white;
-    }
-    &:focus {
-      outline: none;
-    }
-  }
   form {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    margin-bottom: 0.75rem;
     input {
       width: 100%;
       padding: 0.5rem 0.25rem;
+      margin: 0 0 0.75rem;
+      &.hide {
+        display: none;
+      }
     }
-    &.hide {
-      display: none;
+    #create-list {
+      margin: 0;
+      padding: 0.25rem 0.5rem;
+      width: fit-content;
+      font-size: 1rem;
+      border-radius: $radius-sm;
+      background: none;
+      border: none;
+      transition: background-color $time;
+      &:hover {
+        cursor: pointer;
+        background: $blue;
+        color: $white;
+      }
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
