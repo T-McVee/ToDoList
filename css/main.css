@@ -99,7 +99,28 @@ nav .row .col:nth-child(2) ul li:hover {
   transition: background-color 0.2s;
 }
 
-.new-list #create-list {
+.new-list form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.new-list form input {
+  width: 100%;
+  padding: 0.5rem 0.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.new-list form input.hide {
+  display: none;
+}
+
+.new-list form #create-list {
   margin: 0;
   padding: 0.25rem 0.5rem;
   width: -webkit-fit-content;
@@ -113,31 +134,14 @@ nav .row .col:nth-child(2) ul li:hover {
   transition: background-color 0.2s;
 }
 
-.new-list #create-list:hover {
+.new-list form #create-list:hover {
   cursor: pointer;
   background: #197bb8;
   color: #fff;
 }
 
-.new-list #create-list:focus {
+.new-list form #create-list:focus {
   outline: none;
-}
-
-.new-list form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0.75rem;
-}
-
-.new-list form input {
-  width: 100%;
-  padding: 0.5rem 0.25rem;
-}
-
-.new-list form.hide {
-  display: none;
 }
 
 .list {
