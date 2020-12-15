@@ -1,4 +1,6 @@
 import { pageLoad } from './pageLoad';
+import { createList } from './list'
+import { createTask } from './task';
 
 const domElements = {
   content: document.querySelector('#content')
@@ -7,9 +9,9 @@ const domElements = {
 const myLists = [];
 
 const init = (() => {
-  //localStorage.removeItem('myLists');
+  //localStorage.removeItem('projects');
   if (storageAvailable('localStorage')) {
-    if (!localStorage.myLists) {
+    if (!localStorage.projects) {
       updateLocalStorage();
     } else {
       setLists();
@@ -19,6 +21,16 @@ const init = (() => {
     console.log('no localStorage');
   }
   domElements.content.appendChild(pageLoad(myLists));
+
+
+  /* const picker = datepicker(el, {
+      onHide: () => {
+        if (!picker.dateSelected) return;
+        listData.dueDate = picker.dateSelected.toDateString();
+        el.textContent = listData.dueDate;
+        updateLocalStorage();
+      }
+    }) */
 })();
 
 
@@ -58,12 +70,13 @@ function updateLocalStorage() {
 function setLists() {
   console.log('SET LISTS:');
   const storageItem = JSON.parse(localStorage.getItem('projects'));
-  console.log(storageItem);
-
-  storageItem.forEach(list => {
+  storageItem.forEach(item => {
+    const list = createList(item);
+    item.tasks.map(task => createTask(task));
     myLists.push(list);
   });
+  console.log(myLists);
 }
 
 
-export { updateLocalStorage };
+export { myLists, updateLocalStorage };

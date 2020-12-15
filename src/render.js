@@ -1,3 +1,4 @@
+import { myLists, updateLocalStorage } from './index'
 import { elFactory, appendChildren } from './helpers/helpers'
 import { createList, listFactory } from './list'
 import { createListBtn, renderListBtn } from './createListBtn'
@@ -37,31 +38,24 @@ const renderWorkSpace = ((myLists) => {
   const newListBtn = createListBtn('+ Create new list', myLists);
   const renderedListBtn = renderListBtn();
 
-  function addNewList() {
-    const input = renderedListBtn.firstChild.firstChild.value;
-
-    if (!input) return;
-    const list = createList(input, myLists);
-
-    // Add list to myLists
-    newListBtn.pushToMyLists(list);
-    // Create DOM elements for new list
-    workSpace.insertBefore(listFactory(list), workSpace.lastChild);
-    renderedListBtn.firstChild.reset();
-  }
-
   renderedListBtn.firstChild.addEventListener('submit', (e) => {
     e.preventDefault();
-    addNewList()
+    const input = renderedListBtn.firstChild.firstChild.value;
+    if (!input) return;
+    const list = createList({ title: input, index: myLists.length });
+    newListBtn.pushToMyLists(list);
+    updateLocalStorage();
+
+    // Create DOM elements for new list
+    workSpace.insertBefore(listFactory(list), renderedListBtn);
+    renderedListBtn.firstChild.reset();
   });
-  renderedListBtn.lastChild.addEventListener('click', addNewList);
 
-
-  appendChildren(workSpace, renderedListBtn);
+  workSpace.appendChild(renderedListBtn);
 
   // Load existing lists
   myLists.forEach(list => {
-    workSpace.insertBefore(listFactory(list), workSpace.childNodes[0])
+    workSpace.insertBefore(listFactory(list), workSpace.lastChild)
   });
 
   return workSpace;

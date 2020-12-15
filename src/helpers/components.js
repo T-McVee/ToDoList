@@ -63,30 +63,12 @@ const inputFactory = (heading, inputType, inputClass) => {
     {
       type: inputType.type,
       class: `${inputClass}-input`,
-      placeholder: inputType.placeholder
+      placeholder: inputType.placeholder,
     }
   );
 
   return elFactory('div', { class: `${inputClass}-wrapper` }, title, input);
 }
-
-/* const inputBlock = (name, titleType, input) => {
-  const title = elFactory(`${titleType}`, { class: `${name}-title` }, name);
-  const input = elFactory(`${input.type}`, { class: `${name}-input` });
-  // if object.type === select look for object.options
-  // loop through options running elFactory for each one
-
-  // Finish this off ^^^ 
-
-  const inputT = {
-    type: 'select',
-    options: [
-      { value }
-    ]
-  }
-
-  return elFactory('div', { class: `${name}-wrapper` }, title, input);
-} */
 
 const selectFactory = (data, labelText) => {
   const wrapper = elFactory('div', { class: 'select-wrapper' });

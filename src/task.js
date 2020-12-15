@@ -1,10 +1,8 @@
-import { updateLocalStorage } from './index'
+import { myLists, updateLocalStorage } from './index'
 import { elFactory, appendChildren } from "./helpers/helpers"
 import { textInputModule, inputFactory, priorityGraph } from "./helpers/components"
 import { taskPopUp } from './popup'
-import { format } from 'date-fns'
-
-
+import datepicker from 'js-datepicker'
 
 const _updateTask = (state) => ({
   updateTitle: (newTitle) => state.title = newTitle,
@@ -12,7 +10,7 @@ const _updateTask = (state) => ({
   updateDueDate: (newDate) => state.dueDate = newDate,
   updatePriority: (newPriority) => state.priority = newPriority,
   addNote: (input) => state.notes.push(input),
-  deleteTask: () => state.parent.splice([state.index], 1),
+  deleteTask: () => myLists[state.parentIndex].tasks.splice([state.index], 1),
 });
 
 const _getDetails = (state) => ({
@@ -37,8 +35,8 @@ const _getDetails = (state) => ({
   get completed() {
     return state.completed;
   },
-  get parent() {
-    return state.parent;
+  get parentIndex() {
+    return state.parentIndex;
   },
   get index() {
     return state.index;
@@ -67,17 +65,27 @@ const _priorityOptions = (state) => ({
 
 
 // Task Factory
-const createTask = (title, description, dueDate, priority, parentData) => {
+const createTask = ({
+  title,
+  description,
+  dueDate,
+  priority,
+  parentIndex,
+  index,
+  notes = [],
+  dateCreated = new Date,
+  completed = false,
+}) => {
   let state = {
     title,
     description,
-    dateCreated: new Date(),
     dueDate,
     priority,
-    notes: [],
-    completed: false,
-    parent: parentData.tasks,
-    index: `${parentData.index}-${parentData.tasks.length}`,
+    parentIndex,
+    index,
+    notes,
+    dateCreated,
+    completed,
   }
 
   return Object.assign(
@@ -98,48 +106,64 @@ const _taskHead = ((taskData) => {
 
 const _taskBody = ((taskData) => {
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
-  const completed = inputFactory({ type: 'h4', title: 'completed:' }, { type: 'checkbox' }, 'completed');
+  const completed = inputFactory({ type: 'label', title: 'completed:' }, { type: 'checkbox' }, 'completed');
 
-  completed.lastChild.addEventListener(
+  dueDate.textContent = taskData.dueDate;
+
+  const checkbox = completed.querySelector('.completed-input');
+  if (taskData.completed) checkbox.setAttribute('checked', true);
+
+  checkbox.addEventListener(
     'change', () => {
       taskData.completed = !taskData.completed;
       updateLocalStorage();
-    }
+    });
 
-  );
+
+  /* const picker = datepicker(dueDate, {
+    onHide: () => {
+      if (!picker.dateSelected) return;
+      taskData.dueDate = picker.dateSelected.toDateString();
+      dueDate.textContent = taskData.dueDate;
+      updateLocalStorage();
+    }
+  }); */
 
   return elFactory('div', { class: 'task-body' }, dueDate, completed);
 })
 
 const taskFactory = (taskData) => {
   console.log(taskData);
-
   const head = _taskHead(taskData);
   const body = _taskBody(taskData);
 
   // Delete button
-  head.lastChild.addEventListener('click', () => {
-    // Remove task from List array & update indexs
-    taskData.deleteTask()
-    for (let i = 0; i < taskData.parent.length; i++) {
-      taskData.parent[i].index = i;
-      head.parentElement.dataset.index = `${taskData.parent.index}-${taskData.parent[i].index}`;
-    }
+  head.addEventListener('click', (e) => {
+    if (e.target.classList != 'delete') return
 
-    console.log(taskData.parent.parent);
-
+    // Remove task from List array
+    taskData.deleteTask();
     head.parentElement.remove();
+
+    // Update indexes
+    /* for (let i = 0; i < myLists[taskData.parentIndex].tasks.length; i++) {
+      myLists[taskData.parentIndex].tasks[i].index = i;
+      head.parentElement.dataset.index = `${taskData.parent.index}-${taskData.parent[i].index}`;
+    } */
+
     updateLocalStorage();
   })
 
   // Open popup
   body.addEventListener('click', (e) => {
-    if (e.target.classList[0] !== 'task-body') return;
+    if (e.target !== body) return;
+    const cardTitle = head.querySelector('.title');
 
-    const popUp = taskPopUp(taskData);
-    const body = document.querySelector('body')
-    body.insertBefore(popUp, body.firstChild);
+    const popUp = taskPopUp(taskData, cardTitle);
+    const content = document.querySelector('#content');
+    content.insertBefore(popUp, content.firstChild);
   });
+
 
   return elFactory('div',
     {

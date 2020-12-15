@@ -14,8 +14,10 @@ const _renderListHead = ((listData) => {
 
 const _renderListBody = ((listData) => {
   const body = elFactory('div', { class: 'list-body' });
-  listData.tasks.forEach(task => body.appendChild(_renderTask(task)));
-
+  listData.tasks.forEach(task => {
+    console.log(task);
+    body.appendChild(taskFactory(task))
+  })
   return body;
 });
 
@@ -29,7 +31,7 @@ const _updateList = (state) => ({
   changeTitle: (newTitle) => state.title = newTitle,
   addtask: (task) => state.tasks.push(task),
   changeIndex: (newIndex) => state.index = newIndex,
-  deleteList: () => state.parent.splice([state.index], 1),
+  deleteList: () => myLists.splice(state.index, 1),
 });
 
 const _getDetails = (state) => ({
@@ -42,9 +44,6 @@ const _getDetails = (state) => ({
   get index() {
     return state.index;
   },
-  get parent() {
-    return state.parent;
-  }
 });
 
 const _logDetails = (state) => ({
@@ -52,12 +51,11 @@ const _logDetails = (state) => ({
 });
 
 /* List factory */
-const createList = (title, parent) => {
+const createList = ({ title, index, tasks = [] }) => {
   const state = {
     title,
-    tasks: [],
-    parent,
-    index: parent.length,
+    index,
+    tasks,
   }
 
   return Object.assign(
@@ -74,23 +72,34 @@ const listFactory = (listData) => {
   const footer = _renderListFooter(listData);
 
   // Delete button
-  head.lastChild.addEventListener('click', () => {
-    // Remove list from main array and update index
+  head.addEventListener('click', (e) => {
+    if (e.target.classList != 'delete') return
     listData.deleteList();
-    for (let i = 0; i < listData.parent.length; i++) {
-      listData.parent[i].index = i;
+    head.parentElement.remove();
+
+    // update index
+    for (let i = 0; i < myLists.length; i++) {
+      myLists[i].index = i;
     }
 
-    head.parentElement.remove();
     updateLocalStorage();
   })
 
   // Create task
-  footer.firstChild.addEventListener('click', () => {
-    const task = createTask("", '', 'Due date', '2', listData);
+  footer.addEventListener('click', (e) => {
+    if (e.target.classList != 'new-task') return
+
+    const task = createTask(
+      {
+        title: "",
+        description: '',
+        dueDate: 'Due date',
+        priority: '2',
+        index: listData.index,
+      });
     listData.addtask(task);
     const taskEl = taskFactory(task);
-    const dueDateEl = taskEl.lastChild.firstChild;
+    const dueDateEl = taskEl.querySelector('.due-date');
     body.appendChild(taskEl);
 
     const picker = datepicker(dueDateEl, {
@@ -98,6 +107,7 @@ const listFactory = (listData) => {
         if (!picker.dateSelected) return;
         listData.dueDate = picker.dateSelected.toDateString();
         dueDateEl.textContent = listData.dueDate;
+        updateLocalStorage();
       }
     });
     updateLocalStorage();

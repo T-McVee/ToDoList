@@ -1,4 +1,4 @@
-import { elFactory, appendChildren } from './helpers/helpers'
+import { elFactory } from './helpers/helpers'
 import { textInputModule, inputFactory, selectFactory } from './helpers/components'
 import { taskFactory } from './task';
 
@@ -11,12 +11,22 @@ const closePopupFactory = (target) => {
   return close;
 }
 
-const _popupHead = (taskData) => {
+const _popupHead = (taskData, cardTitle) => {
   const title = textInputModule('h2', taskData, false);
   const priority = selectFactory(taskData, 'Priority');
   const titleBlock = elFactory('div', { class: 'title-block' }, title, priority);
 
   const closeBtn = closePopupFactory('.popup-wrapper');
+
+  const input = title.querySelector('input');
+
+  input.addEventListener('change', () => {
+    // working on using eventlisteners to auto update cards when changes are made in title.
+    //should also finish fixing the circular structure so you can merge both threads 
+
+    cardTitle.textContent = taskData.title;
+    console.log(cardTitle);
+  })
 
   return elFactory('div', { class: 'popup-head' }, titleBlock, closeBtn);
 }
@@ -38,14 +48,12 @@ const _popupBody = (taskData) => {
   return elFactory('div', { class: 'popup-body' }, description, notesWrapper);
 }
 
-const taskPopUp = (taskData) => {
-  const popUpWrapper = elFactory('div', { class: 'popup-wrapper hide' });
-  const popUp = elFactory('div', { class: 'popup hide' });
-  popUp.appendChild(_popupHead(taskData));
-  popUp.appendChild(_popupBody(taskData));
-  popUpWrapper.appendChild(popUp);
+const taskPopUp = (taskData, cardTitle) => {
+  const head = _popupHead(taskData, cardTitle);
+  const body = _popupBody(taskData);
+  const popUp = elFactory('div', { class: 'popup hide' }, head, body);
 
-  return popUpWrapper;
+  return elFactory('div', { class: 'popup-wrapper hide' }, popUp);
 };
 
 export { taskPopUp };
