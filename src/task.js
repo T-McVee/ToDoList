@@ -1,6 +1,6 @@
 import { myLists, updateLocalStorage } from './index'
-import { elFactory, appendChildren } from "./helpers/helpers"
-import { textInputModule, inputFactory, priorityGraph } from "./helpers/components"
+import { elFactory } from "./helpers/helpers"
+import { textInputModule, inputFactory } from "./helpers/components"
 import { taskPopUp } from './popup'
 import datepicker from 'js-datepicker'
 
@@ -133,7 +133,7 @@ const _taskBody = ((taskData) => {
 })
 
 const taskFactory = (taskData) => {
-  console.log(taskData);
+  //console.log(taskData);
   const head = _taskHead(taskData);
   const body = _taskBody(taskData);
 
@@ -146,10 +146,9 @@ const taskFactory = (taskData) => {
     head.parentElement.remove();
 
     // Update indexes
-    /* for (let i = 0; i < myLists[taskData.parentIndex].tasks.length; i++) {
+    for (let i = 0; i < myLists[taskData.parentIndex].tasks.length; i++) {
       myLists[taskData.parentIndex].tasks[i].index = i;
-      head.parentElement.dataset.index = `${taskData.parent.index}-${taskData.parent[i].index}`;
-    } */
+    }
 
     updateLocalStorage();
   })

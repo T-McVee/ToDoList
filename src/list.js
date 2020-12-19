@@ -15,7 +15,6 @@ const _renderListHead = ((listData) => {
 const _renderListBody = ((listData) => {
   const body = elFactory('div', { class: 'list-body' });
   listData.tasks.forEach(task => {
-    console.log(task);
     body.appendChild(taskFactory(task))
   })
   return body;
@@ -55,7 +54,7 @@ const createList = ({ title, index, tasks = [] }) => {
   const state = {
     title,
     index,
-    tasks,
+    tasks: tasks.map(task => createTask(task))
   }
 
   return Object.assign(
@@ -95,7 +94,8 @@ const listFactory = (listData) => {
         description: '',
         dueDate: 'Due date',
         priority: '2',
-        index: listData.index,
+        parentIndex: listData.index,
+        index: listData.tasks.length,
       });
     listData.addtask(task);
     const taskEl = taskFactory(task);

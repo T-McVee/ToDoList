@@ -1,6 +1,7 @@
 import { pageLoad } from './pageLoad';
 import { createList } from './list'
 import { createTask } from './task';
+import datepicker from 'js-datepicker'
 
 const domElements = {
   content: document.querySelector('#content')
@@ -22,23 +23,34 @@ const init = (() => {
   }
   domElements.content.appendChild(pageLoad(myLists));
 
+  const listEls = Array.from(document.querySelectorAll('.list'));
+  const taskEls = Array.from(listEls.map(list =>
+    Array.from(list.querySelectorAll('.task'))));
 
-  /* const picker = datepicker(el, {
-      onHide: () => {
-        if (!picker.dateSelected) return;
-        listData.dueDate = picker.dateSelected.toDateString();
-        el.textContent = listData.dueDate;
-        updateLocalStorage();
-      }
-    }) */
+  taskEls.forEach((list, listIndex) => {
+    list.forEach((task, taskIndex) => {
+      const dateEl = task.querySelector('.due-date');
+      const picker = datepicker(dateEl, {
+        onHide: () => {
+          if (!picker.dateSelected) return;
+          myLists[listIndex].tasks[taskIndex] = picker.dateSelected.toDateString();
+          dateEl.textContent = myLists[listIndex].tasks[taskIndex];
+          updateLocalStorage();
+        }
+      });
+    });
+  });
+
+
+
 })();
 
 
 function storageAvailable(type) {
-  var storage;
+  let storage;
   try {
     storage = window[type];
-    var x = '__storage_test__';
+    let x = '__storage_test__';
     storage.setItem(x, x);
     storage.removeItem(x);
     return true;
@@ -61,21 +73,22 @@ function storageAvailable(type) {
 
 // Save myLists to local storage
 function updateLocalStorage() {
-  console.log('POPULATE STORAGE:');
+  //console.log('POPULATE STORAGE:');
   localStorage.setItem('projects', JSON.stringify(myLists));
-  console.log(localStorage);
+  //console.log(localStorage);
 }
 
 // retrieve myLists from local storage
 function setLists() {
-  console.log('SET LISTS:');
+  //console.log('SET LISTS:');
   const storageItem = JSON.parse(localStorage.getItem('projects'));
+  //console.log('StorageItem:');
+  //console.log(storageItem);
+
   storageItem.forEach(item => {
     const list = createList(item);
-    item.tasks.map(task => createTask(task));
     myLists.push(list);
   });
-  console.log(myLists);
 }
 
 
