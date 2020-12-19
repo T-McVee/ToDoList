@@ -35,7 +35,6 @@ const _popupBody = (taskData) => {
   const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Click to add description...' });
   descriptionInput.value = taskData.description;
 
-
   descriptionInput.addEventListener('input', () => {
     taskData.description = descriptionInput.value;
     updateLocalStorage();

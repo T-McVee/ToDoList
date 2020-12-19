@@ -23,7 +23,7 @@ const textInputModule = (headingType, itemData, editOnLoad) => {
   });
 
 
-  if (editOnLoad) {
+  if (editOnLoad && !itemData.title) {
     title.classList.add('hide');
     input.classList.remove('hide');
     input.value = itemData.title;
