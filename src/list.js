@@ -5,14 +5,14 @@ import { textInputModule } from './helpers/components'
 import datepicker from 'js-datepicker'
 
 
-const _renderListHead = ((listData) => {
+const _listHead = ((listData) => {
   const title = textInputModule('h2', listData);
   const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
 
   return elFactory('div', { class: 'list-head' }, title, deleteBtn);
 });
 
-const _renderListBody = ((listData) => {
+const _listBody = ((listData) => {
   const body = elFactory('div', { class: 'list-body' });
   listData.tasks.forEach(task => {
     body.appendChild(taskFactory(task))
@@ -20,7 +20,7 @@ const _renderListBody = ((listData) => {
   return body;
 });
 
-const _renderListFooter = (() => {
+const _listFooter = (() => {
   const newTaskBtn = elFactory('div', { class: 'new-task' }, '+ Add new task');
 
   return elFactory('div', { class: 'list-footer' }, newTaskBtn);
@@ -66,9 +66,9 @@ const createList = ({ title, index, tasks = [] }) => {
 }
 
 const listFactory = (listData) => {
-  const head = _renderListHead(listData);
-  const body = _renderListBody(listData);
-  const footer = _renderListFooter(listData);
+  const head = _listHead(listData);
+  const body = _listBody(listData);
+  const footer = _listFooter(listData);
 
   // Delete button
   head.addEventListener('click', (e) => {
@@ -105,8 +105,8 @@ const listFactory = (listData) => {
     const picker = datepicker(dueDateEl, {
       onHide: () => {
         if (!picker.dateSelected) return;
-        listData.dueDate = picker.dateSelected.toDateString();
-        dueDateEl.textContent = listData.dueDate;
+        task.dueDate = picker.dateSelected.toDateString();
+        dueDateEl.textContent = task.dueDate;
         updateLocalStorage();
       }
     });

@@ -9,8 +9,8 @@ const domElements = {
 
 const myLists = [];
 
+//localStorage.removeItem('projects');
 const init = (() => {
-  //localStorage.removeItem('projects');
   if (storageAvailable('localStorage')) {
     if (!localStorage.projects) {
       updateLocalStorage();
@@ -33,16 +33,15 @@ const init = (() => {
       const picker = datepicker(dateEl, {
         onHide: () => {
           if (!picker.dateSelected) return;
-          myLists[listIndex].tasks[taskIndex] = picker.dateSelected.toDateString();
-          dateEl.textContent = myLists[listIndex].tasks[taskIndex];
+          myLists[listIndex]
+            .tasks[taskIndex]
+            .dueDate = picker.dateSelected.toDateString();
+          dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
           updateLocalStorage();
         }
       });
     });
   });
-
-
-
 })();
 
 
@@ -80,7 +79,7 @@ function updateLocalStorage() {
 
 // retrieve myLists from local storage
 function setLists() {
-  //console.log('SET LISTS:');
+  console.log('SET LISTS:');
   const storageItem = JSON.parse(localStorage.getItem('projects'));
   //console.log('StorageItem:');
   //console.log(storageItem);
@@ -89,6 +88,7 @@ function setLists() {
     const list = createList(item);
     myLists.push(list);
   });
+  console.log(myLists);
 }
 
 

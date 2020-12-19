@@ -108,8 +108,6 @@ const _taskBody = ((taskData) => {
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
   const completed = inputFactory({ type: 'label', title: 'completed:' }, { type: 'checkbox' }, 'completed');
 
-  dueDate.textContent = taskData.dueDate;
-
   const checkbox = completed.querySelector('.completed-input');
   if (taskData.completed) checkbox.setAttribute('checked', true);
 
@@ -118,16 +116,6 @@ const _taskBody = ((taskData) => {
       taskData.completed = !taskData.completed;
       updateLocalStorage();
     });
-
-
-  /* const picker = datepicker(dueDate, {
-    onHide: () => {
-      if (!picker.dateSelected) return;
-      taskData.dueDate = picker.dateSelected.toDateString();
-      dueDate.textContent = taskData.dueDate;
-      updateLocalStorage();
-    }
-  }); */
 
   return elFactory('div', { class: 'task-body' }, dueDate, completed);
 })
@@ -156,9 +144,9 @@ const taskFactory = (taskData) => {
   // Open popup
   body.addEventListener('click', (e) => {
     if (e.target !== body) return;
-    const cardTitle = head.querySelector('.title');
+    const taskTitleEl = head.querySelector('.title');
 
-    const popUp = taskPopUp(taskData, cardTitle);
+    const popUp = taskPopUp(taskData, taskTitleEl);
     const content = document.querySelector('#content');
     content.insertBefore(popUp, content.firstChild);
   });

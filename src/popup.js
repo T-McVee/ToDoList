@@ -1,6 +1,7 @@
 import { elFactory } from './helpers/helpers'
 import { textInputModule, inputFactory, selectFactory } from './helpers/components'
 import { taskFactory } from './task';
+import { updateLocalStorage } from '.';
 
 const closePopupFactory = (target) => {
   const close = elFactory('div', { class: 'close' }, 'x');
@@ -11,7 +12,7 @@ const closePopupFactory = (target) => {
   return close;
 }
 
-const _popupHead = (taskData, cardTitle) => {
+const _popupHead = (taskData, cardTitleEl) => {
   const title = textInputModule('h2', taskData, false);
   const priority = selectFactory(taskData, 'Priority');
   const titleBlock = elFactory('div', { class: 'title-block' }, title, priority);
@@ -22,10 +23,8 @@ const _popupHead = (taskData, cardTitle) => {
 
   input.addEventListener('change', () => {
     // working on using eventlisteners to auto update cards when changes are made in title.
-    //should also finish fixing the circular structure so you can merge both threads 
 
-    cardTitle.textContent = taskData.title;
-    console.log(cardTitle);
+    cardTitleEl.textContent = taskData.title;
   })
 
   return elFactory('div', { class: 'popup-head' }, titleBlock, closeBtn);
@@ -35,8 +34,13 @@ const _popupBody = (taskData) => {
   const descriptionTitle = elFactory('h3', { class: 'descrition-title' }, 'Description:');
   const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Click to add description...' });
   descriptionInput.value = taskData.description;
-  descriptionInput.addEventListener('input', () =>
-    taskData.description = descriptionInput.value
+
+
+  descriptionInput.addEventListener('input', () => {
+    taskData.description = descriptionInput.value;
+    updateLocalStorage();
+  }
+
   );
 
   const description = elFactory('div', { class: 'description-wrapper' }, descriptionTitle, descriptionInput);
