@@ -2,7 +2,7 @@ import { updateLocalStorage } from '../index'
 import { elFactory, appendChildren } from './helpers'
 
 // Title section for lists & tasks - allows user to click to edit title
-const textInputModule = (headingType, itemData, editOnLoad) => {
+const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
   const title = _titleFactory(headingType, itemData.title);
   const input = elFactory('input', { type: 'text', class: 'hide', placeholder: 'Add a title...' });
 
@@ -19,9 +19,9 @@ const textInputModule = (headingType, itemData, editOnLoad) => {
     title.classList.remove('hide');
     title.firstChild.textContent = input.value;
     itemData.title = input.value;
+    targets.forEach(target => target.textContent = itemData.title);
     updateLocalStorage();
   });
-
 
   if (editOnLoad && !itemData.title) {
     title.classList.add('hide');
@@ -70,7 +70,7 @@ const inputFactory = (heading, inputType, inputClass) => {
   return elFactory('div', { class: `${inputClass}-wrapper` }, title, input);
 }
 
-const selectFactory = (data, labelText) => {
+const selectFactory = (data, labelText, targets) => {
   const wrapper = elFactory('div', { class: 'select-wrapper' });
   const label = elFactory('label', {}, `${labelText}: `);
   const select = elFactory('select', {});
@@ -81,10 +81,14 @@ const selectFactory = (data, labelText) => {
 
   select.addEventListener('change', () => {
     data.priority = select.value;
+    targets.forEach(target => target.style.color = data.setColorTo(data.priority));
+    updateLocalStorage();
   });
 
   return wrapper;
 }
+
+const updateColor = new FocusEvent('custom');
 
 
 export {

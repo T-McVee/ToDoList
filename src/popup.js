@@ -1,6 +1,5 @@
 import { elFactory } from './helpers/helpers'
 import { textInputModule, inputFactory, selectFactory } from './helpers/components'
-import { taskFactory } from './task';
 import { updateLocalStorage } from '.';
 
 const closePopupFactory = (target) => {
@@ -13,19 +12,18 @@ const closePopupFactory = (target) => {
 }
 
 const _popupHead = (taskData, cardTitleEl) => {
-  const title = textInputModule('h2', taskData, false);
-  const priority = selectFactory(taskData, 'Priority');
+  const title = textInputModule('h2', taskData, false, cardTitleEl);
+  title.style.color = taskData.setColorTo(taskData.priority);
+  const priority = selectFactory(taskData, 'Priority', [title, cardTitleEl]);
   const titleBlock = elFactory('div', { class: 'title-block' }, title, priority);
 
   const closeBtn = closePopupFactory('.popup-wrapper');
-
   const input = title.querySelector('input');
 
   input.addEventListener('change', () => {
     // working on using eventlisteners to auto update cards when changes are made in title.
-
     cardTitleEl.textContent = taskData.title;
-  })
+  });
 
   return elFactory('div', { class: 'popup-head' }, titleBlock, closeBtn);
 }

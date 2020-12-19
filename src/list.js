@@ -93,7 +93,7 @@ const listFactory = (listData) => {
         title: "",
         description: '',
         dueDate: 'Due date',
-        priority: '2',
+        priority: '1',
         parentIndex: listData.index,
         index: listData.tasks.length,
       });

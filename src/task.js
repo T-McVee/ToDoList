@@ -49,9 +49,17 @@ const _returnPriority = (state) => ({
       : state.priority == 2 ? 'high'
         : 'medium';
   }
-})
+});
 
-const _priorityOptions = (state) => ({
+const _setColorTo = () => ({
+  setColorTo: (priority) => {
+    return priority == 0 ? '#777777'
+      : priority == 1 ? '#000000'
+        : '#d73333'
+  }
+});
+
+const _priorityOptions = () => ({
   priorityOptions: () => {
     const options = [
       elFactory('option', { value: '0', name: 'low' }, 'Low'),
@@ -61,7 +69,7 @@ const _priorityOptions = (state) => ({
 
     return options;
   }
-})
+});
 
 
 // Task Factory
@@ -94,12 +102,14 @@ const createTask = ({
     _updateTask(state),
     _returnPriority(state),
     _priorityOptions(state),
+    _setColorTo(state),
   );
 }
 
 const _taskHead = ((taskData) => {
   const title = textInputModule('h3', taskData, true);
   const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
+  title.style.color = taskData.setColorTo(taskData.priority);
 
   return elFactory('div', { class: 'task-head' }, title, deleteBtn);
 })
@@ -150,7 +160,6 @@ const taskFactory = (taskData) => {
     const content = document.querySelector('#content');
     content.insertBefore(popUp, content.firstChild);
   });
-
 
   return elFactory('div',
     {
