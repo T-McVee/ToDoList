@@ -88,6 +88,40 @@ const selectFactory = (data, labelText, targets) => {
   return wrapper;
 }
 
+const notesModule = (taskData) => {
+  const input = elFactory(
+    'input',
+    {
+      type: 'text',
+      name: 'new-note',
+      placeholder: 'Add a note...'
+    });
+  const submit = elFactory('input', { type: 'submit' });
+  const form = elFactory('form', { name: 'notes' }, input, submit);
+  const notesList = elFactory('ul', {});
+
+  taskData.notes
+    .forEach(note => notesList.insertBefore(elFactory('li', {}, note), notesList.firstChild));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!input.value) return;
+
+    const newNote = elFactory('li', {}, input.value);
+    taskData.notes.push(input.value)
+    if (notesList.firstChild) {
+      notesList.insertBefore(newNote, notesList.firstChild);
+    } else {
+      notesList.appendChild(newNote);
+    }
+
+    form.reset();
+    updateLocalStorage();
+  });
+
+  return elFactory('div', { class: 'notes-wrapper' }, form, notesList);
+}
+
 const updateColor = new FocusEvent('custom');
 
 
@@ -95,4 +129,5 @@ export {
   textInputModule,
   inputFactory,
   selectFactory,
+  notesModule,
 };

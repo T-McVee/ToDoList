@@ -1,5 +1,5 @@
 import { elFactory } from './helpers/helpers'
-import { textInputModule, inputFactory, selectFactory } from './helpers/components'
+import { textInputModule, inputFactory, selectFactory, notesModule } from './helpers/components'
 import { updateLocalStorage } from '.';
 
 const closePopupFactory = (target) => {
@@ -42,8 +42,9 @@ const _popupBody = (taskData) => {
 
   const description = elFactory('div', { class: 'description-wrapper' }, descriptionTitle, descriptionInput);
 
-  const notesTitle = elFactory('div', { class: 'notes' }, 'Notes');
-  const notesList = elFactory('div', { class: 'notes' }, 'A note');
+  const notesTitle = elFactory('div', { class: 'notes' }, 'Notes:');
+  const notesList = notesModule(taskData);
+  // elFactory('div', { class: 'notes' }, 'Add a note');
   const notesWrapper = elFactory('h3', { class: 'notes-wrapper' }, notesTitle, notesList);
 
   return elFactory('div', { class: 'popup-body' }, description, notesWrapper);

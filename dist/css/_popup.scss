@@ -28,8 +28,11 @@
       height: 15%;
       .title-block{
         @include text-input-module;
-      .title {
+      .title, input {
+        font-family: $font-main;
         font-size: 1.5rem;
+        margin: 0;
+        padding: 0;
       }
       .select-wrapper {
         color: $soft-black;

@@ -603,8 +603,11 @@ nav .row .col:nth-child(2) ul li:hover {
   outline: none;
 }
 
-.popup-wrapper .popup .popup-head .title-block .title {
+.popup-wrapper .popup .popup-head .title-block .title, .popup-wrapper .popup .popup-head .title-block input {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .popup-wrapper .popup .popup-head .title-block .select-wrapper {

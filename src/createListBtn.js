@@ -40,7 +40,6 @@ const renderListBtn = () => {
   form.appendChild(btn);
   card.appendChild(form);
 
-
   card.addEventListener('mouseenter', () => {
     input.classList.remove('hide');
   })
