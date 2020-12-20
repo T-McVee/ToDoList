@@ -42,7 +42,7 @@ const _popupBody = (taskData) => {
 
   const description = elFactory('div', { class: 'description-wrapper' }, descriptionTitle, descriptionInput);
 
-  const notesTitle = elFactory('h3', { class: 'notes' }, 'Notes:');
+  const notesTitle = elFactory('h3', {}, 'Notes:');
   const notesList = notesModule(taskData);
   // elFactory('div', { class: 'notes' }, 'Add a note');
   const notesWrapper = elFactory('div', { class: 'notes-wrapper' }, notesTitle, notesList);

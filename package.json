@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "date-fns": "^2.16.1",
+    "html5sortable": "^0.10.0",
     "js-datepicker": "^5.16.0"
   }
 }

@@ -1,6 +1,5 @@
-import { pageLoad } from './pageLoad';
+import { pageLoad } from './pageLoad'
 import { createList } from './list'
-import { createTask } from './task';
 import datepicker from 'js-datepicker'
 
 const domElements = {
@@ -21,8 +20,11 @@ const init = (() => {
   else {
     console.log('no localStorage');
   }
+
   domElements.content.appendChild(pageLoad(myLists));
 
+
+  // Add Date Picker to existing tasks
   const listEls = Array.from(document.querySelectorAll('.list'));
   const taskEls = Array.from(listEls.map(list =>
     Array.from(list.querySelectorAll('.task'))));
@@ -90,6 +92,5 @@ function setLists() {
   });
   console.log(myLists);
 }
-
 
 export { myLists, updateLocalStorage };

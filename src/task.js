@@ -2,7 +2,6 @@ import { myLists, updateLocalStorage } from './index'
 import { elFactory } from "./helpers/helpers"
 import { textInputModule, inputFactory } from "./helpers/components"
 import { taskPopUp } from './popup'
-import datepicker from 'js-datepicker'
 
 const _updateTask = (state) => ({
   updateTitle: (newTitle) => state.title = newTitle,

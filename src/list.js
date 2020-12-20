@@ -3,6 +3,7 @@ import { createTask, taskFactory } from "./task"
 import { elFactory } from "./helpers/helpers"
 import { textInputModule } from './helpers/components'
 import datepicker from 'js-datepicker'
+import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
 
 
 const _listHead = ((listData) => {
@@ -83,6 +84,18 @@ const listFactory = (listData) => {
 
     updateLocalStorage();
   })
+
+  // Drag n Drop
+  const sortableList = sortable('.list-body', {
+    forcePlaceholderSize: true,
+    placeholderClass: 'ph-class',
+    hoverClass: 'bg-maroon yellow'
+  });
+
+  //console.log(sortableList);
+
+
+  //sortableList[0].addEventListener('sortstart', (e) => console.log(e.target));
 
   // Create task
   footer.addEventListener('click', (e) => {
