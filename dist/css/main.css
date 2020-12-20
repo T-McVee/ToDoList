@@ -667,6 +667,69 @@ nav .row .col:nth-child(2) ul li:hover {
   height: 180px;
 }
 
+.popup-wrapper .popup .popup-body .notes-wrapper {
+  width: 100%;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes {
+  width: 100%;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  padding: 0 0 0.25rem 0;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=text] {
+  width: 475px;
+  padding: 0.25rem;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=submit] {
+  width: 75px;
+  border-radius: 4px;
+  background: none;
+  border: none;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=submit]:hover {
+  cursor: pointer;
+  background: #197bb8;
+  color: #fff;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=submit]:focus {
+  outline: none;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes ul li {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0.25rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px #1e272b solid;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes ul li:nth-of-type(1) {
+  padding-top: 0.5rem;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

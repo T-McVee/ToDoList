@@ -119,7 +119,7 @@ const notesModule = (taskData) => {
     updateLocalStorage();
   });
 
-  return elFactory('div', { class: 'notes-wrapper' }, form, notesList);
+  return elFactory('div', { class: 'notes' }, form, notesList);
 }
 
 const updateColor = new FocusEvent('custom');
