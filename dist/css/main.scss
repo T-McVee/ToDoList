@@ -48,16 +48,22 @@ body {
   color: $red
 }
 
-
-.work-space {
-  position: absolute;
-  top: 60px;
-  width: fit-content;
-  height: 100%;
+.main {
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  position: absolute;
+  top: 60px;
+  width: max-content;
+  .work-space {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+  }
 }
+
+
 
 .qs-controls {
   background-color: $blue;

@@ -23,7 +23,6 @@ const init = (() => {
 
   domElements.content.appendChild(pageLoad(myLists));
 
-
   // Add Date Picker to existing tasks
   const listEls = Array.from(document.querySelectorAll('.list'));
   const taskEls = Array.from(listEls.map(list =>

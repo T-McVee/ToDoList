@@ -1,14 +1,15 @@
 import { updateLocalStorage } from './index'
-import { renderNavBar, renderWorkSpace, } from './render'
+import { renderNavBar, renderMain, } from './render'
 import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
+import { elFactory } from './helpers/helpers';
 
 const pageLoad = ((myLists) => {
-  const pageContent = document.createElement('div');
   const navbar = renderNavBar()
-  const workspace = renderWorkSpace(myLists);
+  const main = renderMain(myLists);
+  const workSpace = main.querySelector('.work-space');
 
   // Add list Drag n' Drop
-  const sortableList = sortable(workspace, {
+  const sortableList = sortable(workSpace, {
     forcePlaceholderSize: true,
     placeholderClass: 'ph-class',
     hoverClass: 'bg-maroon yellow'
@@ -24,8 +25,9 @@ const pageLoad = ((myLists) => {
   });
 
   // Add task Drag n' Drop 
-  const listEls = workspace.querySelectorAll('.list');
+  const listEls = workSpace.querySelectorAll('.list');
   listEls.forEach(list => {
+
     const sortableList = sortable(list.querySelector('.list-body'), {
       forcePlaceholderSize: true,
       placeholderClass: 'ph-class',
@@ -43,10 +45,7 @@ const pageLoad = ((myLists) => {
 
   });
 
-  pageContent.appendChild(navbar);
-  pageContent.appendChild(workspace);
-
-  return pageContent;
+  return elFactory('div', {}, navbar, main);
 });
 
 export { pageLoad };

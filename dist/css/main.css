@@ -784,9 +784,22 @@ body {
   color: #f76e6e;
 }
 
-.work-space {
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   position: absolute;
   top: 60px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.main .work-space {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

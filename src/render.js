@@ -34,11 +34,9 @@ const renderNavBar = (() => {
   return nav
 });
 
-const renderWorkSpace = ((myLists) => {
-  const workSpace = elFactory('div', { class: 'work-space container' });
+const renderMain = ((myLists) => {
+  const workSpace = elFactory('div', { class: 'work-space' });
   const newListBtn = createListBtn('+ Create new list', myLists);
-
-  //RenderedListBtn should live outside of workspace - causes issues w/ drag n drop
   const renderedListBtn = renderListBtn();
 
   renderedListBtn.firstChild.addEventListener('submit', (e) => {
@@ -52,7 +50,7 @@ const renderWorkSpace = ((myLists) => {
     // Create DOM elements for new list
     const listEl = listFactory(list);
 
-    workSpace.insertBefore(listEl, renderedListBtn);
+    workSpace.insertBefore(listEl, workSpace.lastChild);
     renderedListBtn.firstChild.reset();
 
     // Add list drag n' drop
@@ -86,19 +84,20 @@ const renderWorkSpace = ((myLists) => {
       list.tasks.splice(destination, 0, movedItem[0]);
       updateLocalStorage();
     });
-  });
 
-  workSpace.appendChild(renderedListBtn);
+  });
 
   // Load existing lists
   myLists.forEach(list => {
     workSpace.insertBefore(listFactory(list), workSpace.lastChild)
   });
 
-  return workSpace;
+  const main = elFactory('div', { class: 'main container' }, workSpace, renderedListBtn);
+
+  return main;
 });
 
 export {
   renderNavBar,
-  renderWorkSpace,
+  renderMain,
 }
