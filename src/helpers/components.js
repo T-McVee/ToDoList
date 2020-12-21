@@ -5,7 +5,16 @@ import { elFactory, appendChildren } from './helpers'
 const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
   const title = _titleFactory(headingType, itemData.title);
   const input = elFactory('input', { type: 'text', class: 'hide', placeholder: 'Add a title...' });
+  const form = elFactory('form', {}, title, input);
 
+  // Set title on submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!input.value) return;
+    setTitle();
+  })
+
+  // Hide title & display text input on click
   title.addEventListener('click', () => {
     input.classList.remove('hide');
     title.classList.add('hide');
@@ -14,14 +23,17 @@ const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
     input.select();
   });
 
-  input.addEventListener('focusout', () => {
+  // Hide text input and display title on focus out
+  input.addEventListener('focusout', setTitle);
+
+  function setTitle() {
     input.classList.add('hide');
     title.classList.remove('hide');
-    title.firstChild.textContent = input.value;
     itemData.title = input.value;
+    title.firstChild.textContent = itemData.title;
     targets.forEach(target => target.textContent = itemData.title);
     updateLocalStorage();
-  });
+  }
 
   if (editOnLoad && !itemData.title) {
     title.classList.add('hide');
@@ -33,7 +45,7 @@ const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
     }, 0);
   };
 
-  return elFactory('div', { class: 'text-input-module' }, title, input);
+  return elFactory('div', { class: 'text-input-module' }, form);
 };
 
 const _titleFactory = (headingType, text) => {

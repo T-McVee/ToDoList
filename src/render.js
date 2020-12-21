@@ -68,6 +68,7 @@ const renderWorkSpace = ((myLists) => {
 
       let movedItem = myLists.splice(origin, 1);
       myLists.splice(destination, 0, movedItem[0]);
+      updateLocalStorage();
     });
 
     // Add task Drag n' Drop
@@ -83,8 +84,8 @@ const renderWorkSpace = ((myLists) => {
 
       let movedItem = list.tasks.splice(origin, 1);
       list.tasks.splice(destination, 0, movedItem[0]);
+      updateLocalStorage();
     });
-
   });
 
   workSpace.appendChild(renderedListBtn);

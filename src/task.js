@@ -107,10 +107,11 @@ const createTask = ({
 
 const _taskHead = ((taskData) => {
   const title = textInputModule('h3', taskData, true);
+  const form = elFactory('form', {}, title);
   const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
   title.style.color = taskData.setColorTo(taskData.priority);
 
-  return elFactory('div', { class: 'task-head' }, title, deleteBtn);
+  return elFactory('div', { class: 'task-head' }, form, deleteBtn);
 })
 
 const _taskBody = ((taskData) => {
@@ -130,7 +131,6 @@ const _taskBody = ((taskData) => {
 })
 
 const taskFactory = (taskData) => {
-  //console.log(taskData);
   const head = _taskHead(taskData);
   const body = _taskBody(taskData);
 
