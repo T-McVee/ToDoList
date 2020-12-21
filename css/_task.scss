@@ -18,12 +18,16 @@
       display: flex;
       flex-direction: row;
       height: 20px;
+      width: 100%;
+      form {
+        width: 100%;
+        @include text-input-module;
+        .title, i, input {
+          font-size: 0.8rem;
+        }
+      }
       .delete {
         @include delete;
-      }
-      @include text-input-module;
-      .title, i, input {
-        font-size: 0.8rem;
       }
     }
     .task-body {
