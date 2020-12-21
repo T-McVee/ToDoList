@@ -313,21 +313,14 @@ nav .row .col:nth-child(2) ul li:hover {
       -ms-flex-direction: row;
           flex-direction: row;
   height: 20px;
+  width: 100%;
 }
 
-.list .list-body .task .task-head .delete {
-  color: #b3b3b3;
-  margin-left: 0.5rem;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s;
+.list .list-body .task .task-head form {
+  width: 100%;
 }
 
-.list .list-body .task .task-head .delete:hover {
-  cursor: pointer;
-  color: #666667;
-}
-
-.list .list-body .task .task-head .text-input-module {
+.list .list-body .task .task-head form .text-input-module {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -339,7 +332,7 @@ nav .row .col:nth-child(2) ul li:hover {
   font-size: 1rem;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper {
+.list .list-body .task .task-head form .text-input-module .title-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -353,54 +346,66 @@ nav .row .col:nth-child(2) ul li:hover {
   width: 100%;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper.hide {
+.list .list-body .task .task-head form .text-input-module .title-wrapper.hide {
   display: none;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper .title, .list .list-body .task .task-head .text-input-module .title-wrapper i {
+.list .list-body .task .task-head form .text-input-module .title-wrapper .title, .list .list-body .task .task-head form .text-input-module .title-wrapper i {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   padding: 1px 0;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper .title {
+.list .list-body .task .task-head form .text-input-module .title-wrapper .title {
   min-width: 30px;
   min-height: 19px;
   font-weight: 800;
   margin: 0;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper i {
+.list .list-body .task .task-head form .text-input-module .title-wrapper i {
   margin-left: 0.5rem;
   padding-bottom: 3px;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper i.hide {
+.list .list-body .task .task-head form .text-input-module .title-wrapper i.hide {
   display: none;
 }
 
-.list .list-body .task .task-head .text-input-module .title-wrapper:hover {
+.list .list-body .task .task-head form .text-input-module .title-wrapper:hover {
   cursor: pointer;
 }
 
-.list .list-body .task .task-head .text-input-module input {
+.list .list-body .task .task-head form .text-input-module input {
   width: 100%;
   margin: 6px 0;
   border: none;
   background: none;
 }
 
-.list .list-body .task .task-head .text-input-module input.hide {
+.list .list-body .task .task-head form .text-input-module input.hide {
   display: none;
 }
 
-.list .list-body .task .task-head .text-input-module input:focus {
+.list .list-body .task .task-head form .text-input-module input:focus {
   outline: none;
 }
 
-.list .list-body .task .task-head .title, .list .list-body .task .task-head i, .list .list-body .task .task-head input {
+.list .list-body .task .task-head form .title, .list .list-body .task .task-head form i, .list .list-body .task .task-head form input {
   font-size: 0.8rem;
+}
+
+.list .list-body .task .task-head .delete {
+  color: #b3b3b3;
+  margin-left: 0.5rem;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.list .list-body .task .task-head .delete:hover {
+  cursor: pointer;
+  color: #666667;
 }
 
 .list .list-body .task .task-body {
