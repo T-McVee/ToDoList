@@ -25,8 +25,16 @@ nav {
         line-height: 0.9rem;
       }
     }
-    i {
+    .logout {
       color: $black;
+      padding: 0.25rem 0.5rem;
+      border-radius: $radius-md;
+      transition: all 0.2s;
+      &:hover {
+        cursor: pointer;
+        background-color: $blue;
+        color: white;
+      }
     }
     .col:nth-child(2) {
       width: 30%;

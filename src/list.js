@@ -30,8 +30,17 @@ const _listFooter = (() => {
 const _updateList = (state) => ({
   changeTitle: (newTitle) => state.title = newTitle,
   addtask: (task) => state.tasks.push(task),
-  changeIndex: (newIndex) => state.index = newIndex,
-  deleteList: () => myLists.splice(state.index, 1),
+  updateIndex: (newIndex) => state.index = newIndex,
+  deleteList: () => {
+    let removedList = myLists.splice(state.index, 1);
+    for (let i = 0; i < myLists.length; i++) {
+      myLists[i].index = i;
+      myLists[i].updateIndex(i);
+    }
+
+    console.log(`Removed list:`, removedList);
+
+  },
 });
 
 const _getDetails = (state) => ({
@@ -76,11 +85,7 @@ const listFactory = (listData) => {
     if (e.target.classList != 'delete') return
     listData.deleteList();
     head.parentElement.remove();
-
-    // update index
-    for (let i = 0; i < myLists.length; i++) {
-      myLists[i].index = i;
-    }
+    console.log(`After delete: `, myLists);
 
     updateLocalStorage();
   })
@@ -91,11 +96,6 @@ const listFactory = (listData) => {
     placeholderClass: 'ph-class',
     hoverClass: 'bg-maroon yellow'
   });
-
-  //console.log(sortableList);
-
-
-  //sortableList[0].addEventListener('sortstart', (e) => console.log(e.target));
 
   // Create task
   footer.addEventListener('click', (e) => {

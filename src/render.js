@@ -28,7 +28,7 @@ const renderNavBar = (() => {
   const nav = document.createElement('nav');
   const row = _renderRow([{ text: 'Kanbanit', classes: 'logo' }]);
   row.classList.add('container');
-  row.appendChild(elFactory('i', { class: 'fas fa-bars' }));
+  row.appendChild(elFactory('div', { class: 'logout' }, 'sign out'));
   nav.appendChild(row);
 
   return nav
@@ -49,8 +49,7 @@ const renderMain = ((myLists) => {
 
     // Create DOM elements for new list
     const listEl = listFactory(list);
-
-    workSpace.insertBefore(listEl, workSpace.lastChild);
+    workSpace.insertBefore(listEl, workSpace.childNodes[workSpace.childNodes.length]);
     renderedListBtn.firstChild.reset();
 
     // Add list drag n' drop
@@ -89,7 +88,7 @@ const renderMain = ((myLists) => {
 
   // Load existing lists
   myLists.forEach(list => {
-    workSpace.insertBefore(listFactory(list), workSpace.lastChild)
+    workSpace.appendChild(listFactory(list));
   });
 
   const main = elFactory('div', { class: 'main container' }, workSpace, renderedListBtn);

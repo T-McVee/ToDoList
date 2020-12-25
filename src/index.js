@@ -75,7 +75,7 @@ function storageAvailable(type) {
 function updateLocalStorage() {
   //console.log('POPULATE STORAGE:');
   localStorage.setItem('projects', JSON.stringify(myLists));
-  //console.log(localStorage);
+  //console.log(`Update: `, myLists);
 }
 
 // retrieve myLists from local storage

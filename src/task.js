@@ -8,8 +8,19 @@ const _updateTask = (state) => ({
   updateDescription: (newDescription) => state.description = newDescription,
   updateDueDate: (newDate) => state.dueDate = newDate,
   updatePriority: (newPriority) => state.priority = newPriority,
+  updateIndex: (newIndex) => state.index = newIndex,
   addNote: (input) => state.notes.push(input),
-  deleteTask: () => myLists[state.parentIndex].tasks.splice([state.index], 1),
+  deleteTask: () => {
+    let removedTask = myLists[state.parentIndex].tasks.splice([state.index], 1);
+    for (let i = 0; i < myLists[state.parentIndex].tasks.length; i++) {
+      let task = myLists[state.parentIndex].tasks[i];
+      task.index = i;
+      task.updateIndex(i);
+    }
+
+    console.log(`Removed task: `, removedTask);
+
+  },
 });
 
 const _getDetails = (state) => ({
@@ -138,14 +149,8 @@ const taskFactory = (taskData) => {
   head.addEventListener('click', (e) => {
     if (e.target.classList != 'delete') return
 
-    // Remove task from List array
     taskData.deleteTask();
     head.parentElement.remove();
-
-    // Update indexes
-    for (let i = 0; i < myLists[taskData.parentIndex].tasks.length; i++) {
-      myLists[taskData.parentIndex].tasks[i].index = i;
-    }
 
     updateLocalStorage();
   })

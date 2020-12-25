@@ -8,6 +8,13 @@ const pageLoad = ((myLists) => {
   const main = renderMain(myLists);
   const workSpace = main.querySelector('.work-space');
 
+  const logoutBtn = navbar.querySelector('.logout');
+  logoutBtn.addEventListener('click', () => {
+    main.style.display = 'none';
+    logoutBtn.textContent = 'sign in';
+  })
+
+
   // Add list Drag n' Drop
   const sortableList = sortable(workSpace, {
     forcePlaceholderSize: true,
@@ -27,7 +34,6 @@ const pageLoad = ((myLists) => {
   // Add task Drag n' Drop 
   const listEls = workSpace.querySelectorAll('.list');
   listEls.forEach(list => {
-
     const sortableList = sortable(list.querySelector('.list-body'), {
       forcePlaceholderSize: true,
       placeholderClass: 'ph-class',
