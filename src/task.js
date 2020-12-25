@@ -1,6 +1,6 @@
 import { myLists, updateLocalStorage } from './index'
-import { elFactory } from "./helpers/helpers"
-import { textInputModule, inputFactory } from "./helpers/components"
+import { elFactory, updateBGColor, updateTextColor } from "./helpers/helpers"
+import { textInputModule } from "./helpers/components"
 import { taskPopUp } from './popup'
 
 const _updateTask = (state) => ({
@@ -127,18 +127,19 @@ const _taskHead = ((taskData) => {
 
 const _taskBody = ((taskData) => {
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
-  const completed = inputFactory({ type: 'label', title: 'completed:' }, { type: 'checkbox' }, 'completed');
+  const completed = elFactory('div', { class: 'completed' }, 'completed');
+  const taskBody = elFactory('div', { class: 'task-body' }, dueDate, completed);
 
-  const checkbox = completed.querySelector('.completed-input');
-  if (taskData.completed) checkbox.setAttribute('checked', true);
-
-  checkbox.addEventListener(
-    'change', () => {
+  // Update completed status
+  completed.addEventListener(
+    'click', () => {
       taskData.completed = !taskData.completed;
+      updateBGColor(taskData.completed, taskBody.parentElement);
+      updateTextColor(taskData.completed, completed);
       updateLocalStorage();
     });
 
-  return elFactory('div', { class: 'task-body' }, dueDate, completed);
+  return taskBody;
 })
 
 const taskFactory = (taskData) => {

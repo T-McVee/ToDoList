@@ -25,7 +25,7 @@ const _renderRow = ((input) => {
 });
 
 const renderNavBar = ((name) => {
-  const logo = elFactory('div', { class: 'logo' }, `Hi ${name}`);
+  const logo = elFactory('div', { class: 'logo' }, `Welcome to List Lab, ${name}`);
   const login = elFactory('div', { class: 'logout' }, 'sign out');
   const gitHubIcon = elFactory('i', { class: 'fab fa-github-square' });
   const gitHubLink = elFactory('a',

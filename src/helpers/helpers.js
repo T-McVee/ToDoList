@@ -20,4 +20,22 @@ const appendChildren = (parent, ...children) => {
   children.forEach(child => parent.appendChild(child));
 };
 
-export { elFactory, appendChildren };
+const updateBGColor = (status, targetEl) => {
+  status ? targetEl.classList.add('light-grey-bg')
+    : targetEl.classList.remove('light-grey-bg');
+}
+
+const updateTextColor = (status, ...targetEls) => {
+  if (status) {
+    targetEls.forEach(el => el.classList.add('mid-blue-text'));
+  } else {
+    targetEls.forEach(el => el.classList.remove('mid-blue-text'));
+  }
+}
+
+export {
+  elFactory,
+  appendChildren,
+  updateBGColor,
+  updateTextColor,
+};

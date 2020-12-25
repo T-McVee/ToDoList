@@ -1,6 +1,6 @@
 import { myLists, updateLocalStorage } from './index'
 import { createTask, taskFactory } from "./task"
-import { elFactory } from "./helpers/helpers"
+import { elFactory, updateBGColor, updateTextColor } from "./helpers/helpers"
 import { textInputModule } from './helpers/components'
 import datepicker from 'js-datepicker'
 import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
@@ -16,7 +16,12 @@ const _listHead = ((listData) => {
 const _listBody = ((listData) => {
   const body = elFactory('div', { class: 'list-body' });
   listData.tasks.forEach(task => {
-    body.appendChild(taskFactory(task))
+    const taskEl = taskFactory(task)
+
+    updateBGColor(task.completed, taskEl);
+    updateTextColor(task.completed, taskEl.querySelector('.completed'));
+
+    body.appendChild(taskEl);
   })
   return body;
 });
