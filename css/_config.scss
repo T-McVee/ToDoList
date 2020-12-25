@@ -1,11 +1,10 @@
-//$black: #051821;
 $black: #1a3546;
-$soft-black: rgb(102, 102, 103);
+$mid-black: #272727;
+$soft-black: rgb(143, 143, 143);
 $blue: rgb(25, 123, 184);
 $bg-blue: lighten($color: $black, $amount: 74);
-$text-blue: lighten($color: $black, $amount: 15);
-$text-blue-light: lighten($color: $text-blue, $amount: 10);
-//$light-grey: #5a82d2;
+$mid-blue: #2f5f7e;
+$text-blue-light: #3d7ba3;
 $light-grey: #d2d3d5;
 $white: #fff;
 $red: rgb(247, 110, 110);
@@ -22,15 +21,48 @@ $time: 0.2s;
 
 $font-main: 'Montserrat', sans-serif;
 
+// Color classes
+.soft-black {
+  &-bg {
+    background-color: $soft-black !important;
+  }
+  &-text {
+    color: $soft-black !important;
+  }
+}
+.mid-blue {
+  &-text {
+    color: $mid-blue !important;
+  }
+}
+.light-grey {
+  &-bg {
+    background-color: $light-grey !important;
+  }
+}
+.red {
+  &-bg {
+    background-color: $red !important;
+  }
+  &-text {
+    color: $red !important;
+  }
+}
+.tan {
+  &-bg {
+    background-color: darken($color: $tan, $amount: 10) !important;
+  }
+}
+
 /* Mixins */
 @mixin delete {
-    color: lighten($color: $soft-black, $amount: 30);
-    margin-left: 0.5rem;
-    transition: color 0.2s;
-    &:hover {
-      cursor: pointer;
-      color: $soft-black;
-    }
+  color: lighten($color: $soft-black, $amount: 10);
+  margin-left: 0.5rem;
+  transition: color 0.2s;
+  &:hover {
+    cursor: pointer;
+    color: $soft-black;
+  }
 }
 
 @mixin text-input-module {
