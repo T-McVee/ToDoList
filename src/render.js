@@ -7,7 +7,7 @@ import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
 
 const _renderColumn = ((input) => {
   const col = elFactory('div', { class: 'col' });
-  const content = elFactory('div', { class: input.classes }, input.text);
+  const content = elFactory(input.type, { class: input.classes }, input.text);
   col.appendChild(content);
 
   return col;
@@ -24,12 +24,23 @@ const _renderRow = ((input) => {
   return row;
 });
 
-const renderNavBar = (() => {
-  const nav = document.createElement('nav');
-  const row = _renderRow([{ text: 'Kanbanit', classes: 'logo' }]);
-  row.classList.add('container');
-  row.appendChild(elFactory('div', { class: 'logout' }, 'sign out'));
-  nav.appendChild(row);
+const renderNavBar = ((name) => {
+  const logo = elFactory('div', { class: 'logo' }, `Hi ${name}`);
+  const login = elFactory('div', { class: 'logout' }, 'sign out');
+  const gitHubIcon = elFactory('i', { class: 'fab fa-github-square' });
+  const gitHubLink = elFactory('a',
+    {
+      target: 'blank',
+      href: 'https://github.com/T-McVee/to-do-list-project'
+    }, gitHubIcon);
+  const buttons = elFactory('div', { class: 'buttons' }, login, gitHubLink);
+
+  const container = elFactory('div', { class: 'row container' }, logo, buttons)
+
+  const nav = elFactory('nav', {}, container);
+
+
+
 
   return nav
 });

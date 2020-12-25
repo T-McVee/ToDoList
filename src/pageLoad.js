@@ -4,7 +4,7 @@ import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
 import { elFactory } from './helpers/helpers';
 
 const pageLoad = ((myLists) => {
-  const navbar = renderNavBar()
+  const navbar = renderNavBar('Tim');
   const main = renderMain(myLists);
   const workSpace = main.querySelector('.work-space');
 

@@ -29,8 +29,8 @@ const _popupHead = (taskData, cardTitleEl) => {
 }
 
 const _popupBody = (taskData) => {
-  const descriptionTitle = elFactory('h3', { class: 'descrition-title' }, 'Description:');
-  const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Click to add description...' });
+  const descriptionTitle = elFactory('h3', { class: 'description-title' }, 'Description:');
+  const descriptionInput = elFactory('textarea', { class: 'description-input', placeholder: 'Add a description...' });
   descriptionInput.value = taskData.description;
 
   descriptionInput.addEventListener('input', () => {
