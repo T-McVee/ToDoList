@@ -14,7 +14,7 @@
     transition: background-color $time;
     &:hover {
       cursor: pointer;
-      background-color: lighten($color: $light-grey, $amount: 2);
+      background-color: darken($color: $white, $amount: 4);
     }
     .task-head {
       position: relative;
