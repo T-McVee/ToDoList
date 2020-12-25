@@ -49,20 +49,16 @@
       .due-date {
         width: fit-content;
         font-size: 0.75rem;
-        color: lighten($color: $soft-black, $amount: 30);
+        color: $soft-black;
         transition: color $time;
         &:hover {
           color: lighten($color: $soft-black, $amount: 0);
         }
       }
-      .completed-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        .completed-title {
-          margin: 0;
-          font-size: 0.8rem;
-        }
+      .completed {
+        margin: 0;
+        font-size: 0.8rem;
+        color: $soft-black;
       }
     }
   }

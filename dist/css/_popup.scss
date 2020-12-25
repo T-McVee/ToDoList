@@ -12,8 +12,6 @@
   backdrop-filter: blur(2px);
   .popup {
     display: flex;
-    //justify-content: center;
-    //align-items: center;
     flex-direction: column;
     width: 450px;
     max-height: 85vh;
@@ -23,39 +21,41 @@
     .popup-head{
       display: flex;
       justify-content: space-between;
-      //align-items: center;
       flex-direction: row;
       width: 100%;
       max-height: 15vh;
-      
       .title-block{
         @include text-input-module;
-      .title, input {
-        font-family: $font-main;
-        font-size: 1.5rem;
-        margin: 0;
-        padding: 0;
-      }
-      .select-wrapper {
-        color: $soft-black;
-        font-size: 0.9rem;
-        select {
+        .title, input {
+          font-family: $font-main;
+          font-size: 1.5rem;
+          margin: 0;
+          padding: 0;
+        }
+        form .title-wrapper h2.title {
+          padding-left: 0.5rem !important;
+          border-left: 6px dotted $blue;
+          margin-bottom: 0.5rem !important;
+        }
+        .select-wrapper {
           color: $soft-black;
           font-size: 0.9rem;
-          background: none;
-          border: none;
-          &:hover {
-            cursor: pointer;
-          }
-          &:focus {
-            outline: none;
-          }
-          option {
+          select {
+            color: $soft-black;
+            font-size: 0.9rem;
             background: none;
+            border: none;
+            &:hover {
+              cursor: pointer;
+            }
+            &:focus {
+              outline: none;
+            }
+            option {
+              background: none;
+            }
           }
         }
-        
-      }
       }
       .close {
         font-size: 1.2rem;
@@ -63,7 +63,7 @@
         transition: $time;
         &:hover {
           cursor: pointer;
-          color: lighten($color: $soft-black, $amount: 0);
+          color: $mid-black;
         }
       }
     }
@@ -102,19 +102,18 @@
       }
       .notes-wrapper {
         width: 100%;
-        //max-height: 25vh;
         padding: 0.5rem;
         margin-top: 1.75rem;
         margin-bottom: 0.5rem;
         background-color: $bg-blue;
         border-radius: $radius-md;
         h3 { 
-          color: $text-blue;
+          color: $mid-blue;
           margin: 0.5rem 0;
         }
         .notes {
           width: 100%;
-          color: $text-blue;
+          color: $mid-blue;
           form {
             display: flex;
             flex-direction: row;
@@ -123,7 +122,7 @@
             input[type=text] {
               width: 475px;
               padding: 0.25rem;
-              color: $text-blue; 
+              color: $text-blue-light; 
               background-color: $bg-blue;
               border: none;
               &::placeholder {
@@ -159,7 +158,7 @@
               margin: 0.25rem 0;
               padding-bottom: 0.25rem;
               color: $text-blue-light;
-              border-bottom: 1px $text-blue solid;
+              border-bottom: 1px $mid-blue solid;
               &:nth-of-type(1) {
                 padding-top: 0.5rem;
               }

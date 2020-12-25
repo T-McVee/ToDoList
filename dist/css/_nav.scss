@@ -5,7 +5,7 @@ nav {
   align-items: center;
   flex-direction: column;
   width: 100vw;
-  height: 40px;
+  height: 60px;
   //background-color: $blue;
   .row {
     display: flex;
@@ -14,12 +14,9 @@ nav {
     .logo {
       display: flex;
       flex-direction: column;
-      //font-family: 'Caveat', cursive;
       font-size: 1.2rem;
-      //text-shadow: 1px 1px 0px  $blue;
       font-weight: 800;
-      color: $soft-black;
-      //letter-spacing: 1px;
+      color: $mid-black;
       line-height: 0.9rem;
     }
     .buttons {
@@ -27,8 +24,9 @@ nav {
       justify-content: center;
       align-items: center;
       flex-direction: row;
+      color: $mid-black;
       .logout {
-        color: $soft-black;
+        color: $mid-black;
         padding: 0.25rem 0.5rem;
         border-radius: $radius-sm;
         transition: all 0.2s;
@@ -41,7 +39,7 @@ nav {
       a {
         margin-left: 0.75rem;
         i {
-          color: $soft-black;
+          color: $mid-black;
           font-size: 1.75rem;
           &:hover {
             color: $blue;
