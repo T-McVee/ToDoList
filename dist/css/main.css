@@ -38,7 +38,7 @@ nav .row .logo {
           flex-direction: column;
   font-size: 1.2rem;
   font-weight: 800;
-  color: #197bb8;
+  color: #666667;
   line-height: 0.9rem;
 }
 
@@ -197,7 +197,7 @@ nav .row .col:nth-child(2) ul li:hover {
   height: fit-content;
   padding: 0.75rem;
   margin-right: 1.5rem;
-  background: #dfe0e1;
+  background: rgba(255, 255, 255, 0.35);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   border-radius: 12px;
@@ -212,6 +212,9 @@ nav .row .col:nth-child(2) ul li:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -291,8 +294,9 @@ nav .row .col:nth-child(2) ul li:hover {
   outline: none;
 }
 
-.list .list-head .title {
+.list .list-head .text-input-module form .title-wrapper .title {
   font-size: 1rem;
+  margin: 0.25rem 0 0;
 }
 
 .list .list-head .delete {
@@ -309,6 +313,7 @@ nav .row .col:nth-child(2) ul li:hover {
 
 .list .list-body {
   width: 100%;
+  margin-top: 1rem;
 }
 
 .list .list-body .task {
@@ -322,16 +327,14 @@ nav .row .col:nth-child(2) ul li:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  background-color: #faf2e3;
-  border-left: 0.25rem solid #197bb8;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 2px #d2d3d5;
+          box-shadow: 0px 2px 2px #d2d3d5;
   width: 100%;
   height: 80px;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.75rem;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
@@ -342,6 +345,7 @@ nav .row .col:nth-child(2) ul li:hover {
 }
 
 .list .list-body .task .task-head {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -351,6 +355,8 @@ nav .row .col:nth-child(2) ul li:hover {
           flex-direction: row;
   height: 20px;
   width: 100%;
+  padding-left: 0.5rem;
+  border-left: 4px dotted #197bb8;
 }
 
 .list .list-body .task .task-head form {
@@ -430,7 +436,7 @@ nav .row .col:nth-child(2) ul li:hover {
 }
 
 .list .list-body .task .task-head form .title, .list .list-body .task .task-head form i, .list .list-body .task .task-head form input {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .list .list-body .task .task-head .delete {
@@ -438,6 +444,9 @@ nav .row .col:nth-child(2) ul li:hover {
   margin-left: 0.5rem;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
+  position: absolute;
+  right: 0;
+  top: -0.25rem;
 }
 
 .list .list-body .task .task-head .delete:hover {
@@ -857,16 +866,17 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: white;
   color: #1a3546;
 }
 
 #content {
   z-index: -100;
   height: 100vh;
-  width: 100vw;
+  background-image: url("/dist/img/katerina-kerdi--YiJvbfNDqk-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #e8f1f6;
 }
 
 .row, .col {
