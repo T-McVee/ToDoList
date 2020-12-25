@@ -8,24 +8,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba($color: $black, $alpha: 0.8);
+  background-color: rgba($color: $black, $alpha: 0.1);
+  backdrop-filter: blur(2px);
   .popup {
     display: flex;
     //justify-content: center;
     //align-items: center;
     flex-direction: column;
-    width: 550px;
-    height: 90vh;
-    padding: 0.75rem;
+    width: 450px;
+    max-height: 85vh;
+    padding: 1.5rem;
     border-radius: $radius-md;
-    background-color: $light-grey;
+    background-color: $white;
     .popup-head{
       display: flex;
       justify-content: space-between;
       //align-items: center;
       flex-direction: row;
       width: 100%;
-      height: 15%;
+      max-height: 15vh;
+      
       .title-block{
         @include text-input-module;
       .title, input {
@@ -69,18 +71,50 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 85%;
+      max-height: 75vh;
+      overflow-y: scroll;
+      margin-top: 1.75rem;
       .description-wrapper {
         width: 100%;
+        padding: 0.5rem;
+        color: darken($color: $tan, $amount: 60);
+        background-color: $tan;
+        border-radius: $radius-md;
+        box-shadow: 0px 2px 2px $light-grey;
+        .description-title {
+          margin: 0.5rem 0;
+          padding: 0;
+        }
         .description-input {
           width: 100%;
           height: 180px;
+          color: darken($color: $tan, $amount: 40);
+          background-color: $tan;
+          border: none;
+          resize: none;
+          &:hover {
+            cursor: pointer;
+          }
+          &::placeholder {
+            color: darken($color: $tan, $amount: 40);
+          }
         }
       }
       .notes-wrapper {
         width: 100%;
+        //max-height: 25vh;
+        padding: 0.5rem;
+        margin-top: 1.75rem;
+        margin-bottom: 0.5rem;
+        background-color: $bg-blue;
+        border-radius: $radius-md;
+        h3 { 
+          color: $text-blue;
+          margin: 0.5rem 0;
+        }
         .notes {
           width: 100%;
+          color: $text-blue;
           form {
             display: flex;
             flex-direction: row;
@@ -89,10 +123,20 @@
             input[type=text] {
               width: 475px;
               padding: 0.25rem;
+              color: $text-blue; 
+              background-color: $bg-blue;
+              border: none;
+              &::placeholder {
+                color: $text-blue-light;
+              }
+              &:hover {
+                cursor: pointer;
+              }
             }
             input[type=submit] {
               width: 75px;
               border-radius: $radius-sm;
+              color: $text-blue-light; 
               background: none;
               border: none;
               transition: background-color $time;
@@ -114,7 +158,8 @@
               width: fit-content;
               margin: 0.25rem 0;
               padding-bottom: 0.25rem;
-              border-bottom: 1px $black solid;
+              color: $text-blue-light;
+              border-bottom: 1px $text-blue solid;
               &:nth-of-type(1) {
                 padding-top: 0.5rem;
               }

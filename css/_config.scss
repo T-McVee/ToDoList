@@ -1,7 +1,10 @@
-$blue: rgb(25, 123, 184);
 //$black: #051821;
-$black: #1a4645;
+$black: #1a3546;
 $soft-black: rgb(102, 102, 103);
+$blue: rgb(25, 123, 184);
+$bg-blue: lighten($color: $black, $amount: 74);
+$text-blue: lighten($color: $black, $amount: 15);
+$text-blue-light: lighten($color: $text-blue, $amount: 10);
 //$light-grey: #5a82d2;
 $light-grey: #d2d3d5;
 $white: #fff;
@@ -9,9 +12,11 @@ $red: rgb(247, 110, 110);
 $green: #21c421;
 $soft-green: rgb(179, 254, 186);
 $soft-pink: #ebb7e1;
+$tan: #faf2e3;
 
 $radius-sm: 6px;
 $radius-md: 12px;
+$radius-lg: 75px;
 
 $time: 0.2s;
 

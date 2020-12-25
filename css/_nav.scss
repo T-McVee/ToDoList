@@ -8,34 +8,48 @@ nav {
   height: 40px;
   //background-color: $blue;
   .row {
+    display: flex;
     width: 100%;
     justify-content: space-between;
-    .col:nth-child(1) {
-      width: 100px;
-      justify-content: flex-start;
-      .logo {
-        display: flex;
-        flex-direction: column;
-        font-family: 'Caveat', cursive;
-        font-size: 2.5rem;
-        //text-shadow: 1px 1px 0px  $blue;
-        font-weight: 600;
-        color: $blue;
-        letter-spacing: 0.2rem;
-        line-height: 0.9rem;
+    .logo {
+      display: flex;
+      flex-direction: column;
+      //font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      //text-shadow: 1px 1px 0px  $blue;
+      font-weight: 800;
+      color: $blue;
+      //letter-spacing: 1px;
+      line-height: 0.9rem;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      .logout {
+        color: $soft-black;
+        padding: 0.25rem 0.5rem;
+        border-radius: $radius-sm;
+        transition: all 0.2s;
+        &:hover {
+          cursor: pointer;
+          background-color: $blue;
+          color: white;
+        }
+      }
+      a {
+        margin-left: 0.75rem;
+        i {
+          color: $soft-black;
+          font-size: 1.75rem;
+          &:hover {
+            color: $blue;
+          }
+        }
       }
     }
-    .logout {
-      color: $black;
-      padding: 0.25rem 0.5rem;
-      border-radius: $radius-md;
-      transition: all 0.2s;
-      &:hover {
-        cursor: pointer;
-        background-color: $blue;
-        color: white;
-      }
-    }
+    
     .col:nth-child(2) {
       width: 30%;
       justify-content: flex-end;
