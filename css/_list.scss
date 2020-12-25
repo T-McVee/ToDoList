@@ -11,25 +11,35 @@
   //max-height: calc(100vh - 100px);
   padding: 0.75rem;
   margin-right: 1.5rem;
-  background: lighten($color: $light-grey, $amount: 5);
+  background: rgba($color: $white, $alpha: 0.35);
   backdrop-filter: blur(5px);
   border-radius: $radius-md;
   box-shadow: 2px 2px 8px rgba($color: $black, $alpha: 0.2);
   .list-head {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
     width: 100%;
     @include text-input-module;
-    .title {
-      font-size: 1rem;
+    .text-input-module {
+      form {
+        .title-wrapper {
+          .title {
+            font-size: 1rem;
+            margin: 0.25rem 0 0;
+          }
+        }
+      }
     }
+    
     .delete {
       @include delete;
     }
   }
   .list-body {
     width: 100%;
+    margin-top: 1rem;
     //overflow-y: scroll;
     @include task;
   }
