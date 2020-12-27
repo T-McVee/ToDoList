@@ -5,7 +5,7 @@
 heavily inspired by Trello's list & card UI.
 I wanted to use this project as a chance to attempt to recreate something similar. This was also my first attempt working with drag and drop, and using npm to import additonal libraries beyond what's laid out in the course.
   
-  Indtended learning outcomes: 
+  Intended learning outcomes: 
   - Exploration of Object Orientated Programing principles.
   - understand pros & cons of OOP Vs Functional Programing.
   - use of modules, npm and webpack.
