@@ -197,7 +197,7 @@
 
 .welcome-screen .row .col-2 {
   width: 43%;
-  background-image: url("/dist/img/fabian-gieske-fl3xaLcJ-30-unsplash.jpg");
+  background-image: url("/dist/img/welcome-screen.jpg");
   background-size: 120%;
   background-position-y: 80%;
   background-position-x: 100%;
@@ -1130,7 +1130,7 @@ body {
 #content .app {
   height: 100vh;
   width: 100vw;
-  background-image: url("/dist/img/lucrezia-carnelos-F0if-2LD4cA-unsplash.jpg");
+  background-image: url("/dist/img/main.jpg");
   background-size: cover;
   background-position-y: top;
   background-repeat: no-repeat;
