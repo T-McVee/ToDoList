@@ -1,5 +1,6 @@
 //@import '~js-datepicker/src/datepicker';
 @import 'config';
+@import 'welcome';
 @import 'nav';
 @import 'new-list-btn';
 @import 'list';
@@ -23,11 +24,15 @@ body {
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
-  background-image: url('/dist/img/lucrezia-carnelos-F0if-2LD4cA-unsplash.jpg');
-  background-size: cover;
-  background-position-y: top;
-  background-repeat: no-repeat;
   background-color: lighten($color: $soft-blue, $amount: 1);
+  .app {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/dist/img/lucrezia-carnelos-F0if-2LD4cA-unsplash.jpg');
+    background-size: cover;
+    background-position-y: top;
+    background-repeat: no-repeat;
+  }
 }
 
 .row, .col {
