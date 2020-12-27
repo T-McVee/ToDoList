@@ -1,5 +1,6 @@
 import { updateLocalStorage } from '../index'
-import { elFactory, appendChildren } from './helpers'
+import { elFactory, appendChildren } from './functions'
+import { format } from 'date-fns'
 
 // Title section for lists & tasks - allows user to click to edit title
 const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
@@ -112,19 +113,33 @@ const notesModule = (taskData) => {
   const form = elFactory('form', { name: 'notes' }, input, submit);
   const notesList = elFactory('ul', {});
 
-  taskData.notes
-    .forEach(note => notesList.insertBefore(elFactory('li', {}, note), notesList.firstChild));
+  taskData.notes.forEach(note => {
+    const noteDate = elFactory('span', {}, ` - ${note.dateCreated}`);
+    const noteText = elFactory('li', {}, note.text, noteDate);
+
+    notesList.insertBefore(noteText, notesList.firstChild);
+  });
+
+
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!input.value) return;
 
-    const newNote = elFactory('li', {}, input.value);
-    taskData.notes.push(input.value)
+    const note = {
+      text: input.value,
+      dateCreated: format(new Date, 'k:m do MMM'),
+    }
+
+    taskData.notes.push(note);
+
+    const noteElDate = elFactory('span', {}, ` - ${note.dateCreated}`);
+    const noteEl = elFactory('li', {}, note.text, noteElDate);
+
     if (notesList.firstChild) {
-      notesList.insertBefore(newNote, notesList.firstChild);
+      notesList.insertBefore(noteEl, notesList.firstChild);
     } else {
-      notesList.appendChild(newNote);
+      notesList.appendChild(noteEl);
     }
 
     form.reset();

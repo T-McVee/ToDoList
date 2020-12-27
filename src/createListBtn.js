@@ -1,4 +1,4 @@
-import { elFactory } from './helpers/helpers'
+import { elFactory } from './helpers/functions'
 
 const _listBtnFunction = (state) => ({
   pushToMyLists: (list) => {

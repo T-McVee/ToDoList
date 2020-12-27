@@ -1,5 +1,5 @@
 import { myLists, updateLocalStorage } from './index'
-import { elFactory, updateBGColor, updateTextColor } from "./helpers/helpers"
+import { elFactory, updateBGColor, updateTextColor } from "./helpers/functions"
 import { textInputModule } from "./helpers/components"
 import { taskPopUp } from './popup'
 
@@ -8,18 +8,14 @@ const _updateTask = (state) => ({
   updateDescription: (newDescription) => state.description = newDescription,
   updateDueDate: (newDate) => state.dueDate = newDate,
   updatePriority: (newPriority) => state.priority = newPriority,
-  updateIndex: (newIndex) => state.index = newIndex,
   addNote: (input) => state.notes.push(input),
-  deleteTask: () => {
-    let removedTask = myLists[state.parentIndex].tasks.splice([state.index], 1);
-    for (let i = 0; i < myLists[state.parentIndex].tasks.length; i++) {
-      let task = myLists[state.parentIndex].tasks[i];
-      task.index = i;
-      task.updateIndex(i);
-    }
+  deleteTask: (task) => {
+    const parentList = myLists.filter(list => list.tasks.includes(task));
+    const taskIndex = parentList[0].tasks.indexOf(task)
+    const removedTask = parentList[0].tasks.splice(taskIndex, 1);
 
-    console.log(`Removed task: `, removedTask);
-
+    console.log(`parentList: `, parentList);
+    console.log(`removedTask: `, removedTask);
   },
 });
 
@@ -45,12 +41,6 @@ const _getDetails = (state) => ({
   get completed() {
     return state.completed;
   },
-  get parentIndex() {
-    return state.parentIndex;
-  },
-  get index() {
-    return state.index;
-  }
 })
 
 const _returnPriority = (state) => ({
@@ -88,8 +78,6 @@ const createTask = ({
   description,
   dueDate,
   priority,
-  parentIndex,
-  index,
   notes = [],
   dateCreated = new Date,
   completed = false,
@@ -99,8 +87,6 @@ const createTask = ({
     description,
     dueDate,
     priority,
-    parentIndex,
-    index,
     notes,
     dateCreated,
     completed,
@@ -150,7 +136,7 @@ const taskFactory = (taskData) => {
   head.addEventListener('click', (e) => {
     if (e.target.classList != 'delete') return
 
-    taskData.deleteTask();
+    taskData.deleteTask(taskData);
     head.parentElement.remove();
 
     updateLocalStorage();

@@ -1,3 +1,5 @@
+import { updateLocalStorage } from '../index'
+
 const elFactory = (type, attributes, ...children) => {
   const el = document.createElement(type);
 
@@ -33,9 +35,22 @@ const updateTextColor = (status, ...targetEls) => {
   }
 }
 
+const updateOrder = (event, array) => {
+  //console.log(`updateOrder: `, event.detail);
+  console.log(`Array: `, array);
+
+  const origin = event.detail.origin.index;
+  const destination = event.detail.destination.index;
+
+  let movedItem = array.splice(origin, 1);
+  array.splice(destination, 0, movedItem[0]);
+  updateLocalStorage();
+}
+
 export {
   elFactory,
   appendChildren,
   updateBGColor,
   updateTextColor,
+  updateOrder,
 };

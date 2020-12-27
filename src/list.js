@@ -1,6 +1,6 @@
 import { myLists, updateLocalStorage } from './index'
 import { createTask, taskFactory } from "./task"
-import { elFactory, updateBGColor, updateTextColor } from "./helpers/helpers"
+import { elFactory, updateBGColor, updateTextColor, updateOrder, } from "./helpers/functions"
 import { textInputModule } from './helpers/components'
 import datepicker from 'js-datepicker'
 import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
@@ -35,16 +35,11 @@ const _listFooter = (() => {
 const _updateList = (state) => ({
   changeTitle: (newTitle) => state.title = newTitle,
   addtask: (task) => state.tasks.push(task),
-  updateIndex: (newIndex) => state.index = newIndex,
-  deleteList: () => {
-    let removedList = myLists.splice(state.index, 1);
-    for (let i = 0; i < myLists.length; i++) {
-      myLists[i].index = i;
-      myLists[i].updateIndex(i);
-    }
+  deleteList: (list) => {
+    const listIndex = myLists.indexOf(list);
+    const removedList = myLists.splice(listIndex, 1);
 
     console.log(`Removed list:`, removedList);
-
   },
 });
 
@@ -60,15 +55,10 @@ const _getDetails = (state) => ({
   },
 });
 
-const _logDetails = (state) => ({
-  logTasks: () => state.tasks.forEach(task => task.logTitle()),
-});
-
 /* List factory */
-const createList = ({ title, index, tasks = [] }) => {
+const createList = ({ title, tasks = [] }) => {
   const state = {
     title,
-    index,
     tasks: tasks.map(task => createTask(task))
   }
 
@@ -76,7 +66,6 @@ const createList = ({ title, index, tasks = [] }) => {
     {},
     _updateList(state),
     _getDetails(state),
-    _logDetails(state),
   )
 }
 
@@ -88,7 +77,7 @@ const listFactory = (listData) => {
   // Delete button
   head.addEventListener('click', (e) => {
     if (e.target.classList != 'delete') return
-    listData.deleteList();
+    listData.deleteList(listData);
     head.parentElement.remove();
     console.log(`After delete: `, myLists);
 
@@ -96,11 +85,11 @@ const listFactory = (listData) => {
   })
 
   // Drag n Drop
-  const sortableList = sortable('.list-body', {
+  const sortableTasks = sortable(body, {
     forcePlaceholderSize: true,
-    placeholderClass: 'ph-class',
-    hoverClass: 'bg-maroon yellow'
   });
+
+  sortableTasks[0].addEventListener('sortupdate', (e) => updateOrder(e, listData.tasks));
 
   // Create task
   footer.addEventListener('click', (e) => {
@@ -117,9 +106,10 @@ const listFactory = (listData) => {
       });
     listData.addtask(task);
     const taskEl = taskFactory(task);
-    const dueDateEl = taskEl.querySelector('.due-date');
     body.appendChild(taskEl);
 
+    // Add date picker
+    const dueDateEl = taskEl.querySelector('.due-date');
     const picker = datepicker(dueDateEl, {
       onHide: () => {
         if (!picker.dateSelected) return;
@@ -128,13 +118,14 @@ const listFactory = (listData) => {
         updateLocalStorage();
       }
     });
+
     updateLocalStorage();
   });
 
   return elFactory('div',
     {
       class: 'list',
-      name: listData.title,
+      //name: listData.title,
       'data-index': listData.index,
       draggable: 'true'
     },
