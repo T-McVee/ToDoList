@@ -543,7 +543,7 @@ nav .row .col:nth-child(2) ul li:hover {
 
 .list .list-footer .new-task {
   font-size: 0.8rem;
-  color: darkgray;
+  color: #1a3546;
   padding: 0.25rem 0;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
@@ -870,17 +870,38 @@ nav .row .col:nth-child(2) ul li:hover {
 }
 
 .popup-wrapper .popup .popup-body .notes-wrapper .notes ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   margin: 0.25rem 0;
-  padding-bottom: 0.25rem;
+  padding: 0.25rem 0.5rem;
   color: #3d7ba3;
-  border-bottom: 1px #2f5f7e solid;
+  line-height: 1.4rem;
+  background-color: white;
+  border-radius: 6px;
 }
 
 .popup-wrapper .popup .popup-body .notes-wrapper .notes ul li:nth-of-type(1) {
-  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.popup-wrapper .popup .popup-body .notes-wrapper .notes ul li span {
+  float: right;
+  font-size: 0.8rem;
+  color: #79accd;
 }
 
 * {

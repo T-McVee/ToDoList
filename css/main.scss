@@ -14,7 +14,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: lighten($color: $bg-blue, $amount: 15);
+  background-color: lighten($color: $soft-blue, $amount: 15);
   color: $black;
 }
 
@@ -27,7 +27,7 @@ body {
   background-size: cover;
   background-position-y: top;
   background-repeat: no-repeat;
-  background-color: lighten($color: $bg-blue, $amount: 1);
+  background-color: lighten($color: $soft-blue, $amount: 1);
 }
 
 .row, .col {

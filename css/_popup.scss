@@ -105,7 +105,7 @@
         padding: 0.5rem;
         margin-top: 1.75rem;
         margin-bottom: 0.5rem;
-        background-color: $bg-blue;
+        background-color: $soft-blue;
         border-radius: $radius-md;
         h3 { 
           color: $mid-blue;
@@ -123,7 +123,7 @@
               width: 475px;
               padding: 0.25rem;
               color: $text-blue-light; 
-              background-color: $bg-blue;
+              background-color: $soft-blue;
               border: none;
               &::placeholder {
                 color: $text-blue-light;
@@ -154,13 +154,24 @@
             margin: 0;
             padding: 0;
             li {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
               width: fit-content;
+              height: fit-content;
               margin: 0.25rem 0;
-              padding-bottom: 0.25rem;
+              padding: 0.25rem 0.5rem;
               color: $text-blue-light;
-              border-bottom: 1px $mid-blue solid;
+              line-height: 1.4rem;
+              background-color: lighten($color: $soft-blue, $amount: 10);
+              border-radius: $radius-sm;
               &:nth-of-type(1) {
-                padding-top: 0.5rem;
+                margin-top: 0.5rem;
+              }
+              span {
+                float: right;
+                font-size: 0.8rem;
+                color: lighten($color: $text-blue-light, $amount: 20);
               }
             }
           }
