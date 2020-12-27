@@ -54,7 +54,7 @@
     }
     .new-task {
       font-size: 0.8rem;
-      color: lighten($color: $soft-black, $amount: 10);
+      color: $black;
       padding: 0.25rem 0;
       transition: color $time;
       &:hover {
