@@ -77,7 +77,7 @@
       .description-wrapper {
         width: 100%;
         padding: 0.5rem;
-        color: darken($color: $tan, $amount: 60);
+        color: $dark-tan;
         background-color: $tan;
         border-radius: $radius-md;
         box-shadow: 0px 2px 2px $light-grey;
@@ -88,7 +88,7 @@
         .description-input {
           width: 100%;
           height: 180px;
-          color: darken($color: $tan, $amount: 40);
+          color: $mid-tan;
           background-color: $tan;
           border: none;
           resize: none;

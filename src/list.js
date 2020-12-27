@@ -125,8 +125,6 @@ const listFactory = (listData) => {
   return elFactory('div',
     {
       class: 'list',
-      //name: listData.title,
-      'data-index': listData.index,
       draggable: 'true'
     },
     head,

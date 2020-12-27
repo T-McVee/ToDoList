@@ -155,8 +155,7 @@ const taskFactory = (taskData) => {
   return elFactory('div',
     {
       class: 'task',
-      'data-index': taskData.index,
-      draggable: 'true'
+      draggable: 'true',
     },
     head,
     body

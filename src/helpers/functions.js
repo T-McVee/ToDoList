@@ -18,10 +18,6 @@ const elFactory = (type, attributes, ...children) => {
   return el;
 }
 
-const appendChildren = (parent, ...children) => {
-  children.forEach(child => parent.appendChild(child));
-};
-
 const updateBGColor = (status, targetEl) => {
   status ? targetEl.classList.add('light-grey-bg')
     : targetEl.classList.remove('light-grey-bg');
@@ -49,7 +45,6 @@ const updateOrder = (event, array) => {
 
 export {
   elFactory,
-  appendChildren,
   updateBGColor,
   updateTextColor,
   updateOrder,

@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 const textInputModule = (headingType, itemData, editOnLoad, ...targets) => {
   const title = _titleFactory(headingType, itemData.title);
   const input = elFactory('input', { type: 'text', class: 'hide', placeholder: 'Add a title...' });
-  const form = elFactory('form', {}, title, input);
+  const form = elFactory('form', { class: 'form' }, title, input);
 
   // Set title on submit
   form.addEventListener('submit', (e) => {
@@ -65,6 +65,20 @@ const _titleFactory = (headingType, text) => {
   return title;
 }
 
+const formInputFactory = (label, input) => {
+  const labelEl = elFactory('label', { for: input.id }, label.text);
+  const inputEl = elFactory('input', {
+    type: input.type,
+    id: input.id,
+    name: input.name,
+    placeholder: input.placeholder
+  });
+
+  const formGroup = elFactory('div', { class: 'form-group' }, labelEl, inputEl);
+
+  return formGroup;
+}
+
 const inputFactory = (heading, inputType, inputClass) => {
   const title = elFactory(
     heading.type,
@@ -84,11 +98,10 @@ const inputFactory = (heading, inputType, inputClass) => {
 }
 
 const selectFactory = (data, labelText, targets) => {
-  const wrapper = elFactory('div', { class: 'select-wrapper' });
   const label = elFactory('label', {}, `${labelText}: `);
   const select = elFactory('select', {});
   data.priorityOptions().forEach(option => select.appendChild(option));
-  appendChildren(wrapper, label, select);
+  const wrapper = elFactory('div', { class: 'select-wrapper' }, label, select);
 
   select.selectedIndex = data.priority;
 
@@ -154,6 +167,7 @@ const updateColor = new FocusEvent('custom');
 
 export {
   textInputModule,
+  formInputFactory,
   inputFactory,
   selectFactory,
   notesModule,

@@ -23,8 +23,9 @@ const _renderRow = ((input) => {
 });
 
 const renderNavBar = ((name) => {
-  const logo = elFactory('div', { class: 'logo' }, `Welcome to List Lab, ${name}`);
-  const login = elFactory('div', { class: 'logout' }, 'sign out');
+  if (name) name = `, ${name}`;
+  const logo = elFactory('div', { class: 'logo' }, `Welcome to List Lab${name}`);
+  const login = elFactory('div', { class: 'logout', id: 'logout' }, 'start demo');
   const gitHubIcon = elFactory('i', { class: 'fab fa-github-square' });
   const gitHubLink = elFactory('a',
     {

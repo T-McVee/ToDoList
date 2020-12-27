@@ -12,6 +12,9 @@ $green: #21c421;
 $soft-green: rgb(179, 254, 186);
 $soft-pink: #ebb7e1;
 $tan: #faf2e3;
+$dark-tan: darken($color: $tan, $amount: 60);
+$mid-tan: darken($color: $tan, $amount: 40);
+
 
 $radius-sm: 6px;
 $radius-md: 12px;
@@ -53,6 +56,12 @@ $font-main: 'Montserrat', sans-serif;
     background-color: darken($color: $tan, $amount: 10) !important;
   }
 }
+
+
+// Break points
+$bp-desktop: 1024px;
+$bp-tablet: 768px;
+$bp-phone: 640px;
 
 /* Mixins */
 @mixin delete {

@@ -1,4 +1,5 @@
-import { pageLoad } from './pageLoad'
+import { appLoad, welcomeLoad } from './pageLoad'
+import { renderNavBar } from './render'
 import { createList } from './list'
 import datepicker from 'js-datepicker'
 
@@ -21,7 +22,32 @@ const init = (() => {
     console.log('no localStorage');
   }
 
-  domElements.content.appendChild(pageLoad(myLists));
+  // Navbar
+  const navbar = renderNavBar('');
+  domElements.content.appendChild(navbar);
+
+  const welcomeScreen = welcomeLoad();
+  domElements.content.appendChild(welcomeScreen);
+
+  // Sign in / sign out function - temporay 
+  let signedIn = false;
+  const demoButton = navbar.querySelector('#logout');
+  demoButton.addEventListener('click', () => {
+    if (!signedIn) {
+      welcomeScreen.remove();
+      domElements.content.appendChild(appLoad(myLists));
+
+      demoButton.textContent = 'sign out';
+    } else {
+      const app = domElements.content.querySelector('.app');
+      app.remove();
+      domElements.content.appendChild(welcomeScreen);
+
+    }
+
+    signedIn = !signedIn;
+  });
+
 
   // Add Date Picker to existing tasks
   const listEls = Array.from(document.querySelectorAll('.list'));
