@@ -2,7 +2,7 @@ import { myLists, updateLocalStorage } from './index'
 import { createTask, taskFactory } from "./task"
 import { elFactory, updateBGColor, updateTextColor, updateOrder, } from "./helpers/functions"
 import { textInputModule } from './helpers/components'
-import datepicker from 'js-datepicker'
+import datepicker from '../node_modules/js-datepicker/dist/datepicker.min.js'
 import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js'
 
 

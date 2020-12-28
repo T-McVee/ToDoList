@@ -1,7 +1,7 @@
 import { appLoad, welcomeLoad } from './pageLoad'
 import { renderNavBar } from './render'
 import { createList } from './list'
-import datepicker from 'js-datepicker'
+import datepicker from '../node_modules/js-datepicker/dist/datepicker.min.js'
 
 const domElements = {
   content: document.querySelector('#content')
@@ -36,38 +36,37 @@ const init = (() => {
     if (!signedIn) {
       welcomeScreen.remove();
       domElements.content.appendChild(appLoad(myLists));
-
       demoButton.textContent = 'sign out';
+
+      // Add Date Picker to existing tasks
+      const listEls = Array.from(document.querySelectorAll('.list'));
+      const taskEls = Array.from(listEls.map(list =>
+        Array.from(list.querySelectorAll('.task'))));
+
+      taskEls.forEach((list, listIndex) => {
+        list.forEach((task, taskIndex) => {
+          const dateEl = task.querySelector('.due-date');
+
+          const picker = datepicker(dateEl, {
+            onHide: () => {
+              if (!picker.dateSelected) return;
+              myLists[listIndex]
+                .tasks[taskIndex]
+                .dueDate = picker.dateSelected.toDateString();
+              dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
+              updateLocalStorage();
+            }
+          });
+        });
+      });
+
     } else {
       const app = domElements.content.querySelector('.app');
       app.remove();
       domElements.content.appendChild(welcomeScreen);
-
     }
 
     signedIn = !signedIn;
-  });
-
-
-  // Add Date Picker to existing tasks
-  const listEls = Array.from(document.querySelectorAll('.list'));
-  const taskEls = Array.from(listEls.map(list =>
-    Array.from(list.querySelectorAll('.task'))));
-
-  taskEls.forEach((list, listIndex) => {
-    list.forEach((task, taskIndex) => {
-      const dateEl = task.querySelector('.due-date');
-      const picker = datepicker(dateEl, {
-        onHide: () => {
-          if (!picker.dateSelected) return;
-          myLists[listIndex]
-            .tasks[taskIndex]
-            .dueDate = picker.dateSelected.toDateString();
-          dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
-          updateLocalStorage();
-        }
-      });
-    });
   });
 })();
 
