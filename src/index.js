@@ -64,12 +64,12 @@ const init = (() => {
       const app = domElements.content.querySelector('.app');
       app.remove();
       domElements.content.appendChild(welcomeScreen);
+      demoButton.textContent = 'start demo';
     }
 
     signedIn = !signedIn;
   });
 })();
-
 
 function storageAvailable(type) {
   let storage;
