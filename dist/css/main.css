@@ -163,7 +163,6 @@
 
 .welcome-screen .row .col-1 .container form .buttons .button {
   padding: 0.5rem 1rem;
-  margin: 0 1rem;
   font-weight: 600;
   border: 3px #faf2e3 solid;
   border-radius: 6px;
@@ -174,6 +173,7 @@
 }
 
 .welcome-screen .row .col-1 .container form .buttons .button.sign-in {
+  margin-right: 1rem;
   background-color: #197bb8;
   color: #fff;
 }
@@ -185,6 +185,7 @@
 }
 
 .welcome-screen .row .col-1 .container form .buttons .button.sign-up {
+  margin-left: 1rem;
   background-color: #1a3546;
   color: #fff;
 }
@@ -205,26 +206,110 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .welcome-screen .row .col-2 {
-    background-size: 160%;
+  .welcome-screen .row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .welcome-screen .row .col-1 {
+    width: 100%;
+    padding: 0;
+  }
+  .welcome-screen .row .col-1 .container {
+    height: 100%;
+    padding: 4rem 4rem;
+    border-radius: 0;
+  }
+  .welcome-screen .row .col-1 .container .woof {
+    font-size: 1.4rem;
+  }
+  .welcome-screen .row .col-1 .container .cta h1 {
+    font-size: 1.4rem;
+  }
+  .welcome-screen .row .col-1 .container .cta span {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .welcome-screen .row .col.col-2 {
+    width: 100%;
+    min-height: 40vh;
+    background-image: url("/dist/img/welcome-screen.jpg");
+    background-size: 100%;
+    background-position-y: 40%;
+    background-position-x: 100%;
   }
 }
 
 @media (min-width: 640px) and (max-width: 768px) {
-  .welcome-screen .row .col-2 {
-    background-size: 190%;
+  .welcome-screen .row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .welcome-screen .row .col-1 {
+    width: 100%;
+    height: 70vh;
+    padding: 0;
+  }
+  .welcome-screen .row .col-1 .container {
+    padding: 2rem 2rem;
+    border-radius: 0;
+  }
+  .welcome-screen .row .col-1 .container .cta h1 {
+    font-size: 1.2rem;
+  }
+  .welcome-screen .row .col-1 .container .cta span {
+    margin-bottom: 1rem;
+  }
+  .welcome-screen .row .col.col-2 {
+    width: 100%;
+    height: 30vh;
+    background-image: url("/dist/img/welcome-screen.jpg");
+    background-size: 100%;
+    background-position-y: 50%;
+    background-position-x: 100%;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 640px) {
+  .welcome-screen .row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
   .welcome-screen .row .col-1 {
-    width: 67%;
+    width: 100%;
+    padding: 0;
   }
   .welcome-screen .row .col-1 .container {
-    padding: 3rem 3rem;
+    padding: 2rem 2rem;
+    border-radius: 0;
   }
-  .welcome-screen .row .col-2 {
-    width: 33%;
+  .welcome-screen .row .col-1 .container .cta h1 {
+    font-size: 1.2rem;
+  }
+  .welcome-screen .row .col-1 .container .cta span {
+    margin-bottom: 0.5rem;
+  }
+  .welcome-screen .row .col-1 .container form .form-group {
+    margin-bottom: 0.5rem;
+  }
+  .welcome-screen .row .col-1 .container form .form-group label {
+    font-size: 0.9rem;
+  }
+  .welcome-screen .row .col-1 .container form .form-group input {
+    font-size: 1rem;
+  }
+  .welcome-screen .row .col.col-2 {
+    width: 100%;
+    height: 45vh;
+    background-image: url("/dist/img/welcome-screen.jpg");
+    background-size: 120%;
+    background-position-y: 50%;
+    background-position-x: 100%;
   }
 }
 
@@ -269,6 +354,15 @@ nav .row .logo {
   font-weight: 800;
   color: #272727;
   line-height: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  nav .row .logo {
+    font-size: 1rem;
+    width: 120px;
+    line-height: 1.2rem;
+    margin-top: 1rem;
+  }
 }
 
 nav .row .buttons {
@@ -1519,6 +1613,13 @@ body {
 .container {
   padding-left: 4rem;
   padding-right: 4rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .low {
