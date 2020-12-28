@@ -1498,7 +1498,7 @@ body {
 #content .app {
   height: 100vh;
   width: 100vw;
-  background-image: url("/img/main.jpg");
+  background-image: url("img/main.jpg");
   background-size: cover;
   background-position-y: top;
   background-repeat: no-repeat;
