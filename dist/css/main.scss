@@ -32,6 +32,10 @@ body {
     background-size: cover;
     background-position-y: top;
     background-repeat: no-repeat;
+    @media (max-width: $bp-tablet) {
+      background-image: url('/dist/img/main.jpg');
+      background-position-x: 40%;
+    }
   }
 }
 

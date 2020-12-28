@@ -1598,6 +1598,13 @@ body {
   background-repeat: no-repeat;
 }
 
+@media (max-width: 768px) {
+  #content .app {
+    background-image: url("/dist/img/main.jpg");
+    background-position-x: 40%;
+  }
+}
+
 .row, .col {
   display: -webkit-box;
   display: -ms-flexbox;
