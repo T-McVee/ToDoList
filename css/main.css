@@ -1606,6 +1606,13 @@ body {
   padding-right: 4rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 .low {
   color: #8f8f8f;
 }
