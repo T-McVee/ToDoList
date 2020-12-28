@@ -1594,7 +1594,8 @@ body {
 
 @media (max-width: 768px) {
   #content .app {
-    background-image: url("../img/welcome-screen.jpg");
+    background-image: url("../img/main.jpg");
+    background-position-x: 40%;
   }
 }
 
