@@ -86,6 +86,29 @@ const init = (() => {
       signOutButton.textContent = 'sign out';
       signOutButton.style.display = 'flex';
       setTimeout(() => form.reset(), 1);
+
+      // Add Date Picker to existing tasks
+      const listEls = Array.from(document.querySelectorAll('.list'));
+      const taskEls = Array.from(listEls.map(list =>
+        Array.from(list.querySelectorAll('.task'))));
+
+      taskEls.forEach((list, listIndex) => {
+        list.forEach((task, taskIndex) => {
+          const dateEl = task.querySelector('.due-date');
+
+          const picker = datepicker(dateEl, {
+            onHide: () => {
+              if (!picker.dateSelected) return;
+              myLists[listIndex]
+                .tasks[taskIndex]
+                .dueDate = picker.dateSelected.toDateString();
+              dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
+              updateLocalStorage();
+            }
+          });
+        });
+      })
+
     } else {
       //signed out
       domElements.content.appendChild(welcomeScreen);
@@ -130,7 +153,7 @@ function updateLocalStorage() {
 
 // retrieve myLists from local storage
 function setLists() {
-  console.log('SET LISTS:');
+  //console.log('SET LISTS:');
   const storageItem = JSON.parse(localStorage.getItem('projects'));
   //console.log('StorageItem:');
   //console.log(storageItem);
@@ -139,7 +162,7 @@ function setLists() {
     const list = createList(item);
     myLists.push(list);
   });
-  console.log(myLists);
+  //console.log(myLists);
 }
 
 export { myLists, updateLocalStorage };
