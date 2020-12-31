@@ -34,7 +34,6 @@ body {
     background-position-y: top;
     background-repeat: no-repeat;
     @media (max-width: $bp-tablet) {
-      background-image: url('../img/main.jpg');
       background-position-x: 40%;
     }
   }
