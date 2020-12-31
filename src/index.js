@@ -27,13 +27,16 @@ const init = (() => {
   domElements.content.appendChild(navbar);
 
   const welcomeScreen = welcomeLoad();
+  const app = appLoad(myLists);
   domElements.content.appendChild(welcomeScreen);
 
   // Sign in / sign out function - temporay 
   let signedIn = false;
   const demoButton = navbar.querySelector('#logout');
   demoButton.addEventListener('click', () => {
-    if (!signedIn) {
+
+    auth.signOut();
+    /* if (!signedIn) {
       welcomeScreen.remove();
       domElements.content.appendChild(appLoad(myLists));
       demoButton.textContent = 'sign out';
@@ -61,14 +64,45 @@ const init = (() => {
       });
 
     } else {
+      auth.signOut();
       const app = domElements.content.querySelector('.app');
       app.remove();
       domElements.content.appendChild(welcomeScreen);
       demoButton.textContent = 'start demo';
     }
 
-    signedIn = !signedIn;
+    signedIn = !signedIn; */
   });
+
+  // New account sign up
+  const signUpButton = document.querySelector('#sign-up');
+  const signInButton = document.querySelector('#sign-in');
+  const form = document.querySelector('form');
+
+  signUpButton.addEventListener('click', () => {
+    auth.createUserWithEmailAndPassword(form.email.value, form.password.value);
+  });
+
+  signInButton.addEventListener('click', () => {
+    auth.signInWithEmailAndPassword(form.email.value, form.password.value);
+  });
+
+  auth.onAuthStateChanged(user => {
+
+
+
+    if (user) {
+      //signed in
+      domElements.content.removeChild(welcomeScreen);
+      domElements.content.appendChild(app);
+    } else {
+      //signed out
+      domElements.content.removeChild(app);
+      domElements.content.appendChild(welcomeScreen);
+    }
+  });
+
+
 })();
 
 function storageAvailable(type) {

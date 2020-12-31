@@ -13,17 +13,17 @@ const welcomeLoad = (() => {
 
   const inputName = formInputFactory(
     { text: 'name:' },
-    { type: 'text', id: 'name', name: 'login', placeholder: "Name" }
+    { type: 'text', id: 'name', name: 'name', placeholder: "Name" }
   );
 
   const inputEmail = formInputFactory(
     { text: 'email:' },
-    { type: 'email', id: 'email', name: 'login', placeholder: 'Email' }
+    { type: 'email', id: 'email', name: 'email', placeholder: 'Email' }
   );
 
   const inputPassword = formInputFactory(
     { text: 'password:' },
-    { type: 'password', id: 'password', name: 'login', placeholder: 'Password' }
+    { type: 'password', id: 'password', name: 'password', placeholder: 'Password' }
   );
 
   const signIn = elFactory('div', { class: 'button sign-in', id: 'sign-in' }, 'sign in');
