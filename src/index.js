@@ -26,82 +26,73 @@ const init = (() => {
   const navbar = renderNavBar('');
   domElements.content.appendChild(navbar);
 
+  // init welcome screen
   const welcomeScreen = welcomeLoad();
   const app = appLoad(myLists);
   domElements.content.appendChild(welcomeScreen);
 
-  // Sign in / sign out function - temporay 
-  let signedIn = false;
-  const demoButton = navbar.querySelector('#logout');
-  demoButton.addEventListener('click', () => {
-
-    auth.signOut();
-    /* if (!signedIn) {
-      welcomeScreen.remove();
-      domElements.content.appendChild(appLoad(myLists));
-      demoButton.textContent = 'sign out';
-
-      // Add Date Picker to existing tasks
-      const listEls = Array.from(document.querySelectorAll('.list'));
-      const taskEls = Array.from(listEls.map(list =>
-        Array.from(list.querySelectorAll('.task'))));
-
-      taskEls.forEach((list, listIndex) => {
-        list.forEach((task, taskIndex) => {
-          const dateEl = task.querySelector('.due-date');
-
-          const picker = datepicker(dateEl, {
-            onHide: () => {
-              if (!picker.dateSelected) return;
-              myLists[listIndex]
-                .tasks[taskIndex]
-                .dueDate = picker.dateSelected.toDateString();
-              dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
-              updateLocalStorage();
-            }
-          });
-        });
-      });
-
-    } else {
-      auth.signOut();
-      const app = domElements.content.querySelector('.app');
-      app.remove();
-      domElements.content.appendChild(welcomeScreen);
-      demoButton.textContent = 'start demo';
-    }
-
-    signedIn = !signedIn; */
-  });
-
-  // New account sign up
+  //DOM elements
+  const form = document.querySelector('form');
   const signUpButton = document.querySelector('#sign-up');
   const signInButton = document.querySelector('#sign-in');
-  const form = document.querySelector('form');
+  const signOutButton = navbar.querySelector('#logout');
 
+  // New account sign up
   signUpButton.addEventListener('click', () => {
     auth.createUserWithEmailAndPassword(form.email.value, form.password.value);
+
+    auth.onAuthStateChanged(user => {
+
+      db.collection('users').add({
+        uid: user.uid,
+        name: form.name.value,
+      });
+      form.reset();
+
+    });
+
   });
 
+  // Sign in
   signInButton.addEventListener('click', () => {
-    auth.signInWithEmailAndPassword(form.email.value, form.password.value);
+
+    auth.signInWithEmailAndPassword(form.email.value, form.password.value)
+      .catch((error) => {
+
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        if (errorCode == 'auth/wrong-password') {
+          alert('Invalid email/password combination');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+
+      });
+  });
+
+  // Sign out
+  signOutButton.addEventListener('click', () => {
+    auth.signOut();
+    domElements.content.removeChild(app);
   });
 
   auth.onAuthStateChanged(user => {
-
-
 
     if (user) {
       //signed in
       domElements.content.removeChild(welcomeScreen);
       domElements.content.appendChild(app);
+      signOutButton.textContent = 'sign out';
+      signOutButton.style.display = 'flex';
+      setTimeout(() => form.reset(), 1);
     } else {
       //signed out
-      domElements.content.removeChild(app);
       domElements.content.appendChild(welcomeScreen);
+      signOutButton.style.display = 'none';
     }
-  });
 
+  });
 
 })();
 

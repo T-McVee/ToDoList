@@ -26,10 +26,10 @@ const welcomeLoad = (() => {
     { type: 'password', id: 'password', name: 'password', placeholder: 'Password' }
   );
 
-  const signIn = elFactory('div', { class: 'button sign-in', id: 'sign-in' }, 'sign in');
   const signUp = elFactory('div', { class: 'button sign-up', id: 'sign-up' }, 'sign up');
+  const signIn = elFactory('div', { class: 'button sign-in', id: 'sign-in' }, 'sign in');
 
-  const buttons = elFactory('div', { class: 'buttons' }, signIn, signUp);
+  const buttons = elFactory('div', { class: 'buttons' }, signUp, signIn);
 
   const form = elFactory('form', {}, inputName, inputEmail, inputPassword, buttons);
 
