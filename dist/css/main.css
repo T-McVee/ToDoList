@@ -636,7 +636,7 @@ nav .row .col:nth-child(2) ul li:hover {
 
 .list .list-head .delete:hover {
   cursor: pointer;
-  color: #8f8f8f;
+  color: #1a3546;
 }
 
 .list .list-body {
@@ -779,7 +779,7 @@ nav .row .col:nth-child(2) ul li:hover {
 
 .list .list-body .task .task-head .delete:hover {
   cursor: pointer;
-  color: #8f8f8f;
+  color: #1a3546;
 }
 
 .list .list-body .task .task-body {
@@ -811,13 +811,23 @@ nav .row .col:nth-child(2) ul li:hover {
 }
 
 .list .list-body .task .task-body .due-date:hover {
+  padding: 0.25rem 0.5rem;
   color: #8f8f8f;
+  background-color: #e4eff5;
+  border-radius: 6px;
 }
 
 .list .list-body .task .task-body .completed {
   margin: 0;
   font-size: 0.8rem;
+  color: #cfcfcf;
+}
+
+.list .list-body .task .task-body .completed:hover {
+  padding: 0.25rem 0.5rem;
   color: #8f8f8f;
+  background-color: #e4eff5;
+  border-radius: 6px;
 }
 
 .list .list-footer {
