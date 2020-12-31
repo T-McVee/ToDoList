@@ -42,10 +42,17 @@ const renderListBtn = () => {
 
   card.addEventListener('mouseenter', () => {
     input.classList.remove('hide');
-  })
+  });
+
   card.addEventListener('mouseleave', () => {
+    if (document.activeElement === input) return;
     input.classList.add('hide');
-  })
+  });
+
+  card.addEventListener('focusout', () => {
+    input.classList.add('hide');
+  });
+
   return card;
 }
 
