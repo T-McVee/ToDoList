@@ -3,25 +3,6 @@ import { elFactory } from './helpers/functions'
 import { createList, listFactory } from './list'
 import { createListBtn, renderListBtn } from './createListBtn'
 
-const _renderColumn = ((input) => {
-  const col = elFactory('div', { class: 'col' });
-  const content = elFactory(input.type, { class: input.classes }, input.text);
-  col.appendChild(content);
-
-  return col;
-});
-
-const _renderRow = ((input) => {
-  const row = elFactory('div', { class: 'row' });
-
-  input.forEach(el => {
-    const col = _renderColumn(el);
-    row.appendChild(col);
-  });
-
-  return row;
-});
-
 const renderNavBar = ((name) => {
   if (name) name = `, ${name}`;
   const logo = elFactory('div', { class: 'logo' }, `Welcome to List Lab${name}`);
