@@ -148,6 +148,16 @@
                 outline: none;
               }
             }
+            @media (max-width: $bp-phone) {
+              input[type=text] {
+                width: calc(100% - 75px);
+              }
+              input[type=submit] {
+                width: 75px;
+                background-color: $blue;
+                color: $white;
+              }
+            }
           }
           ul {
             list-style: none;
@@ -176,7 +186,36 @@
             }
           }
         }
+        @media (min-width: $bp-phone) and (max-width: $bp-tablet) {
+          .notes {
+            form {
+              input[type=text] {
+                width: calc(100% - 100px);
+              }
+              input[type=submit] {
+                width: 100px;
+                background-color: $blue;
+              }
+            }
+          }
+        }
       }
+    }
+  }
+  @media (min-width: $bp-tablet) and (max-width: $bp-desktop) {
+    .popup {
+      width: 90vw;
+    }
+  }
+  @media (min-width: $bp-phone) and (max-width: $bp-tablet) {
+    .popup {
+      width: 90vw;
+    }
+  }
+  @media (max-width: $bp-phone) {
+    .popup {
+      width: 90vw;
+      //height: 70vh;
     }
   }
 }

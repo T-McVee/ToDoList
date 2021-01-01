@@ -251,6 +251,9 @@
   .welcome-screen .row .col-1 .container .woof {
     font-size: 1.4rem;
   }
+  .welcome-screen .row .col-1 .container .cta {
+    height: 95px;
+  }
   .welcome-screen .row .col-1 .container .cta h1 {
     font-size: 1.4rem;
   }
@@ -261,7 +264,6 @@
   .welcome-screen .row .col.col-2 {
     width: 100%;
     min-height: 40vh;
-    background-image: url("/dist/img/welcome-screen.jpg");
     background-size: 100%;
     background-position-y: 40%;
     background-position-x: 100%;
@@ -284,6 +286,9 @@
     padding: 2rem 2rem;
     border-radius: 0;
   }
+  .welcome-screen .row .col-1 .container .cta {
+    height: 95px;
+  }
   .welcome-screen .row .col-1 .container .cta h1 {
     font-size: 1.2rem;
   }
@@ -293,7 +298,6 @@
   .welcome-screen .row .col.col-2 {
     width: 100%;
     height: 30vh;
-    background-image: url("/dist/img/welcome-screen.jpg");
     background-size: 100%;
     background-position-y: 50%;
     background-position-x: 100%;
@@ -314,6 +318,9 @@
   .welcome-screen .row .col-1 .container {
     padding: 2rem 2rem;
     border-radius: 0;
+  }
+  .welcome-screen .row .col-1 .container .cta {
+    height: 95px;
   }
   .welcome-screen .row .col-1 .container .cta h1 {
     font-size: 1.2rem;
@@ -1195,6 +1202,17 @@ nav .row .col:nth-child(2) ul li:hover {
   outline: none;
 }
 
+@media (max-width: 640px) {
+  .popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=text] {
+    width: calc(100% - 75px);
+  }
+  .popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=submit] {
+    width: 75px;
+    background-color: #197bb8;
+    color: #fff;
+  }
+}
+
 .popup-wrapper .popup .popup-body .notes-wrapper .notes ul {
   list-style: none;
   margin: 0;
@@ -1234,6 +1252,34 @@ nav .row .col:nth-child(2) ul li:hover {
   float: right;
   font-size: 0.8rem;
   color: #79accd;
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=text] {
+    width: calc(100% - 100px);
+  }
+  .popup-wrapper .popup .popup-body .notes-wrapper .notes form input[type=submit] {
+    width: 100px;
+    background-color: #197bb8;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .popup-wrapper .popup {
+    width: 90vw;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .popup-wrapper .popup {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .popup-wrapper .popup {
+    width: 90vw;
+  }
 }
 
 /*
