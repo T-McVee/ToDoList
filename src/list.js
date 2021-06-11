@@ -16,7 +16,7 @@ const _listHead = ((listData) => {
 const _listBody = ((listData) => {
   const body = elFactory('div', { class: 'list-body' });
   listData.tasks.forEach(task => {
-    const taskEl = taskFactory(task)
+    const taskEl = taskFactory(task);
 
     updateBGColor(task.completed, taskEl);
     updateTextColor(task.completed, taskEl.querySelector('.completed'));

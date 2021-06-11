@@ -1,2 +1,4 @@
 node_modules
 workspace.code-workspace
+.eslintrc.json
+.prettierrc

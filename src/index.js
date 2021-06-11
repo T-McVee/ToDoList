@@ -1,7 +1,7 @@
-import { appLoad, welcomeLoad } from './pageLoad'
-import { renderNavBar } from './render'
-import { createList } from './list'
-import datepicker from '../node_modules/js-datepicker/dist/datepicker.min.js'
+import { appLoad, welcomeLoad } from './pageLoad';
+import { renderNavBar } from './render';
+import { createList } from './list';
+import datepicker from '../node_modules/js-datepicker/dist/datepicker.min';
 
 const domElements = {
   content: document.querySelector('#content')
@@ -9,7 +9,7 @@ const domElements = {
 
 const myLists = [];
 
-//localStorage.removeItem('projects');
+// localStorage.removeItem('projects');
 const init = (() => {
   if (storageAvailable('localStorage')) {
     if (!localStorage.projects) {
@@ -31,7 +31,7 @@ const init = (() => {
   const app = appLoad(myLists);
   domElements.content.appendChild(welcomeScreen);
 
-  //DOM elements
+  // DOM elements
   const form = document.querySelector('form');
   const signUpButton = document.querySelector('#sign-up');
   const signInButton = document.querySelector('#sign-in');
@@ -59,9 +59,9 @@ const init = (() => {
     auth.signInWithEmailAndPassword(form.email.value, form.password.value)
       .catch((error) => {
 
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        if (errorCode == 'auth/wrong-password') {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
           alert('Invalid email/password combination');
         } else {
           alert(errorMessage);
@@ -80,7 +80,7 @@ const init = (() => {
   auth.onAuthStateChanged(user => {
 
     if (user) {
-      //signed in
+      // signed in
       domElements.content.removeChild(welcomeScreen);
       domElements.content.appendChild(app);
       signOutButton.textContent = 'sign out';
@@ -110,7 +110,7 @@ const init = (() => {
       })
 
     } else {
-      //signed out
+      // signed out
       domElements.content.appendChild(welcomeScreen);
       signOutButton.style.display = 'none';
     }
@@ -123,7 +123,7 @@ function storageAvailable(type) {
   let storage;
   try {
     storage = window[type];
-    let x = '__storage_test__';
+    const x = '__storage_test__';
     storage.setItem(x, x);
     storage.removeItem(x);
     return true;
@@ -146,23 +146,23 @@ function storageAvailable(type) {
 
 // Save myLists to local storage
 function updateLocalStorage() {
-  //console.log('POPULATE STORAGE:');
+  // console.log('POPULATE STORAGE:');
   localStorage.setItem('projects', JSON.stringify(myLists));
-  //console.log(`Update: `, myLists);
+  // console.log(`Update: `, myLists);
 }
 
 // retrieve myLists from local storage
 function setLists() {
-  //console.log('SET LISTS:');
+  // console.log('SET LISTS:');
   const storageItem = JSON.parse(localStorage.getItem('projects'));
-  //console.log('StorageItem:');
-  //console.log(storageItem);
+  // console.log('StorageItem:');
+  // console.log(storageItem);
 
   storageItem.forEach(item => {
     const list = createList(item);
     myLists.push(list);
   });
-  //console.log(myLists);
+  // console.log(myLists);
 }
 
 export { myLists, updateLocalStorage };
