@@ -2,9 +2,29 @@ import { appLoad, welcomeLoad } from './pageLoad';
 import { renderNavBar } from './render';
 import { createList } from './list';
 import datepicker from '../node_modules/js-datepicker/dist/datepicker.min';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore/lite';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBoS-cof4C5LSSQRs7m6y0WzNEbuueljIY',
+  authDomain: 'list-lab-53900.firebaseapp.com',
+  projectId: 'list-lab-53900',
+  storageBucket: 'list-lab-53900.appspot.com',
+  messagingSenderId: '474269545281',
+  appId: '1:474269545281:web:33e5501e63cbcc933667c0',
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth();
 
 const domElements = {
-  content: document.querySelector('#content')
+  content: document.querySelector('#content'),
 };
 
 const myLists = [];
@@ -17,8 +37,7 @@ const init = (() => {
     } else {
       setLists();
     }
-  }
-  else {
+  } else {
     console.log('no localStorage');
   }
 
@@ -39,46 +58,45 @@ const init = (() => {
 
   // New account sign up
   signUpButton.addEventListener('click', () => {
-    auth.createUserWithEmailAndPassword(form.email.value, form.password.value);
-
-    auth.onAuthStateChanged(user => {
-
-      db.collection('users').add({
-        uid: user.uid,
-        name: form.name.value,
+    createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
+      .then((userCredential) => {
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      form.reset();
-
-    });
-
   });
 
   // Sign in
   signInButton.addEventListener('click', () => {
-
-    auth.signInWithEmailAndPassword(form.email.value, form.password.value)
-      .catch((error) => {
-
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Invalid email/password combination');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-
-      });
+    signInWithEmailAndPassword(
+      auth,
+      form.email.value,
+      form.password.value
+    ).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Invalid email/password combination');
+      } else {
+        alert(errorMessage);
+      }
+    });
   });
 
   // Sign out
   signOutButton.addEventListener('click', () => {
-    auth.signOut();
+    signOut(auth)
+      .then(() => {
+        console.log('sign out successful');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     domElements.content.removeChild(app);
   });
 
-  auth.onAuthStateChanged(user => {
-
+  auth.onAuthStateChanged((user) => {
     if (user) {
       // signed in
       domElements.content.removeChild(welcomeScreen);
@@ -89,8 +107,9 @@ const init = (() => {
 
       // Add Date Picker to existing tasks
       const listEls = Array.from(document.querySelectorAll('.list'));
-      const taskEls = Array.from(listEls.map(list =>
-        Array.from(list.querySelectorAll('.task'))));
+      const taskEls = Array.from(
+        listEls.map((list) => Array.from(list.querySelectorAll('.task')))
+      );
 
       taskEls.forEach((list, listIndex) => {
         list.forEach((task, taskIndex) => {
@@ -99,24 +118,21 @@ const init = (() => {
           const picker = datepicker(dateEl, {
             onHide: () => {
               if (!picker.dateSelected) return;
-              myLists[listIndex]
-                .tasks[taskIndex]
-                .dueDate = picker.dateSelected.toDateString();
+              myLists[listIndex].tasks[
+                taskIndex
+              ].dueDate = picker.dateSelected.toDateString();
               dateEl.textContent = myLists[listIndex].tasks[taskIndex].dueDate;
               updateLocalStorage();
-            }
+            },
           });
         });
-      })
-
+      });
     } else {
       // signed out
       domElements.content.appendChild(welcomeScreen);
       signOutButton.style.display = 'none';
     }
-
   });
-
 })();
 
 function storageAvailable(type) {
@@ -127,20 +143,22 @@ function storageAvailable(type) {
     storage.setItem(x, x);
     storage.removeItem(x);
     return true;
-  }
-  catch (e) {
-    return e instanceof DOMException && (
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
       // everything except Firefox
-      e.code === 22 ||
-      // Firefox
-      e.code === 1014 ||
-      // test name field too, because code might not be present
-      // everything except Firefox
-      e.name === 'QuotaExceededError' ||
-      // Firefox
-      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === 'QuotaExceededError' ||
+        // Firefox
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
       // acknowledge QuotaExceededError only if there's something already stored
-      (storage && storage.length !== 0);
+      storage &&
+      storage.length !== 0
+    );
   }
 }
 
@@ -158,7 +176,7 @@ function setLists() {
   // console.log('StorageItem:');
   // console.log(storageItem);
 
-  storageItem.forEach(item => {
+  storageItem.forEach((item) => {
     const list = createList(item);
     myLists.push(list);
   });
