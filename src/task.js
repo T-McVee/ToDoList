@@ -1,21 +1,18 @@
-import { myLists, updateLocalStorage } from './index'
-import { elFactory, updateBGColor, updateTextColor } from "./helpers/functions"
-import { textInputModule } from "./helpers/components"
-import { taskPopUp } from './popup'
+import { myLists, updateLocalStorage } from './index';
+import { elFactory, updateBGColor, updateTextColor } from './helpers/functions';
+import { textInputModule } from './helpers/components';
+import { taskPopUp } from './popup';
 
 const _updateTask = (state) => ({
-  updateTitle: (newTitle) => state.title = newTitle,
-  updateDescription: (newDescription) => state.description = newDescription,
-  updateDueDate: (newDate) => state.dueDate = newDate,
-  updatePriority: (newPriority) => state.priority = newPriority,
+  updateTitle: (newTitle) => (state.title = newTitle),
+  updateDescription: (newDescription) => (state.description = newDescription),
+  updateDueDate: (newDate) => (state.dueDate = newDate),
+  updatePriority: (newPriority) => (state.priority = newPriority),
   addNote: (input) => state.notes.push(input),
   deleteTask: (task) => {
-    const parentList = myLists.filter(list => list.tasks.includes(task));
-    const taskIndex = parentList[0].tasks.indexOf(task)
+    const parentList = myLists.filter((list) => list.tasks.includes(task));
+    const taskIndex = parentList[0].tasks.indexOf(task);
     const removedTask = parentList[0].tasks.splice(taskIndex, 1);
-
-    console.log(`parentList: `, parentList);
-    console.log(`removedTask: `, removedTask);
   },
 });
 
@@ -41,22 +38,22 @@ const _getDetails = (state) => ({
   get completed() {
     return state.completed;
   },
-})
+});
 
 const _returnPriority = (state) => ({
   returnPriority: () => {
-    return state.priority == 0 ? 'low'
-      : state.priority == 2 ? 'high'
-        : 'medium';
-  }
+    return state.priority == 0
+      ? 'low'
+      : state.priority == 2
+      ? 'high'
+      : 'medium';
+  },
 });
 
 const _setColorTo = () => ({
   setColorTo: (priority) => {
-    return priority == 0 ? '#777777'
-      : priority == 1 ? '#000000'
-        : '#d73333'
-  }
+    return priority == 0 ? '#777777' : priority == 1 ? '#000000' : '#d73333';
+  },
 });
 
 const _priorityOptions = () => ({
@@ -68,9 +65,8 @@ const _priorityOptions = () => ({
     ];
 
     return options;
-  }
+  },
 });
-
 
 // Task Factory
 const createTask = ({
@@ -79,7 +75,7 @@ const createTask = ({
   dueDate,
   priority,
   notes = [],
-  dateCreated = new Date,
+  dateCreated = new Date(),
   completed = false,
 }) => {
   let state = {
@@ -90,7 +86,7 @@ const createTask = ({
     notes,
     dateCreated,
     completed,
-  }
+  };
 
   return Object.assign(
     {},
@@ -98,35 +94,34 @@ const createTask = ({
     _updateTask(state),
     _returnPriority(state),
     _priorityOptions(state),
-    _setColorTo(state),
+    _setColorTo(state)
   );
-}
+};
 
-const _taskHead = ((taskData) => {
+const _taskHead = (taskData) => {
   const title = textInputModule('h3', taskData, true);
   const form = elFactory('form', {}, title);
   const deleteBtn = elFactory('div', { class: 'delete' }, 'x');
   title.style.color = taskData.setColorTo(taskData.priority);
 
   return elFactory('div', { class: 'task-head' }, form, deleteBtn);
-})
+};
 
-const _taskBody = ((taskData) => {
+const _taskBody = (taskData) => {
   const dueDate = elFactory('div', { class: 'due-date' }, taskData.dueDate);
   const completed = elFactory('div', { class: 'completed' }, 'completed');
   const taskBody = elFactory('div', { class: 'task-body' }, dueDate, completed);
 
   // Update completed status
-  completed.addEventListener(
-    'click', () => {
-      taskData.completed = !taskData.completed;
-      updateBGColor(taskData.completed, taskBody.parentElement);
-      updateTextColor(taskData.completed, completed);
-      updateLocalStorage();
-    });
+  completed.addEventListener('click', () => {
+    taskData.completed = !taskData.completed;
+    updateBGColor(taskData.completed, taskBody.parentElement);
+    updateTextColor(taskData.completed, completed);
+    updateLocalStorage();
+  });
 
   return taskBody;
-})
+};
 
 const taskFactory = (taskData) => {
   const head = _taskHead(taskData);
@@ -134,13 +129,13 @@ const taskFactory = (taskData) => {
 
   // Delete button
   head.addEventListener('click', (e) => {
-    if (e.target.classList != 'delete') return
+    if (e.target.classList != 'delete') return;
 
     taskData.deleteTask(taskData);
     head.parentElement.remove();
 
     updateLocalStorage();
-  })
+  });
 
   // Open popup
   body.addEventListener('click', (e) => {
@@ -152,7 +147,8 @@ const taskFactory = (taskData) => {
     content.insertBefore(popUp, content.firstChild);
   });
 
-  return elFactory('div',
+  return elFactory(
+    'div',
     {
       class: 'task',
       draggable: 'true',
@@ -160,6 +156,6 @@ const taskFactory = (taskData) => {
     head,
     body
   );
-}
+};
 
 export { createTask, taskFactory };

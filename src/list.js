@@ -43,8 +43,6 @@ const _updateList = (state) => ({
   deleteList: (list) => {
     const listIndex = myLists.indexOf(list);
     const removedList = myLists.splice(listIndex, 1);
-
-    console.log(`Removed list:`, removedList);
   },
 });
 
@@ -80,7 +78,6 @@ const listFactory = (listData) => {
     if (e.target.classList != 'delete') return;
     listData.deleteList(listData);
     head.parentElement.remove();
-    console.log(`After delete: `, myLists);
 
     updateLocalStorage();
   });

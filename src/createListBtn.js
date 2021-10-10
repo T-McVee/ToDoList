@@ -1,29 +1,26 @@
-import { elFactory } from './helpers/functions'
+import { elFactory } from './helpers/functions';
 
 const _listBtnFunction = (state) => ({
   pushToMyLists: (list) => {
     state.target.push(list);
   },
-  log: () => {
-    console.log(state.target);
-  },
   getIndex: () => {
     return state.target.length;
-  }
-})
+  },
+});
 
 const createListBtn = (text, target) => {
   const state = {
     text,
     target,
     active: false,
-  }
+  };
   return Object.assign(
     {},
     // _renderListBtn(state),
-    _listBtnFunction(state),
-  )
-}
+    _listBtnFunction(state)
+  );
+};
 
 const renderListBtn = () => {
   const card = elFactory('div', { class: 'new-list' });
@@ -32,9 +29,13 @@ const renderListBtn = () => {
     class: 'hide',
     id: 'list-title-input',
     type: 'text',
-    placeholder: 'Enter list title...'
+    placeholder: 'Enter list title...',
   });
-  const btn = elFactory('input', { type: 'submit', id: 'create-list', value: '+ Create new list' });
+  const btn = elFactory('input', {
+    type: 'submit',
+    id: 'create-list',
+    value: '+ Create new list',
+  });
 
   form.appendChild(input);
   form.appendChild(btn);
@@ -54,6 +55,6 @@ const renderListBtn = () => {
   });
 
   return card;
-}
+};
 
 export { createListBtn, renderListBtn };

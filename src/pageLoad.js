@@ -78,7 +78,6 @@ const appLoad = (myLists) => {
   });
 
   sortableLists[0].addEventListener('sortupdate', (e) => {
-    console.log('pageLoad');
     updateOrder(e, myLists);
   });
 
