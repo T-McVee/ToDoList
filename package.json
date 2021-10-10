@@ -4,7 +4,8 @@
   "description": "The Odin Project: Final assigment for the 'Organizing your JS' module",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "sass": "sass src/scss/main.scss dist/main.css --watch"
   },
   "repository": {
     "type": "git",
