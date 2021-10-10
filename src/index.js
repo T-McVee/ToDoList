@@ -119,6 +119,8 @@ const init = (() => {
         const errorMessage = error.message;
         if (errorCode === 'auth/wrong-password') {
           alert('Invalid email/password combination');
+        } else if (errorCode === 'auth/user-not-found') {
+          alert('No account found. Please use sign up button');
         } else {
           alert(errorMessage);
         }
