@@ -2,7 +2,8 @@ import { appLoad, welcomeLoad } from './pageLoad';
 import { renderNavBar } from './render';
 import { createList } from './list';
 import { storageAvailable } from './helpers/functions';
-import datepicker from '../node_modules/js-datepicker/dist/datepicker.min';
+// import datepicker from '../node_modules/js-datepicker/dist/datepicker.min';
+import datepicker from 'js-datepicker';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,

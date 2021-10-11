@@ -1,5 +1,4 @@
 import { myLists, updateLocalStorage, db } from './index';
-import { collection, addDoc } from 'firebase/firestore';
 import { createTask, taskFactory } from './task';
 import {
   elFactory,
@@ -8,7 +7,7 @@ import {
   updateOrder,
 } from './helpers/functions';
 import { textInputModule } from './helpers/components';
-import datepicker from '../node_modules/js-datepicker/dist/datepicker.min.js';
+import datepicker from 'js-datepicker';
 import sortable from '../node_modules/html5sortable/dist/html5sortable.es.js';
 
 const _listHead = (listData) => {
