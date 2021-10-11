@@ -39,7 +39,8 @@ body {
   }
 }
 
-.row, .col {
+.row,
+.col {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,11 +60,11 @@ body {
 }
 
 .medium {
-  color: $green
+  color: $green;
 }
 
 .urgent {
-  color: $red
+  color: $red;
 }
 
 .main {
@@ -84,7 +85,6 @@ body {
     //overflow-x: scroll;
   }
 }
-
 
 .qs-controls {
   background-color: $blue;
